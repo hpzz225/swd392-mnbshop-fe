@@ -1,5 +1,5 @@
 import productImg from '@/assets/img/product/item-1.png'
-import heart from '@/assets/icons/heart-red.svg'
+import heart from '@/assets/icons/heart.svg'
 import heartActive from '@/assets/icons/heart-red.svg'
 import star from '@/assets/icons/star.svg'
 
@@ -23,9 +23,11 @@ export default function ProductCard() {
           </a>
           <p className="product-card__brand">Lavazza</p>
           <div className="product-card__row">
+            <div className="product-card__rating">
+              <img src={star} alt="" className="product-card__star" />
+              <span className="product-card__score">3.4</span>
+            </div>
             <span className="product-card__price">$53.00</span>
-            <img src={star} alt="" className="product-card__star" />
-            <span className="product-card__score">3.4</span>
           </div>
         </article>
       </div>

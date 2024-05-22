@@ -1,0 +1,262 @@
+@use "../abstracts";
+
+.footer {
+    padding: 50px 0;
+    font-size: 1.4rem;
+    background: var(--footer-bg-color);
+
+    @include abstracts.screen(md) {
+        padding: 50px 0 30px;
+    }
+
+    &__logo {
+        @include abstracts.screen(lg) {
+            margin: 0 !important;
+        }
+    }
+
+    &__row {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+        gap: 60px;
+
+        @include abstracts.screen(xl) {
+            gap: 20px;
+        }
+
+        @include abstracts.screen(lg) {
+            grid-template-areas:
+                "form form"
+                "list1 list2"
+                "list3 list4";
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+        }
+
+        @include abstracts.screen(md) {
+            grid-template-areas:
+                "a1"
+                "a2"
+                "a3"
+                "a4"
+                "a5";
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+        }
+    }
+
+    &__col {
+        &--form {
+            @include abstracts.screen(lg) {
+                grid-area: form;
+            }
+
+            @include abstracts.screen(md) {
+                grid-area: a1;
+            }
+        }
+
+        &--list-1 {
+            @include abstracts.screen(lg) {
+                grid-area: list1;
+            }
+
+            @include abstracts.screen(md) {
+                grid-area: a2;
+            }
+        }
+        &--list-2 {
+            @include abstracts.screen(lg) {
+                grid-area: list2;
+            }
+
+            @include abstracts.screen(md) {
+                grid-area: a3;
+            }
+        }
+        &--list-3 {
+            @include abstracts.screen(lg) {
+                grid-area: list4;
+            }
+
+            @include abstracts.screen(md) {
+                grid-area: a4;
+            }
+        }
+        &--list-4 {
+            @include abstracts.screen(lg) {
+                grid-area: list3;
+            }
+
+            @include abstracts.screen(md) {
+                grid-area: a5;
+            }
+        }
+    }
+
+    &__input {
+        border: 2px solid #d2d1d6;
+    }
+
+    &__desc,
+    &__help-text {
+        line-height: 180%;
+    }
+
+    &__desc {
+        margin-top: 30px;
+        @include abstracts.screen(lg) {
+            width: 70%;
+        }
+    }
+
+    &__help-text {
+        margin-top: 35px;
+    }
+
+    &__form {
+        display: flex;
+        gap: 10px;
+        margin-top: 16px;
+    }
+
+    &__input {
+        height: 46px;
+        padding: 8px 12px;
+        border: 2px solid #d2d1d6;
+        border-radius: 6px;
+        font-size: 1.5rem;
+        font-weight: 500;
+
+        @include abstracts.screen(lg) {
+            width: 50%;
+        }
+
+        @include abstracts.screen(md) {
+            font-size: 1.6rem;
+        }
+
+        @include abstracts.screen(sm) {
+            flex: 1;
+        }
+
+        &::placeholder {
+            font-weight: 400;
+        }
+    }
+
+    // List
+
+    &__heading {
+        font-size: 1.8rem;
+        font-weight: 600;
+        line-height: 18px;
+        text-transform: uppercase;
+
+        @include abstracts.screen(lg) {
+            margin-top: 20px;
+        }
+    }
+
+    &__list {
+        margin-top: 18px;
+    }
+
+    &__link {
+        padding: 8px 0;
+        display: inline-block;
+        line-height: 1.4;
+        text-align: left;
+
+        &:hover {
+            color: #0071dc;
+        }
+    }
+
+    &__label {
+        margin-top: 20px;
+        line-height: 1.4;
+        font-weight: 500;
+    }
+
+    // Bottom
+
+    &__bottom {
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-between;
+
+        @include abstracts.screen(md) {
+            flex-direction: column-reverse;
+            align-items: center;
+        }
+    }
+
+    &__copyright {
+        line-height: 2.2;
+
+        @include abstracts.screen(md) {
+            margin-top: 20px;
+        }
+    }
+
+    &__socials {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__social-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        color: var(--body-bg);
+        border-radius: 6px;
+        filter: grayscale(50%);
+        transition: translate, filter;
+        transition-duration: 0.3s;
+
+        @include abstracts.screen(sm) {
+            width: 42px;
+            height: 42px;
+        }
+
+        &--ytb {
+            background: #f00;
+        }
+
+        &--fb {
+            background: #4863a9;
+        }
+
+        &--in {
+            background: #2f71ab;
+        }
+
+        &--tw {
+            background: #4999e6;
+        }
+
+        &--tt {
+            background: #000;
+        }
+
+        &:hover {
+            filter: grayscale(0);
+            translate: 0 -6px;
+        }
+    }
+
+    &__social-icon {
+        width: 14px;
+        filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7482%) hue-rotate(72deg) brightness(99%)
+            contrast(99%);
+
+        @include abstracts.screen(sm) {
+            width: 18px;
+            height: 18px;
+        }
+    }
+}
