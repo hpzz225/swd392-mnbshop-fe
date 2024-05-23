@@ -1,5 +1,5 @@
 import more from '@/assets/icons/more.svg'
-import logo from '@/assets/icons/logo.svg'
+import logo from '@/assets/icons/logo3.png'
 import arrowLeft from '@/assets/icons/arrow-left.svg'
 import buy from '@/assets/icons/buy.svg'
 import heart from '@/assets/icons/heart.svg'
@@ -18,7 +18,7 @@ export default function CustomerHeader() {
 
           <a href="./" className="logo top-bar__logo">
             <img src={logo} alt="M&B Mart" className="logo__img top-bar__logo-img" />
-            <h1 className="logo__title top-bar__logo-title mt-3">M&B Mart</h1>
+            <h1 className="logo__title top-bar__logo-title mt-1">M&B Mart</h1>
           </a>
 
           <nav className="navbar hide" id="navbar">

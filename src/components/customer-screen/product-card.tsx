@@ -1,4 +1,4 @@
-import productImg from '@/assets/img/product/item-1.png'
+import productImg from '@/assets/img/product/milk1.png'
 import heart from '@/assets/icons/heart.svg'
 import heartActive from '@/assets/icons/heart-red.svg'
 import star from '@/assets/icons/star.svg'

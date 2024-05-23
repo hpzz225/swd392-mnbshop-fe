@@ -112,20 +112,19 @@ export default function CustomerFooter() {
                 <li className="footer__item">
                   <p className="footer__label">Email</p>
                   <a href="mailto:" className="footer__link">
-                    contact@M&B Mart.com
+                    contact@mnb.com
                   </a>
                 </li>
                 <li className="footer__item">
                   <p className="footer__label">Hotline</p>
                   <a href="" className="footer__link">
-                    18008888
+                    01 234 56789
                   </a>
                 </li>
                 <li className="footer__item">
                   <p className="footer__label">Address</p>
                   <a href="" className="footer__link">
-                    No. 11D, Lot A10, Nam Trung Yen <br />
-                    urban area, Yen Hoa Ward, Cau Giay District, City. Hanoi
+                    Lot E2a-7, Street D1, D. D1, Long Thanh My, Thu Duc City, Ho Chi Minh City
                   </a>
                 </li>
                 <li className="footer__item">
@@ -138,7 +137,7 @@ export default function CustomerFooter() {
             </div>
           </div>
           <div className="footer__bottom">
-            <p className="footer__copyright">© 2010 - 2025 Grocery Mart. All rights reserved.</p>
+            <p className="footer__copyright">© 2024 - 2025 Grocery Mart. All rights reserved.</p>
             <div className="footer__socials">
               <div className="footer__social-link footer__social-link--ytb">
                 <a href="#!">

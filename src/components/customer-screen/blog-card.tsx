@@ -1,4 +1,4 @@
-import blogImg from '@/assets/img/blog/news2.jpg'
+import blogImg from '@/assets/img/blog/milknews.jpeg'
 
 export default function BlogCard() {
   return (

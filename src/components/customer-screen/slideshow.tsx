@@ -1,4 +1,5 @@
-import slideShow from '@/assets/img/slideshow/slide-1.png'
+import slideShow from '@/assets/img/slideshow/31424.jpg'
+import srcSetImg from '@/assets/img/slideshow/srcset.jpeg'
 
 export default function SlideShow() {
   return (
@@ -8,7 +9,7 @@ export default function SlideShow() {
           <div className="slideshow__item">
             <a className="slideshow__link">
               <picture>
-                <source media="(max-width: 767.98px)" srcSet="./assets/img/slideshow/slide-1-md.png" />
+                <source media="(max-width: 767.98px)" srcSet={srcSetImg} />
                 <img src={slideShow} alt="" className="slideshow__img" />
               </picture>
             </a>
