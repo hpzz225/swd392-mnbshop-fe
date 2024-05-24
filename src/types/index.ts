@@ -9,6 +9,23 @@ export type DecodedToken = {
   exp: number
 }
 
+export type InputsType = {
+  key: string
+  label: string
+  type: 'text' | 'input' | 'select' | 'date' | 'badge' | 'textarea'
+  isAllowEdit?: boolean
+  options?: { key: string; value: string | number }[]
+}
+
+export type InputsField = {
+  view?: InputsType[]
+  viewCertification?: InputsType[]
+  edit?: InputsType[]
+  editStatus?: InputsType[]
+  editCertification?: InputsType[]
+  add?: InputsType[]
+}
+
 export type AuthUser = {
   id: number
   fullName: string
