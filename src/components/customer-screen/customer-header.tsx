@@ -6,20 +6,21 @@ import heart from '@/assets/icons/heart.svg'
 import arrowDown from '@/assets/icons/arrow-down.svg'
 import search from '@/assets/icons/search.svg'
 import avatar from '@/assets/img/avatar.jpg'
+import { Link } from 'react-router-dom'
 
-export default function CustomerHeader() {
+export default function CustomerHeader({ isLoginPage }: { isLoginPage: boolean }) {
   return (
-    <div>
+    <header className="header">
       <div className="container">
         <div className="top-bar">
           <button className="top-bar__more d-none d-lg-block js-toggle" toggle-target="#navbar">
             <img src={more} alt="" className="icon top-bar__more-icon" />
           </button>
 
-          <a href="./" className="logo top-bar__logo">
+          <Link to={'/'} className="logo top-bar__logo">
             <img src={logo} alt="M&B Mart" className="logo__img top-bar__logo-img" />
-            <h1 className="logo__title top-bar__logo-title mt-1">M&B Mart</h1>
-          </a>
+            <h1 className="logo__title top-bar__logo-title mt-2">M&B Mart</h1>
+          </Link>
 
           <nav className="navbar hide" id="navbar">
             <button className="navbar__close-btn js-toggle" toggle-target="#navbar">
@@ -40,55 +41,64 @@ export default function CustomerHeader() {
 
             <ul className="navbar__list js-dropdown-list">
               <li className="navbar__item">
-                <a href="#!" className="navbar__link">
-                  Departments
-                  <img src={arrowDown} alt="" className="icon navbar__arrow" />
-                </a>
+                <Link to={'/'} className="navbar__link">
+                  Home
+                </Link>
               </li>
               <li className="navbar__item">
-                <a href="#!" className="navbar__link">
-                  Grocery
+                <Link to={'/products'} className="navbar__link">
+                  Product
                   <img src={arrowDown} alt="" className="icon navbar__arrow" />
-                </a>
+                </Link>
               </li>
               <li className="navbar__item">
-                <a href="#!" className="navbar__link">
-                  Beauty
+                <Link to={'/blogs'} className="navbar__link">
+                  Blog
                   <img src={arrowDown} alt="" className="icon navbar__arrow" />
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
 
           <div className="navbar__overlay js-toggle" toggle-target="#navbar"></div>
 
-          <div className="top-act">
-            <div className="top-act__group d-md-none top-act__group--single">
-              <button className="top-act__btn">
-                <img src={search} alt="" className="icon top-act__icon" />
-              </button>
+          {isLoginPage ? (
+            <div className="top-act">
+              <div className="top-act__group d-md-none top-act__group--single">
+                <button className="top-act__btn">
+                  <img src={search} alt="" className="icon top-act__icon" />
+                </button>
+              </div>
+              <div className="top-act__group d-md-none">
+                <button className="top-act__btn">
+                  <img src={heart} alt="" className="icon top-act__icon" />
+                  <span className="top-act__title">03</span>
+                </button>
+
+                <div className="top-act__separate"></div>
+
+                <button className="top-act__btn">
+                  <img src={buy} alt="" className="icon top-act__icon" />
+                  <span className="top-act__title">$65.42</span>
+                </button>
+              </div>
+
+              <div className="top-act__user">
+                <img src={avatar} alt="" className="top-act__avatar" />
+              </div>
             </div>
-
-            <div className="top-act__group d-md-none">
-              <button className="top-act__btn">
-                <img src={heart} alt="" className="icon top-act__icon" />
-                <span className="top-act__title">03</span>
-              </button>
-
-              <div className="top-act__separate"></div>
-
-              <button className="top-act__btn">
-                <img src={buy} alt="" className="icon top-act__icon" />
-                <span className="top-act__title">$65.42</span>
-              </button>
+          ) : (
+            <div className="top-act">
+              <Link to={'/login'} className="btn btn--text d-md-none">
+                Sign in
+              </Link>
+              <Link to={'/signup'} className="top-act__sign-up btn btn--primary">
+                Sign up
+              </Link>
             </div>
-
-            <div className="top-act__user">
-              <img src={avatar} alt="" className="top-act__avatar" />
-            </div>
-          </div>
+          )}
         </div>
       </div>
-    </div>
+    </header>
   )
 }

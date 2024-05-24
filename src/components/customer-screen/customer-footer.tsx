@@ -7,9 +7,9 @@ import tiktok from '@/assets/icons/tt.svg'
 
 export default function CustomerFooter() {
   return (
-    <div>
+    <footer className="footer">
       <div className="container">
-        <div className="footer__inner my-28">
+        <div className="footer__inner">
           <div className="footer__row">
             <div className="footer__col footer__col--form">
               <a href="./" className="logo footer__logo">
@@ -168,6 +168,6 @@ export default function CustomerFooter() {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   )
 }

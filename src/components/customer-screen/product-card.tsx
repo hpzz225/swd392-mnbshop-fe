@@ -19,7 +19,7 @@ export default function ProductCard() {
           </div>
 
           <a href="">
-            <h3 className="product-card__title">Lavazza Coffee Blends - Try the Italian Espresso</h3>
+            <h3 className="product-card__title">Lavazza Milk Blends - Try the Italian</h3>
           </a>
           <p className="product-card__brand">Lavazza</p>
           <div className="product-card__row">

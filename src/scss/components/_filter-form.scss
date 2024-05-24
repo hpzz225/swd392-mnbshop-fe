@@ -1,18 +1,18 @@
 @use '../abstracts';
 
 .filter-wrap {
-  position: relative;
+  // position: relative;
   z-index: 1;
 }
 
 .filter {
   border-radius: 20px;
-  position: absolute;
+  width: 100%;
+  // position: absolute;
   padding: 30px 0;
   right: 0;
   top: 55px;
   background-color: var(--filter-form-bg);
-  filter: drop-shadow(0px 40px 90px var(--filter-form-shadow));
   transition: opacity, visibility;
   transition-duration: 0.25s;
 
@@ -69,16 +69,12 @@
         grid-template-columns: 1fr 1fr;
         gap: 30px;
       }
-
-      &-middle {
-        width: 210px;
-      }
     }
 
     &-text-input {
       padding: 0 16px;
       height: 44px;
-      width: 334px;
+      width: 100%;
       display: flex;
       align-items: center;
       overflow: hidden;

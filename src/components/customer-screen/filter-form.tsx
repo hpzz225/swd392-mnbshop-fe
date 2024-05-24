@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import selectArrow from '@/assets/icons/select-arrow.svg'
 import search from '@/assets/icons/search.svg'
-import filter from '@/assets/icons/filter.svg'
-import arrowUp from '@/assets/icons/arrow-up.png'
 
 type CustomStyleProps = {
   '--min-value'?: string
@@ -10,8 +8,7 @@ type CustomStyleProps = {
   '--width'?: string
 }
 
-export default function ProductFilter() {
-  const [isHide, setIsHide] = useState(true)
+export default function FilterForm() {
   const sliderStyle: React.CSSProperties & CustomStyleProps = {
     '--min-value': '10%',
     '--max-value': '80%',
@@ -23,12 +20,7 @@ export default function ProductFilter() {
   return (
     <div>
       <div className="filter-wrap">
-        <button className="filter-btn js-toggle" toggle-target="#home-filter" onClick={() => setIsHide(!isHide)}>
-          Filter
-          <img src={filter} alt="" className="icon filter-btn__icon" />
-        </button>
-        <div className={`filter` + (isHide ? ' hide' : ' ')} id="home-filter">
-          <img src={arrowUp} alt="" className="filter__arrow" />
+        <div className="filter" id="home-filter">
           <h3 className="filter__heading">Filter</h3>
           <form action="" className="filter__form">
             <div className="filter__row filter__content">
@@ -72,7 +64,7 @@ export default function ProductFilter() {
                     </div>
                   </div>
                 </div>
-                <div className="filter__form-group filter__form-group-middle">
+                <div className="filter__form-group filter__form-group">
                   <div className="filter__form-tags">
                     <button className="filter__form-tag">Japan</button>
                     <button className="filter__form-tag">China</button>

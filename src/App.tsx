@@ -1,15 +1,7 @@
-import CustomerFooter from './components/customer-screen/customer-footer'
-import CustomerHeader from './components/customer-screen/customer-header'
-import HomePage from './pages/customer-pages/home-page'
+import Router from './router/router'
 
 function App() {
-  return (
-    <div>
-      <CustomerHeader />
-      <HomePage />
-      <CustomerFooter />
-    </div>
-  )
+  return <Router />
 }
 
 export default App

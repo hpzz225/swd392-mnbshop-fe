@@ -4,7 +4,7 @@ export const dateFormatList = ['YYYY-MM-DD', 'DD-MM-YYYY']
 
 export const AUTHORITIES = {
   ADMIN: 'ADMIN',
-  CUSTOMER: 'TRAINER',
+  CUSTOMER: 'CUSTOMER',
   STAFF: 'STAFF',
   GUEST: 'GUEST',
 }
@@ -22,6 +22,12 @@ export const queryClient = new QueryClient({
 export const THEME_CODES = {
   PRIMARY: '#f2a7b1',
   SECONDARY: '#98deea',
+  FOREGROUND: '#000000',
+  BACKGROUND: '#ffffff',
+  ERROR: '#f03e3e',
+  SUCCESS: '#00c48c',
+  WARNING: '#ff9900',
+  UNACTICE: '#a0a0a0',
 }
 
 // Regex số điện thoại VN

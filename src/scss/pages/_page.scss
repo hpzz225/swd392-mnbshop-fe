@@ -1,6 +1,6 @@
 @use '../abstracts';
 
-.home {
+.page {
   margin-bottom: 50px;
 
   &__container {
@@ -12,26 +12,16 @@
   }
 
   &__heading {
-    // margin-bottom: 20px;
+    margin-bottom: 20px;
     font-size: 2.4rem;
     font-weight: 700;
     line-height: 141.667%; /* 141.667% */
   }
-  &__cate {
-    --grid-gutter-x: 25px;
-    --grid-gutter-y: 25px;
-    @include abstracts.screen(lg) {
-      --grid-gutter-x: 30px;
-    }
 
-    @include abstracts.screen(md) {
-      --grid-gutter-y: 20px;
-    }
-  }
   &__row {
     margin-bottom: 20px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: space-between;
   }
 }

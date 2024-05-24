@@ -1,9 +1,10 @@
 import login_thumb from '@/assets/img/auth/login_thumb.png'
-import logo from '@/assets/icons/logo.svg'
+import logo from '@/assets/icons/logo3.png'
 import message from '@/assets/icons/message.svg'
 import lock from '@/assets/icons/lock.svg'
 import form_error from '@/assets/icons/form-error.svg'
 import google from '@/assets/icons/google.svg'
+import { Link } from 'react-router-dom'
 
 export default function Login() {
   return (
@@ -14,10 +15,10 @@ export default function Login() {
       </div>
       <div className="auth__content">
         <div className="auth__content-inner">
-          <a href="./" className="logo">
+          <Link to={'/'} className="logo">
             <img src={logo} alt="M&B Mart" className="logo__img" />
             <h2 className="logo__title">M&B Mart</h2>
-          </a>
+          </Link>
           <h1 className="auth__heading">Hello Again!</h1>
           <p className="auth__desc">
             Welcome back to sign in. As a returning customer, you have access to your previously saved all information.
@@ -54,9 +55,9 @@ export default function Login() {
                 <input type="checkbox" name="" id="" className="form__checkbox-input d-none" />
                 <span className="form__checkbox-label">Set as default card</span>
               </label>
-              <a href="" className="auth__link form__pull-right">
+              <Link to={'/forgot'} className="auth__link form__pull-right">
                 Forgot Password
-              </a>
+              </Link>
             </div>
 
             <div className="form__group auth__btn-group">
@@ -70,9 +71,9 @@ export default function Login() {
 
           <p className="auth__text">
             Don't have an account yet?
-            <a href="" className="auth__link auth__text-link">
+            <Link to={'/signup'} className="auth__link auth__text-link">
               Sign Up
-            </a>
+            </Link>
           </p>
         </div>
       </div>
