@@ -1,13 +1,13 @@
 @use "../abstracts";
 
 .cate-item {
+    display: flex;
+    gap: 20px;
+
+    height: 100%;
+    padding: 20px;
     border-radius: 16px;
     background: var(--cate-item-bg);
-    display: flex;
-    padding: 20px 26px;
-    height: 100%;
-    align-items: center;
-    gap: 20px;
 
     @include abstracts.screen(xl) {
         flex-direction: column;
@@ -19,11 +19,11 @@
 
     &__thumb {
         display: block;
-        width: 116px;
-        height: 116px;
+        width: 100px;
+        height: 100px;
         object-fit: contain;
-        background-color: var(--cate-item-thumb-bg);
         border-radius: 8px;
+        background: var(--cate-item-thumb-bg);
 
         @include abstracts.screen(xl) {
             width: 100%;
@@ -39,28 +39,22 @@
     }
 
     &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         padding-right: 30px;
+
         @include abstracts.screen(xxl) {
             padding-right: 0;
-        }
-
-        @include abstracts.screen(xl) {
-            padding: 0 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        @include abstracts.screen(md) {
-            align-items: flex-start;
         }
     }
 
     &__title {
-        color: var(--cate-item-title-color);
         font-size: 2.2rem;
         font-weight: 700;
-        line-height: 145.455%; /* 145.455% */
+        line-height: 145.455%;
+        color: var(--cate-item-title-color);
+
         @include abstracts.screen(md) {
             font-size: 1.8rem;
         }
@@ -69,14 +63,9 @@
     &__desc {
         margin-top: 6px;
         font-size: 1.6rem;
-        line-height: 150%; /* 150% */
-
-        @include abstracts.screen(xl) {
-            text-align: center;
-        }
+        line-height: 150%;
 
         @include abstracts.screen(md) {
-            text-align: left;
             font-size: 1.4rem;
         }
     }

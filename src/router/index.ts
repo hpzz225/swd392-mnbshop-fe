@@ -81,7 +81,6 @@ export const routes = [
     name: 'Profile',
     component: CustomerProfile,
     layout: null,
-    private: true,
     roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
   },
   {

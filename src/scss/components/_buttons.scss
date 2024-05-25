@@ -3,25 +3,30 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 6px 12px;
 
+    height: 36px;
+    padding: 0 14px;
     border-radius: 6px;
-    background: var(--filter-btn-bg);
 
     color: var(--filter-btn-color);
+    background: var(--filter-btn-bg);
+
     font-size: 1.4rem;
     font-weight: 700;
-    line-height: 142.857%; /* 142.857% */
+    line-height: 142.857%;
 }
 
+// Like button
 .like-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
+
     width: 50px;
     height: 50px;
-    box-shadow: 0px 20px 60px var(--like-btn-shadow);
+    border-radius: 50%;
+
+    box-shadow: 0px 20px 60px rgba(124, 124, 124, 0.2);
 
     &:not(&--liked) &__icon--liked {
         display: none;
@@ -32,12 +37,11 @@
     }
 
     &__icon--liked {
-        margin-top: 8px;
+        margin-top: 6px;
     }
 }
 
 // Buttons
-
 .btn {
     display: flex;
     align-items: center;
@@ -46,12 +50,18 @@
 
     height: 46px;
     padding: 0 20px;
-    background-color: #f8f8fb;
-    border-radius: 10px;
-    user-select: none;
+    border-radius: 6px;
+
+    background: #f8f8fb;
 
     font-size: 1.8rem;
     font-weight: 500;
+    white-space: nowrap;
+    user-select: none;
+
+    &--small {
+        height: 40px;
+    }
 
     + .btn {
         &:not(.btn--no-margin) {
@@ -60,20 +70,17 @@
     }
 
     &--text {
-        background-color: transparent;
-
-        color: #9e9da8;
-        font-size: 1.5rem;
+        background: transparent;
         font-weight: 400;
     }
 
     &--primary {
-        color: #1a162e;
+        color: #171c28;
         background: #ffb700;
     }
 
     &--outline {
-        background-color: transparent;
+        background: transparent;
         border: 1px solid #d2d1d6;
     }
 
@@ -81,13 +88,18 @@
         border-radius: 99px;
     }
 
+    &--danger {
+        color: #fff;
+        background: #ed4337;
+    }
+
     &[disabled],
-    &--disable {
+    &--disabled {
         opacity: 0.5;
         pointer-events: none;
     }
 
     &:hover {
-        opacity: 0.8;
+        opacity: 0.9;
     }
 }

@@ -3,30 +3,33 @@
 .dropdown {
     position: absolute;
     left: 0;
+
     width: min(1240px, 100%);
     padding-top: 54px;
     display: none;
 
     @include abstracts.screen(lg) {
+        position: initial;
         padding-top: 0;
-        position: static;
     }
 
     &__inner {
         --inner-padding: 30px;
 
         position: relative;
+
         padding: var(--inner-padding);
+
         border-radius: 20px;
         background: var(--dropdown-bg-color);
         box-shadow: 0px 40px 90px 20px var(--dropdown-shadow-color);
 
         &::before {
-            content: url(../icons/dropdown-arow.svg);
+            content: url("../icons/dropdown-arrow.svg");
             position: absolute;
-            top: -12px;
+            top: -13px;
             left: var(--arrow-left-pos);
-            transform: translateX(-50%);
+            translate: -50%;
             filter: var(--dropdown-arrow-color);
         }
 
@@ -53,17 +56,17 @@
     --max-inner-height: calc(min(582px, 100vh - 158px) - var(--inner-padding) * 2);
 
     position: relative;
+
     &__main {
         width: var(--main-column-width);
         height: var(--max-inner-height);
-        // border-right: 1px solid var(--top-menu-border-color);
-        box-shadow: 1px 0 0 var(--top-menu-border-color);
+        border-right: 1px solid var(--top-menu-border-color);
         overflow-y: auto;
 
         @include abstracts.screen(lg) {
             width: 100%;
             height: auto;
-            box-shadow: none;
+            border-right: none;
         }
     }
 }
@@ -73,15 +76,16 @@
     gap: 14px;
 
     + .menu-column {
-        margin-top: 20px;
+        margin-top: 22px;
     }
 
     @include abstracts.screen(lg) {
-        margin-top: 12px;
+        margin-top: 10px;
     }
 
     &__icon {
         position: relative;
+
         flex-shrink: 0;
         width: 36px;
         height: 36px;
@@ -95,6 +99,10 @@
         }
     }
 
+    &__content {
+        flex: 1;
+    }
+
     &__icon-1 {
         width: 30px;
         height: 30px;
@@ -105,21 +113,22 @@
         position: absolute;
         right: 0;
         bottom: 0;
+
         width: 24px;
         height: 24px;
         object-fit: contain;
         filter: var(--menu-column-icon-color);
     }
 
-    &__content {
-        flex: 1;
-    }
-
     &__heading {
-        margin: 4px 0 24px;
+        margin-top: 4px;
         font-size: 1.6rem;
         font-weight: 500;
         line-height: 150%;
+
+        @include abstracts.screen(lg) {
+            margin-bottom: 26px;
+        }
     }
 
     &__list {
@@ -151,30 +160,30 @@
 }
 
 .sub-menu {
-    padding-left: var(--inner-padding);
     position: absolute;
     inset: 0 0 0 var(--main-column-width);
 
     display: none;
-    // display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--inner-padding);
+
+    padding-left: var(--inner-padding);
 
     overflow-y: auto;
 
     @include abstracts.screen(lg) {
-        padding-left: 0;
         position: initial;
         grid-template-columns: 1fr;
+        padding-left: 0;
     }
 
     &--not-main {
-        padding-left: 0;
-        height: var(--max-inner-height);
         position: initial;
         inset: initial;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
+        height: var(--max-inner-height);
+        padding-left: 0;
 
         @include abstracts.screen(lg) {
             grid-template-columns: 1fr;

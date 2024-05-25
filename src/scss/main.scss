@@ -1,10 +1,5 @@
-@use './base';
-@use './themes';
-@use './layout';
-@use './components';
-@use './pages';
-
-.header {
-  position: relative;
-  z-index: 2;
-}
+@use "./base";
+@use "./theme";
+@use "./layout";
+@use "./components";
+@use "./pages";

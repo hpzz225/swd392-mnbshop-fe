@@ -137,33 +137,24 @@ export default function CustomerFooter() {
             </div>
           </div>
           <div className="footer__bottom">
-            <p className="footer__copyright">© 2024 - 2025 Grocery Mart. All rights reserved.</p>
+            <p className="footer__copyright">© 2010 - 2025 Grocery Mart. All rights reserved.</p>
+
             <div className="footer__socials">
-              <div className="footer__social-link footer__social-link--ytb">
-                <a href="#!">
-                  <img src={youtube} alt="" className="footer__social-icon" />
-                </a>
-              </div>
-              <div className="footer__social-link footer__social-link--fb">
-                <a href="#!">
-                  <img src={facebook} alt="" className="footer__social-icon" />
-                </a>
-              </div>
-              <div className="footer__social-link footer__social-link--in">
-                <a href="#!">
-                  <img src={instagram} alt="" className="footer__social-icon" />
-                </a>
-              </div>
-              <div className="footer__social-link footer__social-link--tw">
-                <a href="#!">
-                  <img src={twitter} alt="" className="footer__social-icon" />
-                </a>
-              </div>
-              <div className="footer__social-link footer__social-link--tt">
-                <a href="#!">
-                  <img src={tiktok} alt="" className="footer__social-icon" />
-                </a>
-              </div>
+              <a href="#!" className="footer__social-link footer__social-link--facebook">
+                <img src={facebook} alt="" className="footer__social-icon" />
+              </a>
+              <a href="#!" className="footer__social-link footer__social-link--youtube">
+                <img src={youtube} alt="" className="footer__social-icon" />
+              </a>
+              <a href="#!" className="footer__social-link footer__social-link--tiktok">
+                <img src={tiktok} alt="" className="footer__social-icon" />
+              </a>
+              <a href="#!" className="footer__social-link footer__social-link--twitter">
+                <img src={twitter} alt="" className="footer__social-icon" />
+              </a>
+              <a href="#!" className="footer__social-link footer__social-link--linkedin">
+                <img src={instagram} alt="" className="footer__social-icon" />
+              </a>
             </div>
           </div>
         </div>
