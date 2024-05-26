@@ -4,6 +4,7 @@ import DefaultLayout from '@/layouts/manager-layouts/default-layout'
 import BlogsList from '@/pages/customer-pages/blogs-list'
 import CustomerProfile from '@/pages/customer-pages/customer-profile'
 import HomePage from '@/pages/customer-pages/home-page'
+import ProductDetail from '@/pages/customer-pages/product-detail'
 import ProductsList from '@/pages/customer-pages/products-list'
 import ForgotPassword from '@/pages/forgot-password'
 import Login from '@/pages/login'
@@ -20,20 +21,16 @@ export const ROUTE_PATHS = {
 
 export const ROUTE_PATHS_CUSTOMER = {
   ROOT: '/',
-  PRODUCT: '/products',
-  BLOG: '/blogs',
   PROFILE: '/profile',
 }
 
 export const ROUTE_PATHS_MANAGER = {
-  ROOT: '/',
-  LOGIN: '/login',
-  FORGOT: '/forgot',
-  SIGNUP: '/signup',
-  PRODUCT: '/products',
-  BLOG: '/blogs',
+  HOME: '/home',
   PROFILE: '/profile',
+  M_PRODUCT: '/products',
+  M_BLOG: '/blogs',
   M_ACCOUNT: '/account',
+  M_PROMOTION: '/promotion',
 }
 
 export const routes = [
@@ -63,14 +60,21 @@ export const routes = [
     layout: LoginLayout,
   },
   {
-    path: ROUTE_PATHS_CUSTOMER.PRODUCT,
+    path: ROUTE_PATHS.PRODUCT,
     name: 'Product',
     component: ProductsList,
     layout: null,
     roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
   },
   {
-    path: ROUTE_PATHS_CUSTOMER.BLOG,
+    path: `${ROUTE_PATHS.PRODUCT}/:productId`,
+    name: 'Product Detail',
+    component: ProductDetail,
+    layout: null,
+    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+  },
+  {
+    path: ROUTE_PATHS.BLOG,
     name: 'Blog',
     component: BlogsList,
     layout: null,
