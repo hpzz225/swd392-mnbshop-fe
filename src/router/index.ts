@@ -1,6 +1,6 @@
-import { AUTHORITIES } from '@/constants'
 import LoginLayout from '@/layouts/login-layout'
 import DefaultLayout from '@/layouts/manager-layouts/default-layout'
+import BlogDetails from '@/pages/customer-pages/blog-details'
 import BlogsList from '@/pages/customer-pages/blogs-list'
 import CustomerProfile from '@/pages/customer-pages/customer-profile'
 import HomePage from '@/pages/customer-pages/home-page'
@@ -9,14 +9,15 @@ import ProductsList from '@/pages/customer-pages/products-list'
 import ForgotPassword from '@/pages/forgot-password'
 import Login from '@/pages/login'
 import SignUp from '@/pages/sign-up'
+import { AUTHORITIES } from '@/constants'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
   LOGIN: '/login',
   FORGOT: '/forgot',
   SIGNUP: '/signup',
-  PRODUCT: '/products',
-  BLOG: '/blogs',
+  PRODUCT: '/product',
+  BLOG: '/blog',
 }
 
 export const ROUTE_PATHS_CUSTOMER = {
@@ -29,7 +30,7 @@ export const ROUTE_PATHS_MANAGER = {
   PROFILE: '/profile',
   M_PRODUCT: '/products',
   M_BLOG: '/blogs',
-  M_ACCOUNT: '/account',
+  M_ACCOUNT: '/accounts',
   M_PROMOTION: '/promotion',
 }
 
@@ -81,11 +82,18 @@ export const routes = [
     roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
   },
   {
+    path: `${ROUTE_PATHS.BLOG}/:blogId`,
+    name: 'Blog',
+    component: BlogDetails,
+    layout: null,
+    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+  },
+  {
     path: ROUTE_PATHS_CUSTOMER.PROFILE,
     name: 'Profile',
     component: CustomerProfile,
     layout: null,
-    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+    roles: [AUTHORITIES.CUSTOMER],
   },
   {
     path: ROUTE_PATHS_MANAGER.M_ACCOUNT,
@@ -93,6 +101,6 @@ export const routes = [
     component: CustomerProfile,
     layout: DefaultLayout,
     private: true,
-    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+    roles: [AUTHORITIES.ADMIN],
   },
 ]

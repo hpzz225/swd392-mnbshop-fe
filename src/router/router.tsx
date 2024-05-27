@@ -1,7 +1,7 @@
-import { Route, Routes } from 'react-router-dom'
-import { routes } from '.'
 import CustomerHeader from '@/components/customer-screen/customer-header'
 import CustomerFooter from '@/components/customer-screen/customer-footer'
+import { Route, Routes } from 'react-router-dom'
+import { routes } from '.'
 
 export default function Router() {
   return (
@@ -35,7 +35,7 @@ export default function Router() {
                   </div>
                 ) : (
                   <div>
-                    <CustomerHeader isLoginPage={true} />
+                    <CustomerHeader isLoginPage={false} />
                     <Page />
                     <CustomerFooter />
                   </div>

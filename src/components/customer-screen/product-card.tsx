@@ -2,6 +2,8 @@ import productImg from '@/assets/img/product/milk1.png'
 import heart from '@/assets/icons/heart.svg'
 import heartActive from '@/assets/icons/heart-red.svg'
 import star from '@/assets/icons/star.svg'
+import { Link } from 'react-router-dom'
+import { ROUTE_PATHS } from '@/router'
 
 export default function ProductCard() {
   return (
@@ -9,18 +11,19 @@ export default function ProductCard() {
       <div className="col">
         <article className="product-card">
           <div className="product-card__img-wrap">
-            <a href="#!">
+            {/* TODO: add link */}
+            <Link to={`${ROUTE_PATHS.PRODUCT}/1`}>
               <img src={productImg} alt="" className="product-card__thumb" />
-            </a>
+            </Link>
             <button className="like-btn product-card__like-btn">
               <img src={heart} alt="" className="icon like-btn__icon" />
               <img src={heartActive} alt="" className="like-btn__icon--liked" />
             </button>
           </div>
 
-          <a href="">
+          <Link to={`${ROUTE_PATHS.PRODUCT}/1`}>
             <h3 className="product-card__title">Lavazza Milk Blends - Try the Italian</h3>
-          </a>
+          </Link>
           <p className="product-card__brand">Lavazza</p>
           <div className="product-card__row">
             <div className="product-card__rating">

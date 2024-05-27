@@ -7,6 +7,7 @@ import arrowDown from '@/assets/icons/arrow-down.svg'
 import search from '@/assets/icons/search.svg'
 import avatar from '@/assets/img/avatar.jpg'
 import { Link } from 'react-router-dom'
+import { ROUTE_PATHS, ROUTE_PATHS_CUSTOMER } from '@/router'
 
 export default function CustomerHeader({ isLoginPage }: { isLoginPage: boolean }) {
   return (
@@ -17,7 +18,7 @@ export default function CustomerHeader({ isLoginPage }: { isLoginPage: boolean }
             <img src={more} alt="" className="icon top-bar__more-icon" />
           </button>
 
-          <Link to={'/'} className="logo top-bar__logo">
+          <Link to={ROUTE_PATHS.ROOT} className="logo top-bar__logo">
             <img src={logo} alt="M&B Mart" className="logo__img top-bar__logo-img" />
             <h1 className="logo__title top-bar__logo-title mt-2">M&B Mart</h1>
           </Link>
@@ -41,18 +42,18 @@ export default function CustomerHeader({ isLoginPage }: { isLoginPage: boolean }
 
             <ul className="navbar__list js-dropdown-list">
               <li className="navbar__item">
-                <Link to={'/'} className="navbar__link">
+                <Link to={ROUTE_PATHS.ROOT} className="navbar__link">
                   Home
                 </Link>
               </li>
               <li className="navbar__item">
-                <Link to={'/products'} className="navbar__link">
+                <Link to={ROUTE_PATHS.PRODUCT} className="navbar__link">
                   Product
                   <img src={arrowDown} alt="" className="icon navbar__arrow" />
                 </Link>
               </li>
               <li className="navbar__item">
-                <Link to={'/blogs'} className="navbar__link">
+                <Link to={ROUTE_PATHS.BLOG} className="navbar__link">
                   Blog
                   <img src={arrowDown} alt="" className="icon navbar__arrow" />
                 </Link>
@@ -83,16 +84,18 @@ export default function CustomerHeader({ isLoginPage }: { isLoginPage: boolean }
                 </button>
               </div>
 
-              <div className="top-act__user">
-                <img src={avatar} alt="" className="top-act__avatar" />
-              </div>
+              <Link to={ROUTE_PATHS_CUSTOMER.PROFILE}>
+                <div className="top-act__user">
+                  <img src={avatar} alt="" className="top-act__avatar" />
+                </div>
+              </Link>
             </div>
           ) : (
             <div className="top-act">
-              <Link to={'/login'} className="btn btn--text d-md-none">
+              <Link to={ROUTE_PATHS.LOGIN} className="btn btn--text d-md-none">
                 Sign in
               </Link>
-              <Link to={'/signup'} className="top-act__sign-up btn btn--primary">
+              <Link to={ROUTE_PATHS.SIGNUP} className="top-act__sign-up btn btn--primary">
                 Sign up
               </Link>
             </div>
