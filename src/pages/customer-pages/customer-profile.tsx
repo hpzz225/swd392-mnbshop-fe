@@ -18,6 +18,8 @@ import leafBg from '@/assets/img/card/leaf-bg.svg'
 import leaf from '@/assets/img/card/leaf.svg'
 import item1 from '@/assets/img/product/item-1.png'
 import item2 from '@/assets/img/product/item-2.png'
+import { Link } from 'react-router-dom'
+import { ROUTE_PATHS_CUSTOMER } from '@/router'
 
 type CustomStyleProps = {
   '--bg-color'?: string
@@ -62,12 +64,12 @@ export default function CustomerProfile() {
                     <h3 className="profile-menu__title">Manage Account</h3>
                     <ul className="profile-menu__list">
                       <li>
-                        <a href="./edit-personal-info.html" className="profile-menu__link">
+                        <Link to={ROUTE_PATHS_CUSTOMER.EDIT_PROFILE} className="profile-menu__link">
                           <span className="profile-menu__icon">
                             <img src={profile} alt="" className="icon" />
                           </span>
                           Personal info
-                        </a>
+                        </Link>
                       </li>
                       <li>
                         <a href="#!" className="profile-menu__link">

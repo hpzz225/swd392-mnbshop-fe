@@ -10,6 +10,9 @@ import ForgotPassword from '@/pages/forgot-password'
 import Login from '@/pages/login'
 import SignUp from '@/pages/sign-up'
 import { AUTHORITIES } from '@/constants'
+import CustomerEditProfile from '@/pages/customer-pages/customer-edit-profile '
+import FavouriteList from '@/pages/customer-pages/favourite-list'
+import Cart from '@/pages/customer-pages/cart'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
@@ -22,7 +25,10 @@ export const ROUTE_PATHS = {
 
 export const ROUTE_PATHS_CUSTOMER = {
   ROOT: '/',
+  FAVOURITE: '/favourite',
+  CART: '/cart',
   PROFILE: '/profile',
+  EDIT_PROFILE: '/edit-profile',
 }
 
 export const ROUTE_PATHS_MANAGER = {
@@ -89,9 +95,30 @@ export const routes = [
     roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
   },
   {
+    path: ROUTE_PATHS_CUSTOMER.FAVOURITE,
+    name: 'Favourite',
+    component: FavouriteList,
+    layout: null,
+    roles: [AUTHORITIES.CUSTOMER],
+  },
+  {
+    path: ROUTE_PATHS_CUSTOMER.CART,
+    name: 'Cart',
+    component: Cart,
+    layout: null,
+    roles: [AUTHORITIES.CUSTOMER],
+  },
+  {
     path: ROUTE_PATHS_CUSTOMER.PROFILE,
     name: 'Profile',
     component: CustomerProfile,
+    layout: null,
+    roles: [AUTHORITIES.CUSTOMER],
+  },
+  {
+    path: ROUTE_PATHS_CUSTOMER.EDIT_PROFILE,
+    name: 'Edit Profile',
+    component: CustomerEditProfile,
     layout: null,
     roles: [AUTHORITIES.CUSTOMER],
   },

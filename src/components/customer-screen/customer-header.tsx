@@ -17,7 +17,6 @@ export default function CustomerHeader({ isLoginPage }: { isLoginPage: boolean }
           <button className="top-bar__more d-none d-lg-block js-toggle" toggle-target="#navbar">
             <img src={more} alt="" className="icon top-bar__more-icon" />
           </button>
-
           <Link to={ROUTE_PATHS.ROOT} className="logo top-bar__logo">
             <img src={logo} alt="M&B Mart" className="logo__img top-bar__logo-img" />
             <h1 className="logo__title top-bar__logo-title mt-2">M&B Mart</h1>
@@ -71,17 +70,21 @@ export default function CustomerHeader({ isLoginPage }: { isLoginPage: boolean }
                 </button>
               </div>
               <div className="top-act__group d-md-none">
-                <button className="top-act__btn">
-                  <img src={heart} alt="" className="icon top-act__icon" />
-                  <span className="top-act__title">03</span>
-                </button>
+                <Link to={ROUTE_PATHS_CUSTOMER.FAVOURITE}>
+                  <button className="top-act__btn">
+                    <img src={heart} alt="" className="icon top-act__icon" />
+                    <span className="top-act__title">03</span>
+                  </button>
+                </Link>
 
                 <div className="top-act__separate"></div>
 
-                <button className="top-act__btn">
-                  <img src={buy} alt="" className="icon top-act__icon" />
-                  <span className="top-act__title">$65.42</span>
-                </button>
+                <Link to={ROUTE_PATHS_CUSTOMER.CART}>
+                  <button className="top-act__btn">
+                    <img src={buy} alt="" className="icon top-act__icon" />
+                    <span className="top-act__title">$65.42</span>
+                  </button>
+                </Link>
               </div>
 
               <Link to={ROUTE_PATHS_CUSTOMER.PROFILE}>
