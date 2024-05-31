@@ -15,12 +15,6 @@ export default function SlideShow() {
             </a>
           </div>
         </div>
-
-        <div className="slideshow__page">
-          <span className="slideshow__num">1</span>
-          <span className="slideshow__slider"></span>
-          <span className="slideshow__num">5</span>
-        </div>
       </div>
     </div>
   )

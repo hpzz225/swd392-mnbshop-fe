@@ -8,22 +8,22 @@ export default function BlogDetails() {
             <em>31st July, 2022</em>
           </time>
           <p>
-            It’s rolling onto 2 years since I went back independent and fully freelance, but over the 11+ years I’ve
-            been working in design and the web, I’ve probably done around half of that as a freelancer in some capacity.
+            It's rolling onto 2 years since I went back independent and fully freelance, but over the 11+ years I've
+            been working in design and the web, I've probably done around half of that as a freelancer in some capacity.
           </p>
           <p>
             Lots of people are experiencing either redundancies or work issues at the moment and although, at the time
             of writing, we are in a global pandemic: now is a great time to go freelance.
           </p>
           <p>
-            In this article, I’m going to share with you some tips that have helped me make a success out of this
+            In this article, I'm going to share with you some tips that have helped me make a success out of this
             freelancing stuff. I hope by the end that you will feel more confident about going freelance. I must point
             out that the advice is mainly centered around working with clients, rather than say, doing contract
-            development work, but hopefully you’ll get some benefit if that’s you. Let’s dig in.
+            development work, but hopefully you'll get some benefit if that's you. Let's dig in.
           </p>
           <h2 id="heading-freedom">Freedom</h2>
           <p>
-            The “F” in Freelance stands for “Freedom”. It doesn’t really, but freedom is exactly what you get when you
+            The “F” in Freelance stands for “Freedom”. It doesn't really, but freedom is exactly what you get when you
             go freelance. This freedom for me has enabled two key things: ownership of my time and flexibility to
             diversify what I do.
           </p>
@@ -35,7 +35,7 @@ export default function BlogDetails() {
             I didn’t work a “normal” 9-5, but instead worked 10-4 (roughly). Those hours certainly add up.
           </p>
           <p>
-            Because the work was quite steady, I didn’t need to do much admin and business development stuff, either.
+            Because the work was quite steady, I didn't need to do much admin and business development stuff, either.
             This is a very valid way of going about freelance and I think it could appeal to someone who is comfortable
             working almost like they have a day job. The reason you work a lot less time like this as a freelancer is
             simple: no company bullshit. You are the boss of your own time and I promise you: you will make so much more

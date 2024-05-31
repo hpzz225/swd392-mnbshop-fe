@@ -1,5 +1,5 @@
 import ProductCard from './product-card'
-import ViewMore from './view-more'
+import ViewMore from '../view-more'
 
 export default function ProductSection() {
   return (

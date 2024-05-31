@@ -1,4 +1,4 @@
-import BlogCard from '@/components/customer-screen/blog-card'
+import BlogCard from '@/components/customer-screen/blog/blog-card'
 import FilterForm from '@/components/customer-screen/filter-form'
 
 export default function BlogsList() {

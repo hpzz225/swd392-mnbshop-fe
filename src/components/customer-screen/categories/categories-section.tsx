@@ -1,5 +1,5 @@
 import CategoryCard from './category-card'
-import ViewMore from './view-more'
+import ViewMore from '../view-more'
 
 export default function CategoriesSection() {
   return (

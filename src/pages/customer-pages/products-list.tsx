@@ -1,6 +1,6 @@
-import ProductCard from '@/components/customer-screen/product-card'
+import ProductCard from '@/components/customer-screen/product/product-card'
 import FilterForm from '@/components/customer-screen/filter-form'
-import CategoriesSection from '@/components/customer-screen/categories-section'
+import CategoriesSection from '@/components/customer-screen/categories/categories-section'
 
 export default function ProductsList() {
   return (
