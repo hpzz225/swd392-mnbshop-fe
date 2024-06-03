@@ -13,7 +13,7 @@ export default function FavouriteList() {
           <SearchBarMobile />
           {/* <!-- Breadcrumbs --> */}
           <Breadcrumb />
-
+          {/* <!-- Favourite content --> */}
           <div className="checkout-container">
             <div className="row gy-xl-3">
               <div className="col-12">
@@ -39,9 +39,6 @@ export default function FavouriteList() {
                           Continue Shopping
                         </a>
                       </div>
-                      <a href="./checkout.html" className="cart-info__checkout-all btn btn--primary btn--rounded">
-                        All Check Out
-                      </a>
                     </div>
                   </div>
                 </div>

@@ -13,6 +13,7 @@ import { AUTHORITIES } from '@/constants'
 import CustomerEditProfile from '@/pages/customer-pages/customer-edit-profile '
 import FavouriteList from '@/pages/customer-pages/favourite-list'
 import Cart from '@/pages/customer-pages/cart'
+import Checkout from '@/pages/customer-pages/checkout'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
@@ -27,6 +28,7 @@ export const ROUTE_PATHS_CUSTOMER = {
   ROOT: '/',
   FAVOURITE: '/favourite',
   CART: '/cart',
+  CHECKOUT: '/checkout',
   PROFILE: '/profile',
   EDIT_PROFILE: '/edit-profile',
 }
@@ -75,7 +77,7 @@ export const routes = [
   },
   {
     path: `${ROUTE_PATHS.PRODUCT}/:productId`,
-    name: 'Product Detail',
+    name: 'Product detail',
     component: ProductDetail,
     layout: null,
     roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
@@ -89,7 +91,7 @@ export const routes = [
   },
   {
     path: `${ROUTE_PATHS.BLOG}/:blogId`,
-    name: 'Blog',
+    name: 'Blog detail',
     component: BlogDetails,
     layout: null,
     roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
@@ -109,6 +111,13 @@ export const routes = [
     roles: [AUTHORITIES.CUSTOMER],
   },
   {
+    path: ROUTE_PATHS_CUSTOMER.CHECKOUT,
+    name: 'Cart',
+    component: Checkout,
+    layout: null,
+    roles: [AUTHORITIES.CUSTOMER],
+  },
+  {
     path: ROUTE_PATHS_CUSTOMER.PROFILE,
     name: 'Profile',
     component: CustomerProfile,
@@ -117,7 +126,7 @@ export const routes = [
   },
   {
     path: ROUTE_PATHS_CUSTOMER.EDIT_PROFILE,
-    name: 'Edit Profile',
+    name: 'Edit profile',
     component: CustomerEditProfile,
     layout: null,
     roles: [AUTHORITIES.CUSTOMER],

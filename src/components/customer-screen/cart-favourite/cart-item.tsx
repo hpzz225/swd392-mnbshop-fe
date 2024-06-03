@@ -3,9 +3,9 @@ import heart from '@/assets/icons/heart.svg'
 import trash from '@/assets/icons/trash.svg'
 import plus from '@/assets/icons/plus.svg'
 import minus from '@/assets/icons/minus.svg'
-import item1 from '@/assets/img/product/item-1.png'
+import item1 from '@/assets/img/product/milk1.png'
 
-export default function CartItem() {
+export default function CartItem({ isCheckout }: { isCheckout?: boolean }) {
   return (
     <article className="cart-item">
       <a href="./product-detail.html">
@@ -24,15 +24,21 @@ export default function CartItem() {
               LavAzza
               <img className="icon" src={arrowRight} alt="" />
             </div>
-            <div className="cart-item__input">
-              <button className="cart-item__input-btn">
-                <img className="icon" src={minus} alt="" />
-              </button>
-              <span>1</span>
-              <button className="cart-item__input-btn">
-                <img className="icon" src={plus} alt="" />
-              </button>
-            </div>
+            {isCheckout ? (
+              <div className="cart-item__input">
+                <span>1</span>
+              </div>
+            ) : (
+              <div className="cart-item__input">
+                <button className="cart-item__input-btn">
+                  <img className="icon" src={minus} alt="" />
+                </button>
+                <span>1</span>
+                <button className="cart-item__input-btn">
+                  <img className="icon" src={plus} alt="" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
         <div className="cart-item__content-right">

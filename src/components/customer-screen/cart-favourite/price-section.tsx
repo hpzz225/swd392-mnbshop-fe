@@ -1,4 +1,5 @@
 import gift from '@/assets/icons/gift.svg'
+import { Link } from 'react-router-dom'
 
 export default function PriceSection() {
   return (
@@ -25,9 +26,9 @@ export default function PriceSection() {
           <span>Estimated Total</span>
           <span>$201.65</span>
         </div>
-        <a href="./shipping.html" className="cart-info__next-btn btn btn--primary btn--rounded">
+        <Link to={'/checkout'} className="cart-info__next-btn btn btn--primary btn--rounded">
           Continue to checkout
-        </a>
+        </Link>
       </div>
       <div className="cart-info">
         <a href="#!">
