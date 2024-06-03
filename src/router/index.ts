@@ -9,11 +9,11 @@ import ProductsList from '@/pages/customer-pages/products-list'
 import ForgotPassword from '@/pages/forgot-password'
 import Login from '@/pages/login'
 import SignUp from '@/pages/sign-up'
-import { AUTHORITIES } from '@/constants'
 import CustomerEditProfile from '@/pages/customer-pages/customer-edit-profile '
 import FavouriteList from '@/pages/customer-pages/favourite-list'
 import Cart from '@/pages/customer-pages/cart'
 import Checkout from '@/pages/customer-pages/checkout'
+import { AUTHORITIES } from '@/constants'
 
 export const ROUTE_PATHS = {
   ROOT: '/',

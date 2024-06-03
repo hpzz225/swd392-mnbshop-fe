@@ -14,7 +14,7 @@
    ```
 2. **Setup:** Install dependencies using your preferred package manager (e.g., npm or yarn)
    ```console
-   cd MNB_FE
+   cd swd392-mnbshop-fe
    npm install
    ```
 3. **Configuration:**
@@ -26,10 +26,13 @@
 
 # Technologies Used
 
-- **Frontend:** Vite, React, TypeScript, Ant Design, React-Query, Axios, JWT Token, Tiptap, Redux Toolkit
+- **Frontend:** Vite, React, TypeScript, Ant Design, Tailwind, React-Query, Axios, JWT Token, Redux Toolkit
 
 # Contributors
 
+- Nguyen Trung Hieu 👉 github.com/nguyentrunghieu297
+- Nguyen Trung Hieu 👉 github.com/nguyentrunghieu297
+- Nguyen Trung Hieu 👉 github.com/nguyentrunghieu297
 - Nguyen Trung Hieu 👉 github.com/nguyentrunghieu297
 
 # See it live:
