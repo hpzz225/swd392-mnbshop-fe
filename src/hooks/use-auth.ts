@@ -1,7 +1,7 @@
 import authApi from '@/services/auth'
 import { queryClient } from '@/constants'
 import { REFRESH_TOKEN_KEY, TOKEN_KEY } from '@/lib/axios'
-import { ROUTE_PATHS } from '@/router'
+// import { ROUTE_PATHS } from '@/router'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { notification } from 'antd'
 import { useNavigate } from 'react-router-dom'
@@ -19,7 +19,8 @@ export const useAuth = () => {
       const response = await authApi.getCurrentUser()
       if (!response) {
         localStorage.clear()
-        navigate(ROUTE_PATHS.LOGIN)
+        // TODO: Redirect to login
+        // navigate(ROUTE_PATHS.LOGIN)
         return null
       } else return response
     },

@@ -15,7 +15,7 @@ export default function Navigator() {
 
   return (
     <ConfigAntdTheme theme={DefaultButtonStyle}>
-      <Sider className="h-full" collapsible trigger={null} collapsed={isCollapse}>
+      <Sider className="h-full flex flex-col" collapsible trigger={null} collapsed={isCollapse}>
         <Button className={isCollapse ? 'mx-4 my-2' : 'mx-2.5 my-2'} type="text" onClick={toggleCollapse}>
           {isCollapse ? <BarsOutlined className="text-lg" /> : <CloseOutlined className="text-lg" />}
         </Button>

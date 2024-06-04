@@ -29,12 +29,16 @@ export const queryClient = new QueryClient({
 export const THEME_CODES = {
   PRIMARY: '#f2a7b1',
   SECONDARY: '#98deea',
-  FOREGROUND: '#000000',
   BACKGROUND: '#ffffff',
   ERROR: '#f03e3e',
   SUCCESS: '#00c48c',
   WARNING: '#ff9900',
   UNACTICE: '#a0a0a0',
+  PRIMARY_HOVER: '#4F6181',
+  ORANGE: '#D45B13',
+  GREEN: '#2F903F',
+  FOREGROUND: '#EDF2F7',
+  UNACTIVE: '#65748C',
 }
 
 // Regex số điện thoại VN
