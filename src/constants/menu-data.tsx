@@ -1,42 +1,30 @@
-import { SettingOutlined, UserOutlined, ReadOutlined } from '@ant-design/icons'
+import { GiftOutlined, UserOutlined, CodepenOutlined, BarChartOutlined, ReadOutlined } from '@ant-design/icons'
 import { MenuItem } from '@/types'
 
 export const NavigatorItems: MenuItem[] = [
   {
-    label: 'Students',
-    key: 'students',
+    label: 'Dashboard',
+    key: '/home',
+    icon: <BarChartOutlined />,
+  },
+  {
+    label: 'Accounts',
+    key: '/accounts-manager',
     icon: <UserOutlined />,
-    children: [
-      {
-        label: 'Student List',
-        key: '/',
-      },
-      {
-        label: 'Reserve List',
-        key: '/reserve',
-      },
-    ],
   },
   {
-    label: 'Class',
-    key: 'class',
+    label: 'Products',
+    key: '/products-manager',
+    icon: <CodepenOutlined />,
+  },
+  {
+    label: 'Blogs',
+    key: '/blogs-manager',
     icon: <ReadOutlined />,
-    children: [
-      {
-        label: 'View class',
-        key: '/class',
-      },
-    ],
   },
   {
-    label: 'Settings',
-    key: 'settings',
-    icon: <SettingOutlined />,
-    children: [
-      {
-        label: 'E-mail Configuration',
-        key: '/email',
-      },
-    ],
+    label: 'Promotion',
+    key: '/promotion-manager',
+    icon: <GiftOutlined />,
   },
 ]

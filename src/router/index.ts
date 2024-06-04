@@ -1,5 +1,5 @@
 import LoginLayout from '@/layouts/login-layout'
-import DefaultLayout from '@/layouts/manager-layouts/default-layout'
+import ManagerDefaultLayout from '@/layouts/manager-layouts/default-layout'
 import BlogDetails from '@/pages/customer-pages/blog-details'
 import BlogsList from '@/pages/customer-pages/blogs-list'
 import CustomerProfile from '@/pages/customer-pages/customer-profile'
@@ -14,6 +14,7 @@ import CustomerEditProfile from '@/pages/customer-pages/customer-edit-profile '
 import FavouriteList from '@/pages/customer-pages/favourite-list'
 import Cart from '@/pages/customer-pages/cart'
 import Checkout from '@/pages/customer-pages/checkout'
+import AccountList from '@/pages/manager-pages/account-list'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
@@ -135,8 +136,16 @@ export const routes = [
     path: ROUTE_PATHS_MANAGER.M_ACCOUNT,
     name: 'Account',
     component: CustomerProfile,
-    layout: DefaultLayout,
+    layout: ManagerDefaultLayout,
     private: true,
+    roles: [AUTHORITIES.ADMIN],
+  },
+  {
+    path: ROUTE_PATHS_MANAGER.HOME,
+    name: 'Dashboard',
+    component: AccountList,
+    layout: ManagerDefaultLayout,
+    private: false,
     roles: [AUTHORITIES.ADMIN],
   },
 ]
