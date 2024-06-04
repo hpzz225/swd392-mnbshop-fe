@@ -13,8 +13,8 @@ export default function ManagerHeader({ isLoginPage }: { isLoginPage: boolean })
     <div>
       <AntHeader className="bg-primary flex justify-between items-center">
         <div className="flex items-center">
-          <img src={Logo} alt="Logo" className="w-16" />
-          <Typography.Text className="text-white cursor-pointer">M&B ADMIN</Typography.Text>
+          <img src={Logo} alt="M&B Mart" className="logo__img top-bar__logo-img mr-3" />
+          <h1 className="logo__title top-bar__logo-title mt-2 text-white">M&B Mart</h1>
         </div>
         <div className="flex items-center gap-8">
           {!isLoginPage ? (

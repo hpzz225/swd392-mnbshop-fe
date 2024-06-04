@@ -9,7 +9,7 @@ export default function DefaultLayout({ children }: { children: React.ReactNode 
     <Layout className="min-h-screen">
       <Header isLoginPage={false} />
       <Layout>
-        <div className="bg-foreground bg-white">
+        <div>
           <Navigator />
         </div>
         <Content className="flex flex-col">{children}</Content>

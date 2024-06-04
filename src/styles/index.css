@@ -41,3 +41,7 @@
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+:where(.css-dev-only-do-not-override-17seli4).ant-layout .ant-layout-sider {
+  background: white;
+}
