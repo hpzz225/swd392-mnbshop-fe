@@ -54,14 +54,7 @@ export const PAGINATION = {
 // Tiêu đề popup
 export const POPUP_TITLE = {
   FILTER: 'Filter',
-}
-
-// Thông báo
-export const MESSAGES = {
-  EM1: 'The file format is incorrect',
-}
-
-// Thông báo lỗi
-export const ERROR_MESSAGES = {
-  EM1: 'The file format is incorrect',
+  IMPORT_PRODUCT: 'Add new product',
+  UPDATE_PRODUCT: 'Update product',
+  DELETE_PRODUCT: 'Delete product',
 }
