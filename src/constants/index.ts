@@ -29,12 +29,16 @@ export const queryClient = new QueryClient({
 export const THEME_CODES = {
   PRIMARY: '#f2a7b1',
   SECONDARY: '#98deea',
-  FOREGROUND: '#000000',
   BACKGROUND: '#ffffff',
   ERROR: '#f03e3e',
   SUCCESS: '#00c48c',
   WARNING: '#ff9900',
   UNACTICE: '#a0a0a0',
+  PRIMARY_HOVER: '#4F6181',
+  ORANGE: '#D45B13',
+  GREEN: '#2F903F',
+  FOREGROUND: '#EDF2F7',
+  UNACTIVE: '#65748C',
 }
 
 // Regex số điện thoại VN
@@ -50,14 +54,7 @@ export const PAGINATION = {
 // Tiêu đề popup
 export const POPUP_TITLE = {
   FILTER: 'Filter',
-}
-
-// Thông báo
-export const MESSAGES = {
-  EM1: 'The file format is incorrect',
-}
-
-// Thông báo lỗi
-export const ERROR_MESSAGES = {
-  EM1: 'The file format is incorrect',
+  IMPORT_PRODUCT: 'Add new product',
+  UPDATE_PRODUCT: 'Update product',
+  DELETE_PRODUCT: 'Delete product',
 }

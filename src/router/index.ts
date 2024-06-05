@@ -1,5 +1,5 @@
 import LoginLayout from '@/layouts/login-layout'
-import DefaultLayout from '@/layouts/manager-layouts/default-layout'
+import ManagerDefaultLayout from '@/layouts/manager-layouts/default-layout'
 import BlogDetails from '@/pages/customer-pages/blog-details'
 import BlogsList from '@/pages/customer-pages/blogs-list'
 import CustomerProfile from '@/pages/customer-pages/customer-profile'
@@ -13,7 +13,13 @@ import CustomerEditProfile from '@/pages/customer-pages/customer-edit-profile '
 import FavouriteList from '@/pages/customer-pages/favourite-list'
 import Cart from '@/pages/customer-pages/cart'
 import Checkout from '@/pages/customer-pages/checkout'
+import ProductManager from '@/pages/manager-pages/product-manager'
+import AccountManager from '@/pages/manager-pages/account-manager'
+import Dashboard from '@/pages/manager-pages/dashboard'
+import PromotionManager from '@/pages/manager-pages/promotion-manager'
 import { AUTHORITIES } from '@/constants'
+import BlogManager from '@/pages/manager-pages/blog-manager'
+import NotFound from '@/pages/not-found'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
@@ -29,12 +35,12 @@ export const ROUTE_PATHS_CUSTOMER = {
   FAVOURITE: '/favourite',
   CART: '/cart',
   CHECKOUT: '/checkout',
-  PROFILE: '/profile',
+  PROFILE: '/customer-profile',
   EDIT_PROFILE: '/edit-profile',
 }
 
 export const ROUTE_PATHS_MANAGER = {
-  HOME: '/home',
+  DASHBOARD: '/dashboard',
   PROFILE: '/profile',
   M_PRODUCT: '/products',
   M_BLOG: '/blogs',
@@ -43,13 +49,7 @@ export const ROUTE_PATHS_MANAGER = {
 }
 
 export const routes = [
-  {
-    path: ROUTE_PATHS_CUSTOMER.ROOT,
-    name: 'Home',
-    component: HomePage,
-    layout: null,
-    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
-  },
+  // LOGIN ROUTE
   {
     path: ROUTE_PATHS.LOGIN,
     name: 'Login',
@@ -67,6 +67,14 @@ export const routes = [
     name: 'Forgot',
     component: ForgotPassword,
     layout: LoginLayout,
+  },
+  // CUSTOMER ROUTE
+  {
+    path: ROUTE_PATHS_CUSTOMER.ROOT,
+    name: 'Home',
+    component: HomePage,
+    layout: null,
+    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
   },
   {
     path: ROUTE_PATHS.PRODUCT,
@@ -131,11 +139,51 @@ export const routes = [
     layout: null,
     roles: [AUTHORITIES.CUSTOMER],
   },
+  // MANAGER ROUTE
+  {
+    path: ROUTE_PATHS_MANAGER.DASHBOARD,
+    name: 'Admin Dashboard',
+    component: Dashboard,
+    layout: ManagerDefaultLayout,
+    private: false,
+    roles: [AUTHORITIES.ADMIN],
+  },
   {
     path: ROUTE_PATHS_MANAGER.M_ACCOUNT,
-    name: 'Account',
-    component: CustomerProfile,
-    layout: DefaultLayout,
+    name: 'Account Manager',
+    component: AccountManager,
+    layout: ManagerDefaultLayout,
+    private: true,
+    roles: [AUTHORITIES.ADMIN],
+  },
+  {
+    path: ROUTE_PATHS_MANAGER.M_PRODUCT,
+    name: 'Product Manager',
+    component: ProductManager,
+    layout: ManagerDefaultLayout,
+    private: true,
+    roles: [AUTHORITIES.ADMIN],
+  },
+  {
+    path: ROUTE_PATHS_MANAGER.M_BLOG,
+    name: 'Blog',
+    component: BlogManager,
+    layout: ManagerDefaultLayout,
+    private: true,
+    roles: [AUTHORITIES.ADMIN],
+  },
+  {
+    path: ROUTE_PATHS_MANAGER.M_PROMOTION,
+    name: 'Promotion Manager',
+    component: PromotionManager,
+    layout: ManagerDefaultLayout,
+    private: true,
+    roles: [AUTHORITIES.ADMIN],
+  },
+  {
+    path: `*`,
+    name: 'Not found',
+    component: NotFound,
     private: true,
     roles: [AUTHORITIES.ADMIN],
   },

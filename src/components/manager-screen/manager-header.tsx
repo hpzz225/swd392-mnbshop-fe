@@ -1,5 +1,4 @@
-import Flag from '@/assets/img/avatar.jpg'
-import Logo from '@/assets/img/avatar.jpg'
+import Logo from '@/assets/icons/logo3.png'
 import avatar from '@/assets/img/avatar.jpg'
 import { Header as AntHeader } from 'antd/es/layout/layout'
 import { Typography, Avatar } from 'antd'
@@ -13,12 +12,11 @@ export default function ManagerHeader({ isLoginPage }: { isLoginPage: boolean })
   return (
     <div>
       <AntHeader className="bg-primary flex justify-between items-center">
-        <img src={Logo} alt="Logo" className="w-16" />
+        <div className="flex items-center">
+          <img src={Logo} alt="M&B Mart" className="logo__img top-bar__logo-img mr-3" />
+          <h1 className="logo__title top-bar__logo-title mt-2 text-white">M&B Mart</h1>
+        </div>
         <div className="flex items-center gap-8">
-          <div className="flex items-center justify-center gap-2 bg-[#0B2136] text-white px-4 py-3 rounded-full">
-            <img src={Flag} alt="Flag" />
-            <Typography.Text className="text-white text-xs">uniGate</Typography.Text>
-          </div>
           {!isLoginPage ? (
             <div className="flex items-center gap-2">
               <Avatar

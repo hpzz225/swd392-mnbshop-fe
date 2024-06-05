@@ -55,3 +55,27 @@ export type LoginUserAPIResponse = {
     refreshToken: string
   }
 }
+
+export type ProductTableData = {
+  key: React.Key
+  productId: string
+  productName: string
+  brand: string
+  price: number
+  discount: number
+  quantity: number
+  byAge: number
+}
+
+export type AccountTableData = {
+  key: React.Key
+  id: string
+  fullName: string
+  phone: string
+  email: string
+  address: string
+  gender: string
+  dob: string
+  isDisable: boolean
+  role: string
+}
