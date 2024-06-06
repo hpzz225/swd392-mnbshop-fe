@@ -1,5 +1,5 @@
 import Popup from '@/components/manager-screen/popup'
-import DeleteProduct from '@/features/manager-feature/delete-product'
+import DeleteProduct from '@/features/manager-feature/product-mng/delete-product'
 import {
   GiftOutlined,
   UserOutlined,
@@ -13,6 +13,7 @@ import { MenuItem } from '@/types'
 import { ROUTE_PATHS_MANAGER } from '@/router'
 import { Link } from 'react-router-dom'
 import { POPUP_TITLE } from '.'
+import DisableAccount from '@/features/manager-feature/account-mng/disable-account'
 
 // TODO: eslint-disable
 // eslint-disable-next-line react-refresh/only-export-components
@@ -59,6 +60,28 @@ export const ViewProductDropdown = (productName: string, productId: string): Men
         content={<DeleteProduct productName={productName} productId={productId} />}
       >
         Delete Product
+      </Popup>
+    ),
+    key: 'delete',
+    icon: <CloseCircleOutlined />,
+  },
+]
+
+export const ViewAccountDropdown = (fullName: string, id: string): MenuItem[] => [
+  {
+    label: <Link to={id}>Edit Account</Link>,
+    key: 'edit',
+    icon: <EditOutlined />,
+  },
+  {
+    label: (
+      <Popup
+        width={430}
+        type="confirm"
+        title={POPUP_TITLE.DISABLE_ACCOUNT}
+        content={<DisableAccount fullName={fullName} id={id} />}
+      >
+        Disable Account
       </Popup>
     ),
     key: 'delete',

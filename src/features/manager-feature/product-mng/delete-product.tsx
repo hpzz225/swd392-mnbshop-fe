@@ -1,6 +1,6 @@
+import ConfigAntdTheme from '@/lib/antd/config-theme'
 import { POPUP_TITLE } from '@/constants'
 import { DefaultButtonStyle } from '@/lib/antd/antd-styles'
-import ConfigAntdTheme from '@/lib/antd/config-theme'
 import { useAppDispatch } from '@/lib/redux-toolkit/hook'
 import { closePopup } from '@/lib/redux-toolkit/slices/popup-slice'
 import { Button, Typography } from 'antd'
@@ -12,7 +12,6 @@ interface DeleteProductProps {
 
 export default function DeleteProduct({ productName, productId }: DeleteProductProps) {
   const dispatch = useAppDispatch()
-
   const handleDelete = () => {
     console.log(productId)
     dispatch(closePopup(POPUP_TITLE.DELETE_PRODUCT))

@@ -56,7 +56,6 @@ export default function TableData<T extends TableDataType>({
             }
           : undefined
       }
-      className="h-full"
       size="middle"
     />
   )

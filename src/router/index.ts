@@ -17,9 +17,9 @@ import ProductManager from '@/pages/manager-pages/product-manager'
 import AccountManager from '@/pages/manager-pages/account-manager'
 import Dashboard from '@/pages/manager-pages/dashboard'
 import PromotionManager from '@/pages/manager-pages/promotion-manager'
-import { AUTHORITIES } from '@/constants'
 import BlogManager from '@/pages/manager-pages/blog-manager'
 import NotFound from '@/pages/not-found'
+import { AUTHORITIES } from '@/constants'
 
 export const ROUTE_PATHS = {
   ROOT: '/',

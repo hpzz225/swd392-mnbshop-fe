@@ -54,7 +54,11 @@ export const PAGINATION = {
 // Tiêu đề popup
 export const POPUP_TITLE = {
   FILTER: 'Filter',
-  IMPORT_PRODUCT: 'Add new product',
+  ADD_PRODUCT: 'Add new product',
   UPDATE_PRODUCT: 'Update product',
   DELETE_PRODUCT: 'Delete product',
+
+  ADD_ACCOUNT: 'Add new account',
+  UPDATE_ACCOUNT: 'Update account',
+  DISABLE_ACCOUNT: 'Disable account',
 }
