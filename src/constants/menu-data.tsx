@@ -8,6 +8,8 @@ import {
   ReadOutlined,
   CloseCircleOutlined,
   EditOutlined,
+  BoldOutlined,
+  ShoppingCartOutlined,
 } from '@ant-design/icons'
 import { MenuItem } from '@/types'
 import { ROUTE_PATHS_MANAGER } from '@/router'
@@ -29,19 +31,29 @@ export const NavigatorItems: MenuItem[] = [
     icon: <UserOutlined />,
   },
   {
+    label: 'Brands',
+    key: '/brands' || ROUTE_PATHS_MANAGER.M_BRAND,
+    icon: <BoldOutlined />,
+  },
+  {
     label: 'Products',
     key: '/products' || ROUTE_PATHS_MANAGER.M_PRODUCT,
     icon: <CodepenOutlined />,
   },
   {
-    label: 'Blogs',
-    key: '/blogs' || ROUTE_PATHS_MANAGER.M_BLOG,
-    icon: <ReadOutlined />,
+    label: 'Orders',
+    key: '/orders' || ROUTE_PATHS_MANAGER.M_ORDER,
+    icon: <ShoppingCartOutlined />,
   },
   {
     label: 'Promotion',
     key: '/promotion' || ROUTE_PATHS_MANAGER.M_PROMOTION,
     icon: <GiftOutlined />,
+  },
+  {
+    label: 'Blogs',
+    key: '/blogs' || ROUTE_PATHS_MANAGER.M_BLOG,
+    icon: <ReadOutlined />,
   },
 ]
 
