@@ -61,4 +61,12 @@ export const POPUP_TITLE = {
   ADD_ACCOUNT: 'Add new account',
   UPDATE_ACCOUNT: 'Update account',
   DISABLE_ACCOUNT: 'Disable account',
+
+  ADD_ORDER: 'Add new order',
+  UPDATE_ORDER: 'Update order',
+  DELETE_ORDER: 'Delete order',
+
+  ADD_BRAND: 'Add new brand',
+  UPDATE_BRAND: 'Update brand',
+  DELETE_BRAND: 'Delete brand',
 }

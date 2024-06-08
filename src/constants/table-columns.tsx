@@ -1,6 +1,6 @@
-import { AccountTableData, ProductTableData } from '@/types'
-import { TableColumnsType } from 'antd'
-import { ViewAccountDropdown, ViewProductDropdown } from './menu-data'
+import { AccountTableData, BrandTableData, ProductTableData } from '@/types'
+import { Image, TableColumnsType } from 'antd'
+import { ViewAccountDropdown, ViewBrandDropdown, ViewProductDropdown } from './menu-data'
 import Dropdown from '@/components/manager-screen/dropdown'
 
 export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
@@ -60,6 +60,53 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
 
     render: (record) => {
       return <Dropdown items={ViewProductDropdown(record.productName, record.productId)} />
+    },
+  },
+]
+
+export const VIEW_BRAND_COLS: TableColumnsType<BrandTableData> = [
+  {
+    title: 'BRAND ID',
+    dataIndex: 'brandId',
+    key: 'brandId',
+    width: 160,
+    align: 'center',
+  },
+  {
+    title: 'IMAGE',
+    dataIndex: 'image',
+    key: 'image',
+    width: 200,
+    align: 'center',
+    render: (imageUrl) => <Image src={imageUrl} alt="Brand Image" className="rounded-xl" width={100} />,
+  },
+  {
+    title: 'BRAND NAME',
+    dataIndex: 'brandName',
+    key: 'brandName',
+    align: 'center',
+  },
+  {
+    title: '#PRODUCTS',
+    dataIndex: 'numberOfProducts',
+    key: 'numberOfProducts',
+    width: 200,
+    align: 'center',
+  },
+  {
+    title: 'UPDATE AT',
+    dataIndex: 'updateAt',
+    key: 'updateAt',
+    width: 200,
+    align: 'center',
+  },
+  {
+    title: 'Action',
+    key: 'operation',
+    width: 90,
+    align: 'center',
+    render: (record) => {
+      return <Dropdown items={ViewBrandDropdown(record.brandName, record.brandId)} />
     },
   },
 ]

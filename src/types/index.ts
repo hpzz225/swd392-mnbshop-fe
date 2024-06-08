@@ -56,6 +56,15 @@ export type LoginUserAPIResponse = {
   }
 }
 
+export type BrandTableData = {
+  key: React.Key
+  brandId: string
+  brandName: string
+  image: string
+  numberOfProducts: number
+  updateAt: string
+}
+
 export type ProductTableData = {
   key: React.Key
   productId: string
@@ -65,6 +74,17 @@ export type ProductTableData = {
   discount: number
   quantity: number
   byAge: number
+}
+
+export type OrderTableData = {
+  key: React.Key
+  orderId: string
+  userId: string
+  address: string
+  productId: string[]
+  orderDate: string
+  status: string
+  totalPrice: number
 }
 
 export type AccountTableData = {

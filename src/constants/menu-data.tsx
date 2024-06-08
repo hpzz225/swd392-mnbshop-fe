@@ -16,6 +16,7 @@ import { ROUTE_PATHS_MANAGER } from '@/router'
 import { Link } from 'react-router-dom'
 import { POPUP_TITLE } from '.'
 import DisableAccount from '@/features/manager-feature/account-mng/disable-account'
+import DeleteBrand from '@/features/manager-feature/brand-mng/delete-brand'
 
 // TODO: eslint-disable
 // eslint-disable-next-line react-refresh/only-export-components
@@ -72,6 +73,28 @@ export const ViewProductDropdown = (productName: string, productId: string): Men
         content={<DeleteProduct productName={productName} productId={productId} />}
       >
         Delete Product
+      </Popup>
+    ),
+    key: 'delete',
+    icon: <CloseCircleOutlined />,
+  },
+]
+
+export const ViewBrandDropdown = (brandName: string, brandId: string): MenuItem[] => [
+  {
+    label: <Link to={brandId}>Edit Brand</Link>,
+    key: 'edit',
+    icon: <EditOutlined />,
+  },
+  {
+    label: (
+      <Popup
+        width={430}
+        type="confirm"
+        title={POPUP_TITLE.DELETE_BRAND}
+        content={<DeleteBrand brandName={brandName} brandId={brandId} />}
+      >
+        Delete Brand
       </Popup>
     ),
     key: 'delete',
