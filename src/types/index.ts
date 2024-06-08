@@ -81,6 +81,7 @@ export type OrderTableData = {
   orderId: string
   userId: string
   address: string
+  phone: string
   productId: string[]
   orderDate: string
   status: string

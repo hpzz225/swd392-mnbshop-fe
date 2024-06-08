@@ -1,6 +1,6 @@
-import { AccountTableData, BrandTableData, ProductTableData } from '@/types'
+import { AccountTableData, BrandTableData, OrderTableData, ProductTableData } from '@/types'
 import { Image, TableColumnsType } from 'antd'
-import { ViewAccountDropdown, ViewBrandDropdown, ViewProductDropdown } from './menu-data'
+import { ViewAccountDropdown, ViewBrandDropdown, ViewOrderDropdown, ViewProductDropdown } from './menu-data'
 import Dropdown from '@/components/manager-screen/dropdown'
 
 export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
@@ -183,6 +183,75 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     align: 'center',
     render: (record) => {
       return <Dropdown items={ViewAccountDropdown(record.fullName, record.id)} />
+    },
+  },
+]
+
+export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
+  {
+    title: 'ORDER ID',
+    dataIndex: 'orderId',
+    key: 'orderId',
+    width: 160,
+    align: 'center',
+  },
+  {
+    title: 'CUSTOMER NAME',
+    dataIndex: 'userId',
+    key: 'userId',
+    align: 'center',
+  },
+  {
+    title: 'PRODUCTS',
+    dataIndex: 'productId',
+    key: 'productId',
+    align: 'center',
+    render: (record) => {
+      return record.length
+    },
+  },
+  {
+    title: 'ADDRESS',
+    dataIndex: 'address',
+    key: 'address',
+    align: 'center',
+  },
+  {
+    title: 'PHONE',
+    dataIndex: 'phone',
+    width: 140,
+    key: 'phone',
+    align: 'center',
+  },
+  {
+    title: 'STATUS',
+    dataIndex: 'status',
+    width: 140,
+    key: 'status',
+    align: 'center',
+  },
+  {
+    title: 'TOTAL PRICE',
+    dataIndex: 'totalPrice',
+    width: 140,
+    key: 'totalPrice',
+    align: 'center',
+  },
+  {
+    title: 'ORDER DATE',
+    dataIndex: 'orderDate',
+    width: 140,
+    key: 'orderDate',
+    align: 'center',
+  },
+  {
+    title: 'Action',
+    key: 'operation',
+    width: 90,
+    align: 'center',
+
+    render: (record) => {
+      return <Dropdown items={ViewOrderDropdown(record.orderId)} />
     },
   },
 ]

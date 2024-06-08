@@ -102,6 +102,14 @@ export const ViewBrandDropdown = (brandName: string, brandId: string): MenuItem[
   },
 ]
 
+export const ViewOrderDropdown = (orderId: string): MenuItem[] => [
+  {
+    label: <Link to={orderId}>View Order</Link>,
+    key: 'edit',
+    icon: <EditOutlined />,
+  },
+]
+
 export const ViewAccountDropdown = (fullName: string, id: string): MenuItem[] => [
   {
     label: <Link to={id}>Edit Account</Link>,
