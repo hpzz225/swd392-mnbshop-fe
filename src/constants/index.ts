@@ -10,10 +10,11 @@ export const AUTHORITIES = {
 }
 
 export const ORDER_STATUSES = {
-  WAITING: 'waiting',
-  PROCESSING: 'processing',
-  DELIVERY: 'delivery',
-  DONE: 'done',
+  PENDING: 'Pending',
+  PROCESSING: 'Processing',
+  SHIPPED: 'Shipped',
+  COMPLETED: 'Completed',
+  CANCELLED: 'Cancelled',
 }
 
 export const queryClient = new QueryClient({

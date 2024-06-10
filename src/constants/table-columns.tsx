@@ -1,7 +1,8 @@
 import { AccountTableData, BrandTableData, OrderTableData, ProductTableData } from '@/types'
-import { Image, TableColumnsType } from 'antd'
+import { Image, TableColumnsType, Tag } from 'antd'
 import { ViewAccountDropdown, ViewBrandDropdown, ViewOrderDropdown, ViewProductDropdown } from './menu-data'
 import Dropdown from '@/components/manager-screen/dropdown'
+import { getTagColor } from '@/utils'
 
 export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
   {
@@ -10,6 +11,10 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
     key: 'id',
     width: 160,
     align: 'center',
+    sorter: {
+      compare: (a, b) => a.productId.localeCompare(b.productId),
+    },
+    defaultSortOrder: 'ascend',
   },
   {
     title: 'PRODUCT NAME',
@@ -71,6 +76,10 @@ export const VIEW_BRAND_COLS: TableColumnsType<BrandTableData> = [
     key: 'brandId',
     width: 160,
     align: 'center',
+    sorter: {
+      compare: (a, b) => a.brandId.localeCompare(b.brandId),
+    },
+    defaultSortOrder: 'ascend',
   },
   {
     title: 'IMAGE',
@@ -78,7 +87,7 @@ export const VIEW_BRAND_COLS: TableColumnsType<BrandTableData> = [
     key: 'image',
     width: 200,
     align: 'center',
-    render: (imageUrl) => <Image src={imageUrl} alt="Brand Image" className="rounded-xl" width={100} />,
+    render: (imageUrl) => <Image src={imageUrl} preview={false} className="rounded-xl" alt="Brand Image" width={80} />,
   },
   {
     title: 'BRAND NAME',
@@ -103,7 +112,7 @@ export const VIEW_BRAND_COLS: TableColumnsType<BrandTableData> = [
   {
     title: 'Action',
     key: 'operation',
-    width: 90,
+    width: 100,
     align: 'center',
     render: (record) => {
       return <Dropdown items={ViewBrandDropdown(record.brandName, record.brandId)} />
@@ -118,6 +127,10 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     width: 100,
     key: 'id',
     align: 'center',
+    sorter: {
+      compare: (a, b) => a.id.localeCompare(b.id),
+    },
+    defaultSortOrder: 'ascend',
   },
   {
     title: 'FULL NAME',
@@ -194,6 +207,10 @@ export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
     key: 'orderId',
     width: 160,
     align: 'center',
+    sorter: {
+      compare: (a, b) => a.orderId.localeCompare(b.orderId),
+    },
+    defaultSortOrder: 'ascend',
   },
   {
     title: 'CUSTOMER NAME',
@@ -229,6 +246,13 @@ export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
     width: 140,
     key: 'status',
     align: 'center',
+    render: (status: string) => {
+      return (
+        <Tag className="text-center w-36" color={getTagColor(status, 'status')}>
+          {status.toUpperCase()}
+        </Tag>
+      )
+    },
   },
   {
     title: 'TOTAL PRICE',
@@ -236,6 +260,9 @@ export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
     width: 140,
     key: 'totalPrice',
     align: 'center',
+    render: (totalPrice: string) => {
+      return <span>{totalPrice}$</span>
+    },
   },
   {
     title: 'ORDER DATE',
