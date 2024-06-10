@@ -77,9 +77,9 @@ export type ProductTableData = {
 }
 
 export type OrderTableData = {
-  key: React.Key
   orderId: string
   userId: string
+  userName: string
   address: string
   phone: string
   productId: string[]

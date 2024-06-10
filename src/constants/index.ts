@@ -3,10 +3,10 @@ import { QueryClient } from '@tanstack/react-query'
 export const dateFormatList = ['YYYY-MM-DD', 'DD-MM-YYYY']
 
 export const AUTHORITIES = {
-  ADMIN: 'admin',
-  CUSTOMER: 'customer',
-  STAFF: 'staff',
-  GUEST: 'guest',
+  ADMIN: 'Admin',
+  CUSTOMER: 'Customer',
+  STAFF: 'Staff',
+  GUEST: 'Guest',
 }
 
 export const ORDER_STATUSES = {

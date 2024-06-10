@@ -3,7 +3,7 @@ import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { jwtDecode } from 'jwt-decode'
 import { DecodedToken } from '@/types'
-import { ORDER_STATUSES } from '@/constants'
+import { AUTHORITIES, ORDER_STATUSES } from '@/constants'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -16,10 +16,7 @@ export const hasAuthority = (authority: string) => {
   return decodedToken.role === authority
 }
 
-export function getTagColor(
-  tag: string | undefined,
-  type: 'status' | 'attendingStatus' | 'classStatus' | 'classResult'
-): string | undefined {
+export function getTagColor(tag: string | undefined, type: 'status' | 'attendingStatus' | 'role'): string | undefined {
   switch (type) {
     case 'status':
       switch (tag) {
@@ -35,5 +32,16 @@ export function getTagColor(
           return 'red'
       }
       break
+    case 'role':
+      switch (tag) {
+        case AUTHORITIES.ADMIN:
+          return 'blue'
+        case AUTHORITIES.CUSTOMER:
+          return 'cyan'
+        case AUTHORITIES.STAFF:
+          return 'orange'
+        case AUTHORITIES.GUEST:
+          return 'green'
+      }
   }
 }

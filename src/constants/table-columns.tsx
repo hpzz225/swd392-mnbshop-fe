@@ -1,5 +1,5 @@
 import { AccountTableData, BrandTableData, OrderTableData, ProductTableData } from '@/types'
-import { Image, TableColumnsType, Tag } from 'antd'
+import { Image, TableColumnsType, Tag, Tooltip, Typography } from 'antd'
 import { ViewAccountDropdown, ViewBrandDropdown, ViewOrderDropdown, ViewProductDropdown } from './menu-data'
 import Dropdown from '@/components/manager-screen/dropdown'
 import { getTagColor } from '@/utils'
@@ -42,18 +42,12 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
     key: 'description',
     width: 140,
     align: 'center',
+    render: (discount) => <span>{discount}%</span>,
   },
   {
     title: 'QUANTITY',
     dataIndex: 'quantity',
     key: 'image',
-    width: 140,
-    align: 'center',
-  },
-  {
-    title: 'BY AGE',
-    dataIndex: 'byAge',
-    key: 'createdAt',
     width: 140,
     align: 'center',
   },
@@ -144,6 +138,12 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     dataIndex: 'email',
     key: 'email',
     align: 'center',
+    ellipsis: true,
+    render: (email) => (
+      <Tooltip title={email}>
+        <Typography.Text>{email}</Typography.Text>
+      </Tooltip>
+    ),
   },
   {
     title: 'PHONE',
@@ -157,6 +157,8 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     dataIndex: 'address',
     key: 'address',
     align: 'center',
+    ellipsis: true,
+    render: (address) => <Tooltip title={address}>{address}</Tooltip>,
   },
   {
     title: 'GENDER',
@@ -179,7 +181,7 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     width: 90,
     align: 'center',
     render: (record) => {
-      return record ? 'Yes' : 'No'
+      return record ? <span className="text-red-500">Yes</span> : <span className="text-green-500">No</span>
     },
   },
   {
@@ -188,6 +190,13 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     width: 100,
     key: 'role',
     align: 'center',
+    render: (role: string) => {
+      return (
+        <Tag className="text-center w-36" color={getTagColor(role, 'role')}>
+          {role.toUpperCase()}
+        </Tag>
+      )
+    },
   },
   {
     title: 'Action',
@@ -214,24 +223,17 @@ export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
   },
   {
     title: 'CUSTOMER NAME',
-    dataIndex: 'userId',
-    key: 'userId',
+    dataIndex: 'userName',
+    key: 'userName',
     align: 'center',
-  },
-  {
-    title: 'PRODUCTS',
-    dataIndex: 'productId',
-    key: 'productId',
-    align: 'center',
-    render: (record) => {
-      return record.length
-    },
   },
   {
     title: 'ADDRESS',
     dataIndex: 'address',
     key: 'address',
     align: 'center',
+    ellipsis: true,
+    render: (address) => <Tooltip title={address}>{address}</Tooltip>,
   },
   {
     title: 'PHONE',
