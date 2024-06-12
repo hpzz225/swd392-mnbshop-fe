@@ -21,6 +21,10 @@ import BlogManager from '@/pages/manager-pages/blog-manager'
 import NotFound from '@/pages/not-found'
 import OrderManager from '@/pages/manager-pages/order-manager'
 import BrandManager from '@/pages/manager-pages/brand-manager'
+import ViewDetailAccount from '@/features/manager-feature/account-mng/view-detail-account'
+import ViewBrandDetail from '@/features/manager-feature/brand-mng/view-brand-detail'
+import ViewProductDetail from '@/features/manager-feature/product-mng/view-product-detail'
+import ViewOrderDetail from '@/features/manager-feature/order-mng/view-order-detail'
 import { AUTHORITIES } from '@/constants'
 
 export const ROUTE_PATHS = {
@@ -143,6 +147,7 @@ export const routes = [
     layout: null,
     roles: [AUTHORITIES.CUSTOMER],
   },
+
   // MANAGER ROUTE
   {
     path: ROUTE_PATHS_MANAGER.DASHBOARD,
@@ -161,9 +166,25 @@ export const routes = [
     roles: [AUTHORITIES.ADMIN],
   },
   {
+    path: `${ROUTE_PATHS_MANAGER.M_ACCOUNT}/:accountId`,
+    name: 'Account Detail Manager',
+    component: ViewDetailAccount,
+    layout: ManagerDefaultLayout,
+    private: true,
+    roles: [AUTHORITIES.ADMIN],
+  },
+  {
     path: ROUTE_PATHS_MANAGER.M_BRAND,
     name: 'Brand Manager',
     component: BrandManager,
+    layout: ManagerDefaultLayout,
+    private: true,
+    roles: [AUTHORITIES.ADMIN],
+  },
+  {
+    path: `${ROUTE_PATHS_MANAGER.M_BRAND}/:brandId`,
+    name: 'Brand Detail Manager',
+    component: ViewBrandDetail,
     layout: ManagerDefaultLayout,
     private: true,
     roles: [AUTHORITIES.ADMIN],
@@ -177,6 +198,14 @@ export const routes = [
     roles: [AUTHORITIES.ADMIN],
   },
   {
+    path: `${ROUTE_PATHS_MANAGER.M_PRODUCT}/:productId`,
+    name: 'Product Detail Manager',
+    component: ViewProductDetail,
+    layout: ManagerDefaultLayout,
+    private: true,
+    roles: [AUTHORITIES.ADMIN],
+  },
+  {
     path: ROUTE_PATHS_MANAGER.M_ORDER,
     name: 'Order Manager',
     component: OrderManager,
@@ -185,8 +214,24 @@ export const routes = [
     roles: [AUTHORITIES.ADMIN],
   },
   {
+    path: `${ROUTE_PATHS_MANAGER.M_ORDER}/:orderId`,
+    name: 'Order Detail Manager',
+    component: ViewOrderDetail,
+    layout: ManagerDefaultLayout,
+    private: true,
+    roles: [AUTHORITIES.ADMIN],
+  },
+  {
     path: ROUTE_PATHS_MANAGER.M_BLOG,
-    name: 'Blog',
+    name: 'Blog Manager',
+    component: BlogManager,
+    layout: ManagerDefaultLayout,
+    private: true,
+    roles: [AUTHORITIES.ADMIN],
+  },
+  {
+    path: `${ROUTE_PATHS_MANAGER.M_BLOG}/:blogId`,
+    name: 'Blog Detail Manager',
     component: BlogManager,
     layout: ManagerDefaultLayout,
     private: true,
@@ -195,6 +240,14 @@ export const routes = [
   {
     path: ROUTE_PATHS_MANAGER.M_PROMOTION,
     name: 'Promotion Manager',
+    component: PromotionManager,
+    layout: ManagerDefaultLayout,
+    private: true,
+    roles: [AUTHORITIES.ADMIN],
+  },
+  {
+    path: `${ROUTE_PATHS_MANAGER.M_PROMOTION}/:promotionId`,
+    name: 'Promotion Detail Manager',
     component: PromotionManager,
     layout: ManagerDefaultLayout,
     private: true,
