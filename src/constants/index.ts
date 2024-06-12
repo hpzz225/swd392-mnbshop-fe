@@ -71,3 +71,12 @@ export const POPUP_TITLE = {
   UPDATE_BRAND: 'Update brand',
   DELETE_BRAND: 'Delete brand',
 }
+
+export const FILTER_OPTIONS = {
+  ID: 'id',
+  Fullname: 'fullname',
+  Email: 'email',
+  Phone: 'phone',
+  Status: 'status',
+  Role: 'role',
+}
