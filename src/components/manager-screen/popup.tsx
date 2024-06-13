@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/lib/redux-toolkit/hook'
 import { closePopup, openPopup } from '@/lib/redux-toolkit/slices/popup-slice'
 import { CloseCircleOutlined } from '@ant-design/icons'
-import { Modal, Typography } from 'antd'
+import { Modal } from 'antd'
 
 type PopupType = 'info' | 'form' | 'confirm'
 
@@ -27,16 +27,14 @@ export default function Popup({ children, content, type, title, icon, width }: P
         onCancel={() => dispatch(closePopup(title))}
         styles={{ content: { padding: 0 } }}
         title={
-          <div className="px-3 py-2 rounded-t-md bg-primary">
+          <div className="px-3 py-2 rounded-t-md bg-[#001529]">
             <div className="flex">
               <div className="mx-auto">
                 {icon}
-                <Typography.Title level={5} type="secondary">
-                  {title}
-                </Typography.Title>
+                <p className="text-white">{title}</p>
               </div>
               {type === 'info' && (
-                <CloseCircleOutlined className="text-foreground" onClick={() => dispatch(closePopup(title))} />
+                <CloseCircleOutlined className="text-white" onClick={() => dispatch(closePopup(title))} />
               )}
             </div>
           </div>

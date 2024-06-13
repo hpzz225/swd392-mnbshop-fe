@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#f2a7b1',
+        primary: '#F8F8FB',
+        primary_mng: '#1677ff',
         secondary: '#8b8b8b',
         orange: '#D45B13',
         green: '#2F903F',
-        // foreground: '#EDF2F7',
       },
     },
   },

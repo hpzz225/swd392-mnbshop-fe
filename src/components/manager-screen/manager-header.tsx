@@ -10,7 +10,7 @@ export default function ManagerHeader({ isLoginPage }: { isLoginPage: boolean })
   const navigate = useNavigate()
   const { logoutMutation, user } = useAuth()
   return (
-    <AntHeader className="bg-primary flex justify-between items-center">
+    <AntHeader className="flex justify-between items-center">
       <div className="flex items-center">
         <img src={Logo} alt="M&B Mart" className="logo__img top-bar__logo-img mr-3" />
         <h1 className="logo__title top-bar__logo-title mt-2 text-white">M&B Mart</h1>

@@ -16,7 +16,7 @@ export default function AccountManager() {
       <div className="flex flex-col gap-4 p-4">
         <div className="flex justify-between">
           <SearchBar />
-          <div className="flex flex-col gap-4 ml-auto">
+          <div className="flex flex-col gap-4 ">
             <div className="flex items-center gap-2">
               <ConfigAntdTheme theme={GreenButtonStyle}>
                 <Popup width={500} type="form" title={POPUP_TITLE.ADD_ACCOUNT} content={<AddAccount />}>
