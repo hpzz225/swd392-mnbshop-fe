@@ -3,6 +3,8 @@ import { setPagination } from '@/lib/redux-toolkit/slices/pagination-slice'
 import { setIsChosen, setProductChosen } from '@/lib/redux-toolkit/slices/chosen-slice'
 import { ProductTableData, AccountTableData, BrandTableData, OrderTableData } from '@/types'
 import { Table, TableColumnsType } from 'antd'
+import ConfigAntdTheme from '@/lib/antd/config-theme'
+import { DefaultButtonStyle } from '@/lib/antd/antd-styles'
 
 type TableDataType = AccountTableData | ProductTableData | BrandTableData | OrderTableData
 
@@ -29,34 +31,36 @@ export default function TableData<T extends TableDataType>({
   const pagination = useAppSelector((state) => state.pagination)
 
   return (
-    <Table
-      loading={isLoading}
-      columns={columns}
-      dataSource={data}
-      scroll={{ x: scrollX, y: scrollY }}
-      pagination={{
-        total: total,
-        position: ['bottomCenter'],
-        pageSizeOptions: [10, 20, 30],
-        showSizeChanger: true,
-        current: pagination.pageNumber,
-        pageSize: pagination.pageSize,
-        onChange: (current, size) => {
-          dispatch(setPagination({ pageSize: size, pageNumber: current }))
-        },
-      }}
-      rowSelection={
-        hasRowSelection
-          ? {
-              type: 'checkbox',
-              onChange(selectedRowKeys) {
-                dispatch(setIsChosen(selectedRowKeys.length > 0))
-                dispatch(setProductChosen(selectedRowKeys.map(String)))
-              },
-            }
-          : undefined
-      }
-      size="middle"
-    />
+    <ConfigAntdTheme theme={DefaultButtonStyle}>
+      <Table
+        loading={isLoading}
+        columns={columns}
+        dataSource={data}
+        scroll={{ x: scrollX, y: scrollY }}
+        pagination={{
+          total: total,
+          position: ['bottomCenter'],
+          pageSizeOptions: [10, 20, 30],
+          showSizeChanger: true,
+          current: pagination.pageNumber,
+          pageSize: pagination.pageSize,
+          onChange: (current, size) => {
+            dispatch(setPagination({ pageSize: size, pageNumber: current }))
+          },
+        }}
+        rowSelection={
+          hasRowSelection
+            ? {
+                type: 'checkbox',
+                onChange(selectedRowKeys) {
+                  dispatch(setIsChosen(selectedRowKeys.length > 0))
+                  dispatch(setProductChosen(selectedRowKeys.map(String)))
+                },
+              }
+            : undefined
+        }
+        size="middle"
+      />
+    </ConfigAntdTheme>
   )
 }

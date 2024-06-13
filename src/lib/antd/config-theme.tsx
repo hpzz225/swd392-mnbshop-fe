@@ -13,13 +13,6 @@ export default function ConfigAntdTheme({ theme, children }: ConfigAntdThemeProp
       theme={{
         components: {
           Table: {
-            headerBg: THEME_CODES.PRIMARY,
-            headerColor: THEME_CODES.FOREGROUND,
-            borderColor: THEME_CODES.PRIMARY,
-            headerSplitColor: '',
-            headerSortActiveBg: THEME_CODES.PRIMARY,
-            headerSortHoverBg: THEME_CODES.PRIMARY,
-            colorIcon: THEME_CODES.FOREGROUND,
             colorIconHover: THEME_CODES.FOREGROUND,
             rowSelectedBg: THEME_CODES.FOREGROUND,
             rowSelectedHoverBg: THEME_CODES.FOREGROUND,

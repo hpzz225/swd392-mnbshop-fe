@@ -1,8 +1,10 @@
 import { AccountTableData, BrandTableData, OrderTableData, ProductTableData } from '@/types'
-import { Image, TableColumnsType, Tag, Tooltip, Typography } from 'antd'
+import { Image, TableColumnsType, Tag, Tooltip } from 'antd'
 import { ViewAccountDropdown, ViewBrandDropdown, ViewOrderDropdown, ViewProductDropdown } from './menu-data'
 import Dropdown from '@/components/manager-screen/dropdown'
 import { getTagColor } from '@/utils'
+import { Link } from 'react-router-dom'
+import { ROUTE_PATHS_MANAGER } from '@/router'
 
 export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
   {
@@ -21,6 +23,9 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
     dataIndex: 'productName',
     key: 'name',
     align: 'center',
+    render: (name: string, record: ProductTableData) => (
+      <Link to={`${ROUTE_PATHS_MANAGER.M_PRODUCT}/${record.productId}`}>{name}</Link>
+    ),
   },
   {
     title: 'BRAND',
@@ -88,6 +93,9 @@ export const VIEW_BRAND_COLS: TableColumnsType<BrandTableData> = [
     dataIndex: 'brandName',
     key: 'brandName',
     align: 'center',
+    render: (name: string, record: BrandTableData) => (
+      <Link to={`${ROUTE_PATHS_MANAGER.M_BRAND}/${record.brandId}`}>{name}</Link>
+    ),
   },
   {
     title: '#PRODUCTS',
@@ -132,6 +140,9 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     width: 180,
     key: 'name',
     align: 'center',
+    render: (fullName: string, record: AccountTableData) => (
+      <Link to={`${ROUTE_PATHS_MANAGER.M_ACCOUNT}/${record.id}`}>{fullName}</Link>
+    ),
   },
   {
     title: 'EMAIL',
@@ -141,7 +152,7 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     ellipsis: true,
     render: (email) => (
       <Tooltip title={email}>
-        <Typography.Text>{email}</Typography.Text>
+        <span>{email}</span>
       </Tooltip>
     ),
   },
@@ -220,6 +231,7 @@ export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
       compare: (a, b) => a.orderId.localeCompare(b.orderId),
     },
     defaultSortOrder: 'ascend',
+    render: (orderId: string) => <Link to={`${ROUTE_PATHS_MANAGER.M_ORDER}/${orderId}`}>{orderId}</Link>,
   },
   {
     title: 'CUSTOMER NAME',

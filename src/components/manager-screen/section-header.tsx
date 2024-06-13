@@ -8,7 +8,7 @@ interface SectionHeaderProps {
 
 export default function SectionHeader({ title, className }: SectionHeaderProps) {
   return (
-    <div className={cn('bg-primary w-full flex justify-center items-center p-4 mt-1', className)}>
+    <div className={cn(' w-full flex justify-start items-center p-4 mt-1', className)}>
       <Typography.Title level={3}>{title}</Typography.Title>
     </div>
   )

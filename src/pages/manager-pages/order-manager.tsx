@@ -7,6 +7,7 @@ import { Button } from 'antd'
 import { POPUP_TITLE } from '@/constants'
 import { GreenButtonStyle } from '@/lib/antd/antd-styles'
 import { PlusCircleOutlined } from '@ant-design/icons'
+import SearchBar from '@/components/manager-screen/search'
 
 export default function OrderManager() {
   return (
@@ -14,7 +15,7 @@ export default function OrderManager() {
       <SectionHeader title="Order List" className="" />
       <div className="flex flex-col gap-4 p-4">
         <div className="flex justify-between">
-          {/* Searchbar */}
+          <SearchBar />
           <div className="flex flex-col gap-4 ml-auto">
             <div className="flex items-center gap-2">
               <ConfigAntdTheme theme={GreenButtonStyle}>
