@@ -76,6 +76,16 @@ export type ProductTableData = {
   byAge: number
 }
 
+export type ProductDetail = {
+  productId: string
+  productName: string
+  brand: string
+  price: number
+  discount: number
+  quantity: number
+  byAge: number
+}
+
 export type OrderTableData = {
   orderId: string
   userId: string
@@ -99,4 +109,18 @@ export type AccountTableData = {
   dob: string
   isDisable: boolean
   role: string
+}
+
+// API Response
+export type CustomErrorAPIResponse = {
+  statusCode: number
+  message: string
+  timestamp: string
+}
+
+export type ViewProductListAPIResponse = {
+  message: string
+  httpStatus: string
+  timestamp: string
+  data: ProductDetail[]
 }

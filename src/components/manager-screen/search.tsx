@@ -22,8 +22,8 @@ export default function SearchBar() {
   }, 250)
 
   return (
-    <div className="flex items-center space-x-3 w-96 flex-col">
-      <div className="flex gap-3">
+    <div className="flex items-center space-x-3 w-[350px] flex-col">
+      <div className="flex gap-3 w-full">
         <Input
           prefix={<SearchOutlined />}
           defaultValue={searchValue}

@@ -1,6 +1,6 @@
 import Popup from '@/components/manager-screen/popup'
 import ConfigAntdTheme from '@/lib/antd/config-theme'
-import ViewListProduct from '@/features/manager-feature/product-mng/view-list-product'
+import ViewListProduct from '@/features/manager-feature/product-mng/view-product/view-list-product'
 import SectionHeader from '@/components/manager-screen/section-header'
 import AddProduct from '@/features/manager-feature/product-mng/add-product'
 import { POPUP_TITLE } from '@/constants'
