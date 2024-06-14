@@ -9,7 +9,7 @@ export default function ViewListProduct() {
   // const pagination = useAppSelector((state) => state.pagination)
   const { data, isLoading } = useViewProductList()
 
-  console.log(data)
+  console.log(data?.message)
 
   const addKeyToData = (dataArray: ProductTableData[] | null) => {
     if (!dataArray) return []
