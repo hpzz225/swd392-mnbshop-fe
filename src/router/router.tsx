@@ -35,7 +35,7 @@ export default function Router() {
                   </div>
                 ) : (
                   <div>
-                    <CustomerHeader isLoginPage={true} />
+                    <CustomerHeader isLoginPage={false} />
                     <Page />
                     <CustomerFooter />
                   </div>

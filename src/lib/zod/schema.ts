@@ -24,3 +24,12 @@ export const editProfileTemplateSchema = z.object({
   role: z.string().readonly(),
   username: z.string().readonly(),
 })
+
+export const productSchema = z.object({
+  name: z.string().min(1, 'Product name is required'),
+  category: z.string().min(1, 'Category is required'),
+  price: z.number().min(0, 'Price must be a positive number'),
+  stock: z.number().int().min(0, 'Stock must be a non-negative integer'),
+  status: z.enum(['Active', 'Inactive']),
+  description: z.string().min(1, 'Description is required'),
+})

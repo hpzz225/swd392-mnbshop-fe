@@ -80,3 +80,7 @@ export const FILTER_OPTIONS = {
   Status: 'status',
   Role: 'role',
 }
+
+export const ERROR_MESSAGES = {
+  EM1: 'Field is required',
+}
