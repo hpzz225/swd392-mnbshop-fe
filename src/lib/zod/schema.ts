@@ -33,3 +33,14 @@ export const productSchema = z.object({
   status: z.enum(['Active', 'Inactive']),
   description: z.string().min(1, 'Description is required'),
 })
+
+export const accountSchema = z.object({
+  fullName: z.string().min(1, 'Full name is required'),
+  image: z.string().min(1, 'Image is required'),
+  phone: z.string().min(1, 'Phone number is required'),
+  email: z.string().email('Invalid email address'),
+  address: z.string().min(1, 'Address is required'),
+  gender: z.enum(['Male', 'Female', 'Other']),
+  dob: z.string().min(1, 'Date of birth is required'),
+  role: z.string().min(1, 'Role is required'),
+})

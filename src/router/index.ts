@@ -21,11 +21,11 @@ import BlogManager from '@/pages/manager-pages/blog-manager'
 import NotFound from '@/pages/not-found'
 import OrderManager from '@/pages/manager-pages/order-manager'
 import BrandManager from '@/pages/manager-pages/brand-manager'
-import ViewDetailAccount from '@/features/manager-feature/account-mng/account-detail/view-detail-account'
 import ViewBrandDetail from '@/features/manager-feature/brand-mng/view-brand-detail'
-import ViewProductDetail from '@/features/manager-feature/product-mng/view-product-detail'
+import ViewProductDetail from '@/features/manager-feature/product-mng/view-product/view-product-detail'
 import ViewOrderDetail from '@/features/manager-feature/order-mng/view-order-detail'
 import { AUTHORITIES } from '@/constants'
+import ViewAccountDetail from '@/features/manager-feature/account-mng/view-account-detail'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
@@ -168,7 +168,7 @@ export const routes = [
   {
     path: `${ROUTE_PATHS_MANAGER.M_ACCOUNT}/:accountId`,
     name: 'Account Detail Manager',
-    component: ViewDetailAccount,
+    component: ViewAccountDetail,
     layout: ManagerDefaultLayout,
     private: true,
     roles: [AUTHORITIES.ADMIN],
