@@ -111,6 +111,19 @@ export type AccountTableData = {
   role: string
 }
 
+export type AccountDetail = {
+  id: string
+  fullName: string
+  phone: string
+  email: string
+  address: string
+  gender: string
+  dob: string
+  isDisable: boolean
+  role: string
+  image: string
+}
+
 // API Response
 export type CustomErrorAPIResponse = {
   statusCode: number
