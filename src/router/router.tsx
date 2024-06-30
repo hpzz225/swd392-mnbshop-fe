@@ -1,50 +1,59 @@
-import CustomerHeader from '@/components/customer-screen/customer-header'
-import CustomerFooter from '@/components/customer-screen/customer-footer'
+import PublicRoute from '@/components/auth/public-route'
+import PrivateRoute from '@/components/auth/private-route'
+import ConditionalRoute from '@/components/auth/conditional-route'
 import { Route, Routes } from 'react-router-dom'
 import { routes } from '.'
 
 export default function Router() {
   return (
-    <div>
-      <Routes>
-        {routes.map((route) => {
-          const Page = route.component
-          const Layout = route.layout
-          return (
-            <Route
-              key={route.path}
-              path={route.path}
-              element={
-                route.private ? ( // Check if the route is private
-                  <div>
-                    {Layout ? (
-                      <Layout>
-                        <Page />
-                      </Layout>
-                    ) : (
-                      <div>
-                        <Page />
-                      </div>
-                    )}
-                  </div>
-                ) : Layout ? (
-                  <div>
+    <Routes>
+      {routes.map((route) => {
+        const Page = route.component
+        const Layout = route.layout
+        return (
+          <Route
+            key={route.name}
+            path={route.path}
+            element={
+              route.conditional ? (
+                <ConditionalRoute roles={route.roles}>
+                  {Layout ? (
                     <Layout>
                       <Page />
                     </Layout>
-                  </div>
-                ) : (
-                  <div>
-                    <CustomerHeader isLoginPage={false} />
+                  ) : (
+                    <div>
+                      <Page />
+                    </div>
+                  )}
+                </ConditionalRoute>
+              ) : route.private ? (
+                <PrivateRoute roles={route.roles}>
+                  {Layout ? (
+                    <Layout>
+                      <Page />
+                    </Layout>
+                  ) : (
+                    <div>
+                      <Page />
+                    </div>
+                  )}
+                </PrivateRoute>
+              ) : Layout ? (
+                <PublicRoute>
+                  <Layout>
                     <Page />
-                    <CustomerFooter />
-                  </div>
-                )
-              }
-            />
-          )
-        })}
-      </Routes>
-    </div>
+                  </Layout>
+                </PublicRoute>
+              ) : (
+                <PublicRoute>
+                  <Page />
+                </PublicRoute>
+              )
+            }
+          />
+        )
+      })}
+    </Routes>
   )
 }

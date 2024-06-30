@@ -1,7 +1,7 @@
 import authApi from '@/services/auth'
 import { queryClient } from '@/constants'
 import { REFRESH_TOKEN_KEY, TOKEN_KEY } from '@/lib/axios'
-// import { ROUTE_PATHS } from '@/router'
+import { ROUTE_PATHS } from '@/router'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { notification } from 'antd'
 import { useNavigate } from 'react-router-dom'
@@ -18,8 +18,8 @@ export const useAuth = () => {
     queryFn: async () => {
       const response = await authApi.getCurrentUser()
       if (!response) {
-        localStorage.clear()
         // TODO: Redirect to login
+        // localStorage.clear()
         // navigate(ROUTE_PATHS.LOGIN)
         return null
       } else return response
@@ -31,8 +31,9 @@ export const useAuth = () => {
     onSuccess: (data) => {
       localStorage.setItem(TOKEN_KEY, data.data.accessToken)
       localStorage.setItem(REFRESH_TOKEN_KEY, data.data.refreshToken)
+      console.log(TOKEN_KEY, REFRESH_TOKEN_KEY)
       queryClient.invalidateQueries({ queryKey: ['user'] })
-      navigate('/')
+      navigate(ROUTE_PATHS.ROOT)
       notification.success({
         message: data.message,
         description: 'You have successfully logged in',

@@ -82,7 +82,7 @@ export const routes = [
     name: 'Home',
     component: HomePage,
     layout: null,
-    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
   {
     path: ROUTE_PATHS.PRODUCT,
