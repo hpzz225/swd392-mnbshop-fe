@@ -8,8 +8,11 @@ import search from '@/assets/icons/search.svg'
 import avatar from '@/assets/img/avatar.jpg'
 import { Link } from 'react-router-dom'
 import { ROUTE_PATHS, ROUTE_PATHS_CUSTOMER } from '@/router'
+import { useAuth } from '@/hooks/use-auth'
 
-export default function CustomerHeader({ isLoginPage }: { isLoginPage: boolean }) {
+export default function CustomerHeader() {
+  const { user } = useAuth()
+
   return (
     <header className="header">
       <div className="container">
@@ -62,7 +65,7 @@ export default function CustomerHeader({ isLoginPage }: { isLoginPage: boolean }
 
           <div className="navbar__overlay js-toggle" toggle-target="#navbar"></div>
 
-          {isLoginPage ? (
+          {user ? (
             <div className="top-act">
               <div className="top-act__group d-md-none top-act__group--single">
                 <button className="top-act__btn">

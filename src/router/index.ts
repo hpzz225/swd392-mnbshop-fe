@@ -38,7 +38,6 @@ export const ROUTE_PATHS = {
 }
 
 export const ROUTE_PATHS_CUSTOMER = {
-  ROOT: '/',
   FAVOURITE: '/favourite',
   CART: '/cart',
   CHECKOUT: '/checkout',
@@ -79,7 +78,7 @@ export const routes = [
   },
   // CUSTOMER ROUTE
   {
-    path: ROUTE_PATHS_CUSTOMER.ROOT,
+    path: ROUTE_PATHS.ROOT,
     name: 'Home',
     component: HomePage,
     layout: CustomerDefaultLayout,
@@ -90,28 +89,28 @@ export const routes = [
     name: 'Product',
     component: ProductsList,
     layout: CustomerDefaultLayout,
-    roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
   {
     path: `${ROUTE_PATHS.PRODUCT}/:productId`,
     name: 'Product detail',
     component: ProductDetail,
     layout: CustomerDefaultLayout,
-    roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
   {
     path: ROUTE_PATHS.BLOG,
     name: 'Blog',
     component: BlogsList,
     layout: CustomerDefaultLayout,
-    roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
   {
     path: `${ROUTE_PATHS.BLOG}/:blogId`,
     name: 'Blog detail',
     component: BlogDetails,
     layout: CustomerDefaultLayout,
-    roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
   {
     path: ROUTE_PATHS_CUSTOMER.FAVOURITE,
