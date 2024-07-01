@@ -24,8 +24,9 @@ import BrandManager from '@/pages/manager-pages/brand-manager'
 import ViewBrandDetail from '@/features/manager-feature/brand-mng/view-brand-detail'
 import ViewProductDetail from '@/features/manager-feature/product-mng/view-product/view-product-detail'
 import ViewOrderDetail from '@/features/manager-feature/order-mng/view-order-detail'
-import { AUTHORITIES } from '@/constants'
 import ViewAccountDetail from '@/features/manager-feature/account-mng/view-account-detail'
+import CustomerDefaultLayout from '@/layouts/customer-layouts/default-layout'
+import { AUTHORITIES } from '@/constants'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
@@ -37,7 +38,6 @@ export const ROUTE_PATHS = {
 }
 
 export const ROUTE_PATHS_CUSTOMER = {
-  ROOT: '/',
   FAVOURITE: '/favourite',
   CART: '/cart',
   CHECKOUT: '/checkout',
@@ -76,76 +76,83 @@ export const routes = [
     component: ForgotPassword,
     layout: LoginLayout,
   },
+
   // CUSTOMER ROUTE
+
   {
-    path: ROUTE_PATHS_CUSTOMER.ROOT,
+    path: ROUTE_PATHS.ROOT,
     name: 'Home',
     component: HomePage,
-    layout: null,
-    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+    layout: CustomerDefaultLayout,
+    conditional: true,
   },
   {
     path: ROUTE_PATHS.PRODUCT,
     name: 'Product',
     component: ProductsList,
-    layout: null,
-    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+    layout: CustomerDefaultLayout,
+    conditional: true,
   },
   {
     path: `${ROUTE_PATHS.PRODUCT}/:productId`,
     name: 'Product detail',
     component: ProductDetail,
-    layout: null,
-    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+    layout: CustomerDefaultLayout,
+    conditional: true,
   },
   {
     path: ROUTE_PATHS.BLOG,
     name: 'Blog',
     component: BlogsList,
-    layout: null,
-    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+    layout: CustomerDefaultLayout,
+    conditional: true,
   },
   {
     path: `${ROUTE_PATHS.BLOG}/:blogId`,
     name: 'Blog detail',
     component: BlogDetails,
-    layout: null,
-    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+    layout: CustomerDefaultLayout,
+    conditional: true,
   },
   {
     path: ROUTE_PATHS_CUSTOMER.FAVOURITE,
     name: 'Favourite',
     component: FavouriteList,
-    layout: null,
+    layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
   {
     path: ROUTE_PATHS_CUSTOMER.CART,
     name: 'Cart',
     component: Cart,
-    layout: null,
+    layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
   {
     path: ROUTE_PATHS_CUSTOMER.CHECKOUT,
     name: 'Checkout',
     component: Checkout,
-    layout: null,
+    layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
   {
     path: ROUTE_PATHS_CUSTOMER.PROFILE,
     name: 'Profile',
     component: CustomerProfile,
-    layout: null,
+    layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
   {
     path: ROUTE_PATHS_CUSTOMER.EDIT_PROFILE,
     name: 'Edit profile',
     component: CustomerEditProfile,
-    layout: null,
+    layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
 
   // MANAGER ROUTE
@@ -154,7 +161,7 @@ export const routes = [
     name: 'Admin Dashboard',
     component: Dashboard,
     layout: ManagerDefaultLayout,
-    private: false,
+    private: true,
     roles: [AUTHORITIES.ADMIN],
   },
   {

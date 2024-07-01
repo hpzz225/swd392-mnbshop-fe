@@ -4,7 +4,7 @@ import CustomerHeader from '@/components/customer-screen/customer-header'
 export default function DefaultLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <CustomerHeader isLoginPage={true} />
+      <CustomerHeader />
       {children}
       <CustomerFooter />
     </div>

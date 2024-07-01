@@ -5,8 +5,20 @@ import lock from '@/assets/icons/lock.svg'
 import form_error from '@/assets/icons/form-error.svg'
 import google from '@/assets/icons/google.svg'
 import { Link } from 'react-router-dom'
+import { ROUTE_PATHS } from '@/router'
+import { useAuth } from '@/hooks/use-auth'
+import { useState } from 'react'
 
 export default function Login() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { signInMutation } = useAuth()
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault()
+    signInMutation.mutate({ username: email, password })
+  }
+
   return (
     <div className="auth">
       <div className="auth__intro d-md-none">
@@ -15,7 +27,7 @@ export default function Login() {
       </div>
       <div className="auth__content">
         <div className="auth__content-inner">
-          <Link to={'/'} className="logo">
+          <Link to={ROUTE_PATHS.ROOT} className="logo">
             <img src={logo} alt="M&B Mart" className="logo__img" />
             <h2 className="logo__title">M&B Mart</h2>
           </Link>
@@ -23,22 +35,30 @@ export default function Login() {
           <p className="auth__desc">
             Welcome back to sign in. As a returning customer, you have access to your previously saved all information.
           </p>
-          <form action="" className="form auth__form">
+
+          <form onSubmit={handleLogin} className="form auth__form">
             <div className="form__group">
               <div className="form__text-input">
-                <input type="email" name="" id="" className="form__input" placeholder="Email" required />
+                <input
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="form__input"
+                  placeholder="Email"
+                  required
+                />{' '}
                 <img src={message} alt="" className="form__input-icon" />
                 <img src={form_error} alt="" className="form__input-icon-error" />
               </div>
-              <p className="form__error">Email is not in correct format</p>
+              {signInMutation.isError && <p className="form__error">Username is not in correct format</p>}
             </div>
 
             <div className="form__group">
               <div className="form__text-input">
                 <input
                   type="password"
-                  name=""
-                  id=""
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="form__input"
                   placeholder="Password"
                   required
@@ -47,7 +67,7 @@ export default function Login() {
                 <img src={lock} alt="" className="form__input-icon" />
                 <img src={form_error} alt="" className="form__input-icon-error" />
               </div>
-              <p className="form__error">Password is not in correct format</p>
+              {signInMutation.isError && <p className="form__error">Password is not in correct format</p>}
             </div>
 
             <div className="form__group form__group--inline">
@@ -61,7 +81,13 @@ export default function Login() {
             </div>
 
             <div className="form__group auth__btn-group">
-              <button className="btn btn--primary auth__btn form__submit-btn">Sign in</button>
+              <button
+                type="submit"
+                className="btn btn--primary auth__btn form__submit-btn"
+                disabled={signInMutation.isPending}
+              >
+                {signInMutation.isPending ? 'Signing in...' : 'Sign in'}
+              </button>{' '}
               <button className="btn btn--outline auth__btn btn--no-margin">
                 <img src={google} alt="" className="btn__icon icon" />
                 Sign in with Google
