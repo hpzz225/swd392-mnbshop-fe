@@ -24,9 +24,9 @@ import BrandManager from '@/pages/manager-pages/brand-manager'
 import ViewBrandDetail from '@/features/manager-feature/brand-mng/view-brand-detail'
 import ViewProductDetail from '@/features/manager-feature/product-mng/view-product/view-product-detail'
 import ViewOrderDetail from '@/features/manager-feature/order-mng/view-order-detail'
-import { AUTHORITIES } from '@/constants'
 import ViewAccountDetail from '@/features/manager-feature/account-mng/view-account-detail'
 import CustomerDefaultLayout from '@/layouts/customer-layouts/default-layout'
+import { AUTHORITIES } from '@/constants'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
