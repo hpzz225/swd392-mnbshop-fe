@@ -76,7 +76,9 @@ export const routes = [
     component: ForgotPassword,
     layout: LoginLayout,
   },
+
   // CUSTOMER ROUTE
+
   {
     path: ROUTE_PATHS.ROOT,
     name: 'Home',
@@ -118,6 +120,7 @@ export const routes = [
     component: FavouriteList,
     layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
   {
     path: ROUTE_PATHS_CUSTOMER.CART,
@@ -125,6 +128,7 @@ export const routes = [
     component: Cart,
     layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
   {
     path: ROUTE_PATHS_CUSTOMER.CHECKOUT,
@@ -132,6 +136,7 @@ export const routes = [
     component: Checkout,
     layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
   {
     path: ROUTE_PATHS_CUSTOMER.PROFILE,
@@ -139,6 +144,7 @@ export const routes = [
     component: CustomerProfile,
     layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
   {
     path: ROUTE_PATHS_CUSTOMER.EDIT_PROFILE,
@@ -146,6 +152,7 @@ export const routes = [
     component: CustomerEditProfile,
     layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
+    conditional: true,
   },
 
   // MANAGER ROUTE
