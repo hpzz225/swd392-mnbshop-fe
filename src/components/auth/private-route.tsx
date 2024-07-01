@@ -5,16 +5,18 @@ import authApi from '@/services/auth'
 import { DecodedToken } from '@/types'
 import { jwtDecode } from 'jwt-decode'
 import { ReactNode, useEffect } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
-export default function PrivateRoute({ children, roles }: { children: ReactNode; roles: string[] }) {
+export default function PrivateRoute({ children, roles }: { children: ReactNode; roles: number[] }) {
   const { user } = useAuth()
+  const navigate = useNavigate()
 
   const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY)
   const tokenKey = localStorage.getItem(TOKEN_KEY)
 
   if (!refreshToken || !tokenKey) {
     logOutApp()
+    navigate(ROUTE_PATHS.LOGIN)
   }
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function PrivateRoute({ children, roles }: { children: ReactNode;
     }
   }
 
-  if (roles && user && !roles.includes(user.data.role)) {
+  if (roles && user && !roles.includes(user.data.roleId)) {
     return <Navigate to="/unauthorized" replace />
   }
 

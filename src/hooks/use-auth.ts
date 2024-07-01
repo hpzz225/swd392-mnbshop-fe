@@ -1,14 +1,21 @@
 import authApi from '@/services/auth'
 import { queryClient } from '@/constants'
 import { REFRESH_TOKEN_KEY, TOKEN_KEY } from '@/lib/axios'
-import { ROUTE_PATHS } from '@/router'
+import { ROUTE_PATHS, ROUTE_PATHS_MANAGER } from '@/router'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { notification } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode'
+import { DecodedToken } from '@/types'
 
 export const useAuth = () => {
   const navigate = useNavigate()
 
+  // Decode token
+  const decodeToken = (token: string) => {
+    const decodedToken = jwtDecode<DecodedToken>(token)
+    return decodedToken
+  }
   const {
     data: user,
     isLoading: loadingInitial,
@@ -16,7 +23,8 @@ export const useAuth = () => {
   } = useQuery({
     queryKey: ['user'],
     queryFn: async () => {
-      const response = await authApi.getCurrentUser()
+      const userId = decodeToken(localStorage.getItem(TOKEN_KEY) || '').Id
+      const response = await authApi.getCurrentUser(userId)
       if (!response) {
         // TODO: Redirect to login
         // localStorage.clear()
@@ -31,9 +39,15 @@ export const useAuth = () => {
     onSuccess: (data) => {
       localStorage.setItem(TOKEN_KEY, data.data.accessToken)
       localStorage.setItem(REFRESH_TOKEN_KEY, data.data.refreshToken)
-      console.log(TOKEN_KEY, REFRESH_TOKEN_KEY)
       queryClient.invalidateQueries({ queryKey: ['user'] })
-      navigate(ROUTE_PATHS.ROOT)
+      const roleId = decodeToken(localStorage.getItem(TOKEN_KEY) || '').RoleId
+      if (roleId == '1') {
+        console.log('Manager')
+        navigate(ROUTE_PATHS_MANAGER.DASHBOARD)
+      } else {
+        console.log('User')
+        navigate(ROUTE_PATHS.ROOT)
+      }
       notification.success({
         message: data.message,
         description: 'You have successfully logged in',

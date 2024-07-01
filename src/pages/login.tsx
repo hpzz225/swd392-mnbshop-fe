@@ -40,7 +40,7 @@ export default function Login() {
             <div className="form__group">
               <div className="form__text-input">
                 <input
-                  type="email"
+                  type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="form__input"
@@ -50,7 +50,7 @@ export default function Login() {
                 <img src={message} alt="" className="form__input-icon" />
                 <img src={form_error} alt="" className="form__input-icon-error" />
               </div>
-              {signInMutation.isError && <p className="form__error">Email is not in correct format</p>}
+              {signInMutation.isError && <p className="form__error">Username is not in correct format</p>}
             </div>
 
             <div className="form__group">

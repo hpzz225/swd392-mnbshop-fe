@@ -26,6 +26,7 @@ import ViewProductDetail from '@/features/manager-feature/product-mng/view-produ
 import ViewOrderDetail from '@/features/manager-feature/order-mng/view-order-detail'
 import { AUTHORITIES } from '@/constants'
 import ViewAccountDetail from '@/features/manager-feature/account-mng/view-account-detail'
+import CustomerDefaultLayout from '@/layouts/customer-layouts/default-layout'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
@@ -81,70 +82,70 @@ export const routes = [
     path: ROUTE_PATHS_CUSTOMER.ROOT,
     name: 'Home',
     component: HomePage,
-    layout: null,
+    layout: CustomerDefaultLayout,
     conditional: true,
   },
   {
     path: ROUTE_PATHS.PRODUCT,
     name: 'Product',
     component: ProductsList,
-    layout: null,
-    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+    layout: CustomerDefaultLayout,
+    roles: [AUTHORITIES.CUSTOMER],
   },
   {
     path: `${ROUTE_PATHS.PRODUCT}/:productId`,
     name: 'Product detail',
     component: ProductDetail,
-    layout: null,
-    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+    layout: CustomerDefaultLayout,
+    roles: [AUTHORITIES.CUSTOMER],
   },
   {
     path: ROUTE_PATHS.BLOG,
     name: 'Blog',
     component: BlogsList,
-    layout: null,
-    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+    layout: CustomerDefaultLayout,
+    roles: [AUTHORITIES.CUSTOMER],
   },
   {
     path: `${ROUTE_PATHS.BLOG}/:blogId`,
     name: 'Blog detail',
     component: BlogDetails,
-    layout: null,
-    roles: [AUTHORITIES.GUEST, AUTHORITIES.CUSTOMER],
+    layout: CustomerDefaultLayout,
+    roles: [AUTHORITIES.CUSTOMER],
   },
   {
     path: ROUTE_PATHS_CUSTOMER.FAVOURITE,
     name: 'Favourite',
     component: FavouriteList,
-    layout: null,
+    layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
   },
   {
     path: ROUTE_PATHS_CUSTOMER.CART,
     name: 'Cart',
     component: Cart,
-    layout: null,
+    layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
   },
   {
     path: ROUTE_PATHS_CUSTOMER.CHECKOUT,
     name: 'Checkout',
     component: Checkout,
-    layout: null,
+    layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
   },
   {
     path: ROUTE_PATHS_CUSTOMER.PROFILE,
     name: 'Profile',
     component: CustomerProfile,
-    layout: null,
+    layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
   },
   {
     path: ROUTE_PATHS_CUSTOMER.EDIT_PROFILE,
     name: 'Edit profile',
     component: CustomerEditProfile,
-    layout: null,
+    layout: CustomerDefaultLayout,
     roles: [AUTHORITIES.CUSTOMER],
   },
 
@@ -154,7 +155,7 @@ export const routes = [
     name: 'Admin Dashboard',
     component: Dashboard,
     layout: ManagerDefaultLayout,
-    private: false,
+    private: true,
     roles: [AUTHORITIES.ADMIN],
   },
   {

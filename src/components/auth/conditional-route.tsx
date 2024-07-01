@@ -2,11 +2,13 @@ import { useAuth } from '@/hooks/use-auth'
 import PrivateRoute from './private-route'
 import PublicRoute from './public-route'
 
-export default function ConditionalRoute({ children, roles }: { children: React.ReactNode; roles?: string[] }) {
+export default function ConditionalRoute({ children, roles }: { children: React.ReactNode; roles?: number[] }) {
   const { user } = useAuth()
-  console.log('conditional', user?.data)
-  if (user?.data) {
+  if (user) {
+    console.log('private')
     return <PrivateRoute roles={roles}>{children}</PrivateRoute>
+  } else {
+    console.log('public')
+    return <PublicRoute>{children}</PublicRoute>
   }
-  return <PublicRoute>{children}</PublicRoute>
 }

@@ -3,10 +3,13 @@ import type { MenuProps } from 'antd'
 export type MenuItem = Required<MenuProps>['items'][number]
 
 export type DecodedToken = {
-  sub: string
-  role: string
-  iat: number
+  jti: string
+  Id: string
+  RoleId: string
+  Role: string
   exp: number
+  iss: string
+  aud: string
 }
 
 export type InputsType = {
@@ -35,7 +38,7 @@ export type AuthUser = {
   gender: string
   phone: string
   username: string
-  role: string
+  roleId: number
   profilePic: string
 }
 
