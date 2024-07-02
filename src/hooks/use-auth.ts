@@ -6,7 +6,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { notification } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
-import { DecodedToken } from '@/types'
+import { DecodedToken, SignUpForm } from '@/types'
 
 export const useAuth = () => {
   const navigate = useNavigate()
@@ -61,6 +61,22 @@ export const useAuth = () => {
     },
   })
 
+  const signUpMutation = useMutation({
+    mutationFn: (inputData: SignUpForm) => authApi.signUp(inputData),
+    onSuccess: (data) => {
+      navigate(ROUTE_PATHS.LOGIN)
+      notification.success({
+        message: data.message,
+        description: 'You have successfully registered',
+      })
+    },
+    onError: (error) => {
+      notification.error({
+        message: error.message,
+      })
+    },
+  })
+
   const logoutMutation = useMutation({
     mutationFn: () => authApi.logOut(),
     onSuccess: () => {
@@ -75,5 +91,5 @@ export const useAuth = () => {
     },
   })
 
-  return { user, loadingInitial, error, signInMutation, logoutMutation }
+  return { user, loadingInitial, error, signInMutation, logoutMutation, signUpMutation }
 }

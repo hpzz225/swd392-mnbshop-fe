@@ -42,6 +42,17 @@ export type AuthUser = {
   profilePic: string
 }
 
+export type SignUpForm = {
+  username: string
+  password: string
+  fullName: string
+  dateOfBirth: string
+  gender: boolean
+  address: string
+  phone: string
+  email: string
+}
+
 export type GetCurrentUserAPIResponse = {
   message: string
   httpStatus: string

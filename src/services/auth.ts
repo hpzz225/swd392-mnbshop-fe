@@ -1,5 +1,5 @@
 import apiInstance from '@/lib/axios'
-import { GetCurrentUserAPIResponse, LoginUserAPIResponse } from '@/types'
+import { GetCurrentUserAPIResponse, LoginUserAPIResponse, SignUpForm } from '@/types'
 
 const signIn = async (username: string, password: string): Promise<LoginUserAPIResponse> => {
   try {
@@ -11,6 +11,15 @@ const signIn = async (username: string, password: string): Promise<LoginUserAPIR
     return data.data
   } catch (error) {
     throw new Error('Invalid username or password')
+  }
+}
+
+const signUp = async (userData: SignUpForm): Promise<any> => {
+  try {
+    const response = await apiInstance.post(import.meta.env.VITE_SIGNUP_API, userData)
+    return response.data
+  } catch (error) {
+    throw new Error('Registration failed')
   }
 }
 
@@ -45,6 +54,7 @@ const getCurrentUser = async (userId: string) => {
 
 const authApi = {
   signIn,
+  signUp,
   logOut,
   refreshToken,
   getCurrentUser,
