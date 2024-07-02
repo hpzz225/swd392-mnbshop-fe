@@ -44,3 +44,20 @@ export const accountSchema = z.object({
   dob: z.string().min(1, 'Date of birth is required'),
   role: z.string().min(1, 'Role is required'),
 })
+
+export const signUpSchema = z
+  .object({
+    username: z.string().min(3, 'Username must be at least 3 characters'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
+    confirmPassword: z.string(),
+    fullName: z.string().min(2, 'Full name must be at least 2 characters'),
+    dateOfBirth: z.string(),
+    gender: z.string(),
+    address: z.string(),
+    phone: z.string().regex(/^\d{10}$/, 'Invalid phone number'),
+    email: z.string().email('Invalid email address'),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  })

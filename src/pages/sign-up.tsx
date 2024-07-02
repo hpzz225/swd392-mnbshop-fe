@@ -5,8 +5,33 @@ import lock from '@/assets/icons/lock.svg'
 import form_error from '@/assets/icons/form-error.svg'
 import google from '@/assets/icons/google.svg'
 import { Link } from 'react-router-dom'
+import { useAuth } from '@/hooks/use-auth'
+import { z } from 'zod'
+import { signUpSchema } from '@/lib/zod/schema'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+type SignUpForm = z.infer<typeof signUpSchema>
 
 export default function SignUp() {
+  const { signUpMutation } = useAuth()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpForm>({
+    resolver: zodResolver(signUpSchema),
+  })
+
+  const onSubmit = (data: SignUpForm) => {
+    const { confirmPassword, ...rest } = data
+    const formattedData = {
+      ...rest,
+      gender: rest.gender === 'Male' ? true : false,
+    }
+    signUpMutation.mutate(formattedData)
+  }
+
   return (
     <main>
       <div className="auth">
@@ -33,48 +58,120 @@ export default function SignUp() {
             </Link>
             <h1 className="auth__heading">Sign Up</h1>
             <p className="auth__desc">Let's create your account and Shop like a pro and save money.</p>
-            <form action="/" className="form auth__form">
+            <form onSubmit={handleSubmit(onSubmit)} className="form auth__form">
               <div className="form__group">
                 <div className="form__text-input">
-                  <input type="email" name="" id="" className="form__input" placeholder="Email" required />
+                  <input
+                    type="email"
+                    {...register('email')}
+                    className={`form__input ${errors.email ? 'error' : ''}`}
+                    placeholder="Email"
+                  />
                   <img src={message} alt="" className="form__input-icon" />
-                  <img src={form_error} alt="" className="form__input-icon-error" />
+                  {errors.email && <img src={form_error} alt="" className="form__input-icon-error" />}
                 </div>
-                <p className="form__error">Email is not in correct format</p>
+                {errors.email && <p className="form__error">{errors.email.message}</p>}
               </div>
 
               <div className="form__group">
                 <div className="form__text-input">
                   <input
                     type="password"
-                    name=""
-                    id=""
-                    className="form__input"
+                    {...register('password')}
+                    className={`form__input ${errors.password ? 'error' : ''}`}
                     placeholder="Password"
-                    required
-                    minLength={6}
                   />
                   <img src={lock} alt="" className="form__input-icon" />
-                  <img src={form_error} alt="" className="form__input-icon-error" />
+                  {errors.password && <img src={form_error} alt="" className="form__input-icon-error" />}
                 </div>
-                <p className="form__error">Password is not in correct format</p>
+                {errors.password && <p className="form__error">{errors.password.message}</p>}
               </div>
 
               <div className="form__group">
                 <div className="form__text-input">
                   <input
                     type="password"
-                    name=""
-                    id=""
-                    className="form__input"
+                    {...register('confirmPassword')}
+                    className={`form__input ${errors.confirmPassword ? 'error' : ''}`}
                     placeholder="Confirm password"
-                    required
-                    minLength={6}
                   />
                   <img src={lock} alt="" className="form__input-icon" />
-                  <img src={form_error} alt="" className="form__input-icon-error" />
+                  {errors.confirmPassword && <img src={form_error} alt="" className="form__input-icon-error" />}
                 </div>
-                <p className="form__error">Password is not in correct format</p>
+                {errors.confirmPassword && <p className="form__error">{errors.confirmPassword.message}</p>}
+              </div>
+
+              <div className="form__group">
+                <div className="form__text-input">
+                  <input
+                    type="text"
+                    {...register('username')}
+                    className={`form__input ${errors.username ? 'error' : ''}`}
+                    placeholder="Username"
+                  />
+                </div>
+                {errors.username && <p className="form__error">{errors.username.message}</p>}
+              </div>
+
+              <div className="form__group">
+                <div className="form__text-input">
+                  <input
+                    type="text"
+                    {...register('fullName')}
+                    className={`form__input ${errors.fullName ? 'error' : ''}`}
+                    placeholder="Full Name"
+                  />
+                </div>
+                {errors.fullName && <p className="form__error">{errors.fullName.message}</p>}
+              </div>
+
+              <div className="form__group">
+                <div className="form__text-input">
+                  <input
+                    type="date"
+                    {...register('dateOfBirth')}
+                    className={`form__input ${errors.dateOfBirth ? 'error' : ''}`}
+                  />
+                </div>
+                {errors.dateOfBirth && <p className="form__error">{errors.dateOfBirth.message}</p>}
+              </div>
+
+              <div className="form__group">
+                <div className="form__text-input">
+                  <select
+                    {...register('gender')}
+                    defaultValue={'Male'}
+                    className={`form__input ${errors.gender ? 'error' : ''}`}
+                  >
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+                {errors.gender && <p className="form__error">{errors.gender.message}</p>}
+              </div>
+
+              <div className="form__group">
+                <div className="form__text-input">
+                  <input
+                    type="text"
+                    {...register('address')}
+                    className={`form__input ${errors.address ? 'error' : ''}`}
+                    placeholder="Address"
+                  />
+                </div>
+                {errors.address && <p className="form__error">{errors.address.message}</p>}
+              </div>
+
+              <div className="form__group">
+                <div className="form__text-input">
+                  <input
+                    type="tel"
+                    {...register('phone')}
+                    className={`form__input ${errors.phone ? 'error' : ''}`}
+                    placeholder="Phone"
+                  />
+                </div>
+                {errors.phone && <p className="form__error">{errors.phone.message}</p>}
               </div>
 
               <div className="form__group form__group--inline">
@@ -88,7 +185,9 @@ export default function SignUp() {
               </div>
 
               <div className="form__group auth__btn-group">
-                <button className="btn btn--primary auth__btn form__submit-btn">Sign Up</button>
+                <button type="submit" className="btn btn--primary auth__btn form__submit-btn">
+                  Sign Up
+                </button>
                 <button className="btn btn--outline auth__btn btn--no-margin">
                   <img src={google} alt="" className="btn__icon icon" />
                   Sign in with Google
