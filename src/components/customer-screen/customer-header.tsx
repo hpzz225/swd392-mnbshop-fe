@@ -9,10 +9,15 @@ import avatar from '@/assets/img/avatar.jpg'
 import { Link } from 'react-router-dom'
 import { ROUTE_PATHS, ROUTE_PATHS_CUSTOMER } from '@/router'
 import { useAuth } from '@/hooks/use-auth'
+import { Input } from 'antd'
+
+const { Search } = Input
 
 export default function CustomerHeader() {
   const { user } = useAuth()
-
+  const onSearch = (value: string) => {
+    console.log(value)
+  }
   return (
     <header className="header">
       <div className="container">
@@ -51,13 +56,11 @@ export default function CustomerHeader() {
               <li className="navbar__item">
                 <Link to={ROUTE_PATHS.PRODUCT} className="navbar__link">
                   Product
-                  <img src={arrowDown} alt="" className="icon navbar__arrow" />
                 </Link>
               </li>
               <li className="navbar__item">
                 <Link to={ROUTE_PATHS.BLOG} className="navbar__link">
                   Blog
-                  <img src={arrowDown} alt="" className="icon navbar__arrow" />
                 </Link>
               </li>
             </ul>
@@ -67,10 +70,8 @@ export default function CustomerHeader() {
 
           {user ? (
             <div className="top-act">
-              <div className="top-act__group d-md-none top-act__group--single">
-                <button className="top-act__btn">
-                  <img src={search} alt="" className="icon top-act__icon" />
-                </button>
+              <div className=" d-md-none top-act__group--single">
+                <Search placeholder="Search" allowClear onSearch={onSearch} size="large" style={{ width: 400 }} />
               </div>
               <div className="top-act__group d-md-none">
                 <Link to={ROUTE_PATHS_CUSTOMER.FAVOURITE}>
