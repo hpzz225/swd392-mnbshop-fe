@@ -1,7 +1,12 @@
 import gift from '@/assets/icons/gift.svg'
 import { Link } from 'react-router-dom'
 
-export default function PriceSection() {
+interface PriceSectionProps {
+  totalItem: number
+  totalPrice: number
+}
+
+export default function PriceSection({ totalItem, totalPrice }: PriceSectionProps) {
   return (
     <div className="col-4 col-xl-12">
       <div className="cart-info">
@@ -9,22 +14,22 @@ export default function PriceSection() {
           <span>
             Subtotal <span className="cart-info__sub-label">(items)</span>
           </span>
-          <span>3</span>
+          <span>{totalItem}</span>
         </div>
         <div className="cart-info__row">
           <span>
             Price <span className="cart-info__sub-label">(Total)</span>
           </span>
-          <span>$191.65</span>
+          <span>${totalPrice}</span>
         </div>
         <div className="cart-info__row">
           <span>Shipping</span>
-          <span>$10.00</span>
+          <span>$0.00</span>
         </div>
         <div className="cart-info__separate"></div>
         <div className="cart-info__row">
           <span>Estimated Total</span>
-          <span>$201.65</span>
+          <span>${totalPrice}</span>
         </div>
         <Link to={'/checkout'} className="cart-info__next-btn btn btn--primary btn--rounded">
           Continue to checkout

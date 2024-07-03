@@ -91,13 +91,18 @@ export type ProductTableData = {
 }
 
 export type ProductDetail = {
-  productId: string
+  productId: number
   productName: string
-  brand: string
-  price: number
-  discount: number
+  productDescription: string
+  productImg: string
+  productPrice: number
   quantity: number
   byAge: number
+  isPreOrder: boolean
+  preOrderAmount: number | null
+  isPromote: boolean
+  isDisable: boolean
+  brandId: number
 }
 
 export type OrderTableData = {
@@ -150,4 +155,42 @@ export type ViewProductListAPIResponse = {
   httpStatus: string
   timestamp: string
   data: ProductDetail[]
+}
+
+export type ViewFavoriteListAPIResponse = {
+  favoriteProductId: number
+  productName: string
+  productPrice: number
+  promote: number | null
+  favoriteId: number
+  favorite: number | null
+  productId: number
+  product: string | null
+}
+
+export type CartAPIResponse = {
+  data: CartInfo
+  success: boolean
+  message: string
+  error: string | null
+  errorMessages: string | null
+}
+
+export type CartInfo = {
+  cartId: number
+  totalItem: number
+  totalPrice: number
+  userId: number
+  cartItems: cartItems[]
+}
+
+export type cartItems = {
+  cartItemId: number
+  cartId: number
+  productId: number
+  productName: string
+  image: string
+  quantity: number
+  unitPrice: number
+  brandName: string
 }

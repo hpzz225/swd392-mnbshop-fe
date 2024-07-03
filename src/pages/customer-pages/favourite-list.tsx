@@ -3,8 +3,11 @@ import Breadcrumb from '@/components/customer-screen/breadcrumb'
 
 import FavouriteItem from '@/components/customer-screen/cart-favourite/favourite-item'
 import SearchBarMobile from '@/components/customer-screen/search-bar-mobile'
+import { useFavoriteList } from '@/hooks/customer-hook/use-favorite-list'
 
 export default function FavouriteList() {
+  const { data } = useFavoriteList()
+  console.log(data)
   return (
     <div>
       <main className="checkout-page">

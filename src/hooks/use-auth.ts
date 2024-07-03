@@ -41,6 +41,7 @@ export const useAuth = () => {
       localStorage.setItem(REFRESH_TOKEN_KEY, data.data.refreshToken)
       queryClient.invalidateQueries({ queryKey: ['user'] })
       const roleId = decodeToken(localStorage.getItem(TOKEN_KEY) || '').RoleId
+      localStorage.setItem('userId', decodeToken(localStorage.getItem(TOKEN_KEY) || '').Id)
       if (roleId == '1') {
         console.log('Manager')
         navigate(ROUTE_PATHS_MANAGER.DASHBOARD)
