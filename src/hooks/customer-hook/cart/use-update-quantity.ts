@@ -5,7 +5,8 @@ import { notification } from 'antd'
 
 export const useUpdateQuantity = () => {
   return useMutation({
-    mutationFn: ({ id, quantity }: { id: number; quantity: number }) => cartApi.updateQuantity(id, quantity),
+    mutationFn: ({ productId, quantity }: { productId: number; quantity: number }) =>
+      cartApi.updateQuantity(productId, quantity),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] })
       notification.success({

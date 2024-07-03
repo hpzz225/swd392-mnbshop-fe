@@ -5,12 +5,14 @@ import { cartItems } from '@/types'
 import { useDeleteCartItem } from '@/hooks/customer-hook/cart/use-delete-cart-item'
 import { useEffect, useState } from 'react'
 import { useDebounce } from '@/hooks/use-debounce'
+import { useUpdateQuantity } from '@/hooks/customer-hook/cart/use-update-quantity'
 
 export default function CartItem({ isCheckout, cartItem }: { isCheckout?: boolean; cartItem: cartItems }) {
-  const totalPrice = cartItem?.unitPrice * cartItem?.quantity
+  const onePrice = cartItem?.unitPrice / cartItem?.quantity
   const deleteCartItemMutation = useDeleteCartItem()
+  const updateQuantityMutation = useUpdateQuantity()
   const [quantityItem, setQuantityItem] = useState(cartItem?.quantity)
-  const debouncedQuantity = useDebounce(quantityItem, 1000)
+  const debouncedQuantity = useDebounce(quantityItem, 500)
 
   function handleDelete(id: number) {
     console.log(id)
@@ -25,6 +27,7 @@ export default function CartItem({ isCheckout, cartItem }: { isCheckout?: boolea
 
   function handleUpdateQuantity(productId: number, quantity: number) {
     console.log(productId, quantity)
+    updateQuantityMutation.mutate({ productId, quantity })
   }
 
   return (
@@ -38,7 +41,7 @@ export default function CartItem({ isCheckout, cartItem }: { isCheckout?: boolea
             <a href="./product-detail.html">{cartItem?.productName}</a>
           </h3>
           <p className="cart-item__price-wrap">
-            {cartItem?.unitPrice} | <span className="cart-item__status">In Stock</span>
+            {onePrice} | <span className="cart-item__status">In Stock</span>
           </p>
           <div className="cart-item__ctrl cart-item__ctrl--md-block">
             <div className="cart-item__input">{cartItem?.brandName}</div>
@@ -65,7 +68,7 @@ export default function CartItem({ isCheckout, cartItem }: { isCheckout?: boolea
           </div>
         </div>
         <div className="cart-item__content-right">
-          <p className="cart-item__total-price">{totalPrice}</p>
+          <p className="cart-item__total-price">{cartItem?.unitPrice}</p>
           <div className="cart-item__ctrl">
             <button
               className="cart-item__ctrl-btn js-toggle"
