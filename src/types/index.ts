@@ -93,6 +93,7 @@ export type ProductTableData = {
 export type ProductDetail = {
   productId: number
   productName: string
+  productBrand: string
   productDescription: string
   productImg: string
   productPrice: number
@@ -103,6 +104,7 @@ export type ProductDetail = {
   isPromote: boolean
   isDisable: boolean
   brandId: number
+  rate: number
 }
 
 export type OrderTableData = {
@@ -155,6 +157,14 @@ export type ViewProductListAPIResponse = {
   httpStatus: string
   timestamp: string
   data: ProductDetail[]
+}
+
+export type ViewProductDetailAPIResponse = {
+  data: ProductDetail
+  success: boolean
+  message: string
+  error: string | null
+  errorMessages: string | null
 }
 
 export type ViewFavoriteListAPIResponse = {
