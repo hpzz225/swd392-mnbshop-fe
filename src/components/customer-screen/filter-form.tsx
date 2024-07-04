@@ -1,22 +1,12 @@
 import React from 'react'
+import { Slider, Input, Button, Select, Tag } from 'antd'
+import { DownOutlined, SearchOutlined } from '@ant-design/icons'
 import selectArrow from '@/assets/icons/select-arrow.svg'
 import search from '@/assets/icons/search.svg'
 
-type CustomStyleProps = {
-  '--min-value'?: string
-  '--max-value'?: string
-  '--width'?: string
-}
+const { Option } = Select
 
 export default function FilterForm() {
-  const sliderStyle: React.CSSProperties & CustomStyleProps = {
-    '--min-value': '10%',
-    '--max-value': '80%',
-  }
-  const formSelectStyle: React.CSSProperties & CustomStyleProps = {
-    '--width': '100%',
-  }
-
   return (
     <div>
       <div className="filter-wrap">
@@ -29,47 +19,49 @@ export default function FilterForm() {
                   Price
                 </label>
                 <div className="filter__form-group">
-                  <div className="filter__form-slider" style={sliderStyle}></div>{' '}
+                  <Slider range defaultValue={[30, 100]} />
                 </div>
                 <div className="filter__form-group filter__form-group--inline">
                   <div>
                     <label htmlFor="" className="filter__form-label filter__form-label--small">
                       Minimum
                     </label>
-                    <div className="filter__form-text-input filter__form-text-input--small">
-                      <input type="text" name="" id="" className="filter__form-input" value="$30.00" />
+                    <div className=" filter__form-text-input--small">
+                      <Input prefix="$" defaultValue="30.00" />
                     </div>
                   </div>
                   <div>
                     <label htmlFor="" className="filter__form-label filter__form-label--small">
                       Maximum
                     </label>
-                    <div className="filter__form-text-input filter__form-text-input--small">
-                      <input type="text" name="" id="" className="filter__form-input" value="$100.00" />
+                    <div className=" filter__form-text-input--small">
+                      <Input prefix="$" defaultValue="100.00" />
                     </div>
                   </div>
                 </div>
               </div>
 
               <div className="filter__separate"></div>
+
               <div className="filter__col">
                 <label htmlFor="" className="filter__form-label">
                   Made in
                 </label>
                 <div className="filter__form-group">
-                  <div className="filter__form-select-wrap">
-                    <div className="filter__form-select" style={formSelectStyle}>
-                      USA
-                      <img src={selectArrow} alt="" className="icon filter__form-select-arrow" />
-                    </div>
-                  </div>
+                  <Select defaultValue="USA" style={{ width: '100%' }}>
+                    <Option value="USA">USA</Option>
+                    <Option value="Japan">Japan</Option>
+                    <Option value="China">China</Option>
+                    <Option value="France">France</Option>
+                    <Option value="England">England</Option>
+                  </Select>
                 </div>
-                <div className="filter__form-group filter__form-group">
+                <div className="filter__form-group">
                   <div className="filter__form-tags">
-                    <button className="filter__form-tag">Japan</button>
-                    <button className="filter__form-tag">China</button>
-                    <button className="filter__form-tag">France</button>
-                    <button className="filter__form-tag">England</button>
+                    <Tag>Japan</Tag>
+                    <Tag>China</Tag>
+                    <Tag>France</Tag>
+                    <Tag>England</Tag>
                   </div>
                 </div>
               </div>
@@ -81,30 +73,28 @@ export default function FilterForm() {
                   Brand
                 </label>
                 <div className="filter__form-group">
-                  <div className="filter__form-text-input">
-                    <input type="text" name="" id="" placeholder="Search brand name" className="filter__form-input" />
-                    <img src={search} alt="" className="icon filter__form-input-icon" />
-                  </div>
+                  <Input placeholder="Search brand name" prefix={<SearchOutlined />} />
                 </div>
                 <div className="filter__form-group">
                   <div className="filter__form-tags">
-                    <button className="filter__form-tag">Ensure</button>
-                    <button className="filter__form-tag">Abbott</button>
-                    <button className="filter__form-tag">Meiji</button>
-                    <button className="filter__form-tag">Yokogold</button>
-                    <button className="filter__form-tag">Similac</button>
-                    <button className="filter__form-tag">Nutifood</button>
+                    <Tag>Ensure</Tag>
+                    <Tag>Abbott</Tag>
+                    <Tag>Meiji</Tag>
+                    <Tag>Yokogold</Tag>
+                    <Tag>Similac</Tag>
+                    <Tag>Nutifood</Tag>
                   </div>
                 </div>
               </div>
             </div>
+
             <div className="filter__row filter__footer">
-              <button className="btn btn--text filter__cancel js-toggle" toggle-target="#home-filter">
+              <Button className="btn btn--text filter__cancel js-toggle" toggle-target="#home-filter">
                 Cancel
-              </button>
-              <button className="btn btn--primary filter__submit js-toggle" toggle-target="#home-filter">
+              </Button>
+              <Button type="primary" className="btn btn--primary filter__submit js-toggle" toggle-target="#home-filter">
                 Show Result
-              </button>
+              </Button>
             </div>
           </form>
         </div>
