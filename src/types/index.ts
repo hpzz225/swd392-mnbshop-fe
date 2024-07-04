@@ -104,6 +104,7 @@ export type ProductDetail = {
   isPromote: boolean
   isDisable: boolean
   brandId: number
+  rate: number
 }
 
 export type OrderTableData = {

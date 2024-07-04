@@ -1,47 +1,47 @@
 import search from '@/assets/icons/search.svg'
 import arrowRight from '@/assets/icons/arrow-right.svg'
 import star from '@/assets/icons/star.svg'
-import starHalf from '@/assets/icons/star-half.svg'
-import starBlank from '@/assets/icons/star-blank.svg'
-import selectArrow from '@/assets/icons/select-arrow.svg'
-import document from '@/assets/icons/document.svg'
-import buy from '@/assets/icons/buy.svg'
-import bag from '@/assets/icons/bag.svg'
 import heart from '@/assets/icons/heart.svg'
 import heartRed from '@/assets/icons/heart-red.svg'
 import avatar1 from '@/assets/img/avatar/avatar-1.png'
 import item1 from '@/assets/img/product/milk1.png'
-import { Row, Col, Typography, Rate, InputNumber, Button, Tag, Descriptions, List, Avatar, Card, Space } from 'antd'
-import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons'
+import {
+  Row,
+  Col,
+  Typography,
+  Rate,
+  InputNumber,
+  Button,
+  Tag,
+  Descriptions,
+  List,
+  Avatar,
+  Card,
+  Space,
+  Form,
+  Input,
+} from 'antd'
+import { ShoppingCartOutlined } from '@ant-design/icons'
 import { useState } from 'react'
+import { useViewDetailProduct } from '@/hooks/customer-hook/product/use-view-detail-product'
+import { useParams } from 'react-router-dom'
 
 const { Title, Paragraph } = Typography
 
-type CustomStyleProps = {
-  '--width'?: string
-}
-
 export default function ProductDetail() {
-  // const widthSelectStyle: React.CSSProperties & CustomStyleProps = {
-  //   '--width': '146px',
-  // }
   const [quantity, setQuantity] = useState(1)
   const [currentTab, setCurrentTab] = useState('description')
+  const [newReview, setNewReview] = useState({ rating: 0, content: '' })
+  const { productId }: any = useParams()
 
+  const { data: product } = useViewDetailProduct(productId)
   const handleTabChange = (tab: string) => {
     setCurrentTab(tab)
   }
 
-  const product = {
-    productId: 1,
-    productName: 'Premium Coffee Beans',
-    productBrand: 'Lavazza',
-    productDescription: 'High-quality Arabica coffee beans, perfect for espresso.',
-    productImg:
-      'https://www.junie.vn/cdn/shop/files/01_2ec80539-7643-497c-8eca-7f2579083b0a.jpg?v=1693106487&width=950',
-    productPrice: 47.0,
-    quantity: 100,
-    byAge: 18,
+  const handleSubmitReview = (values: any) => {
+    console.log('New review: ', values)
+    setNewReview({ rating: 0, content: '' })
   }
 
   const reviews = [
@@ -108,128 +108,48 @@ export default function ProductDetail() {
             </ul>
           </div>
 
-          {/* <!-- Product info --> */}
-          {/* <div className="product-container prod-info-content">
-            <div className="row">
-              <div className="col-5 col-xl-6 col-lg-12">
-                <div className="prod-preview">
-                  <div className="prod-preview__list">
-                    <div className="prod-preview__item">
-                      <img src={item1} alt="" className="prod-preview__img" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-7 col-xl-6 col-lg-12">
-                <form action="" className="form">
-                  <section className="prod-info">
-                    <h1 className="prod-info__heading">Milk Beans - No 1 in France</h1>
-                    <div className="row">
-                      <div className="col-5 col-xxl-6 col-xl-12">
-                        <div className="prod-prop">
-                          <img src={star} alt="" className="prod-prop__icon" />
-                          <h4 className="prod-prop__title">(3.5) 1100 reviews</h4>
-                        </div>
-                        <label htmlFor="" className="form__label prod-info__label">
-                          Size/Weight
-                        </label>
-                        <div className="filter__form-group">
-                          <div className="form__select-wrap">
-                            <div className="form__select" style={widthSelectStyle}>
-                              500g
-                              <img src={selectArrow} alt="" className="form__select-arrow icon" />
-                            </div>
-                            <div className="form__select">
-                              Gram
-                              <img src={selectArrow} alt="" className="form__select-arrow icon" />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="filter__form-group">
-                          <div className="form__tags">
-                            <button className="form__tag prod-info__tag">Small</button>
-                            <button className="form__tag prod-info__tag">Medium</button>
-                            <button className="form__tag prod-info__tag">Large</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-7 col-xxl-6 col-xl-12">
-                        <div className="prod-props">
-                          <div className="prod-prop">
-                            <img src={document} alt="" className="prod-prop__icon icon" />
-                            <h4 className="prod-prop__title">Compare</h4>
-                          </div>
-                          <div className="prod-prop">
-                            <img src={buy} alt="" className="prod-prop__icon icon" />
-                            <div>
-                              <h4 className="prod-prop__title">Delivery</h4>
-                              <p className="prod-prop__desc">From $6 for 1-3 days</p>
-                            </div>
-                          </div>
-                          <div className="prod-prop">
-                            <img src={bag} alt="" className="prod-prop__icon icon" />
-                            <div>
-                              <h4 className="prod-prop__title">Pickup</h4>
-                              <p className="prod-prop__desc">Out of 2 store, today</p>
-                            </div>
-                          </div>
-                          <div className="prod-info__card">
-                            <div className="prod-info__row">
-                              <span className="prod-info__price">$500.00</span>
-                              <span className="prod-info__tax">10%</span>
-                            </div>
-                            <p className="prod-info__total-price">$540.00</p>
-                            <div className="prod-info__row">
-                              <button className="btn btn--primary prod-info__add-to-cart">Add to cart</button>
-                              <button className="like-btn prod-info__like-btn">
-                                <img src={heart} alt="" className="like-btn__icon icon" />
-                                <img src={heartRed} alt="" className="like-btn__icon--liked" />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-                </form>
-              </div>
-            </div>
-          </div> */}
-
           <div className="container mx-auto px-4 py-8">
             <Row gutter={[32, 32]}>
               <Col xs={24} md={12} className="flex justify-center">
                 <img
-                  src={product.productImg}
-                  alt={product.productName}
+                  src={product?.productImg}
+                  alt={product?.productName}
                   className="h-[600px] w-10/12 object-cover rounded-lg shadow-lg"
                 />
               </Col>
               <Col xs={24} md={12}>
-                <Title level={2}>{product.productName}</Title>
+                <Title level={2}>{product?.productName}</Title>
                 <Title level={4} type="secondary">
-                  {product.productBrand}
+                  {product?.productBrand}
                 </Title>
                 <div className="my-4">
-                  <Rate defaultValue={4} />
+                  <Rate defaultValue={product?.rate} disabled />
                   <span className="ml-2 text-gray-500">(1100 reviews)</span>
                 </div>
                 <Title level={3} className="text-blue-600">
-                  ${product.productPrice.toFixed(2)}
+                  ${product?.productPrice.toFixed(2)}
                 </Title>
-                <Paragraph className="mt-4">{product.productDescription}</Paragraph>
+                <Paragraph className="mt-4">{product?.productDescription}</Paragraph>
                 <Descriptions layout="vertical" column={2} className="flex flex-col mt-6">
-                  <Descriptions.Item label="Available Quantity">
-                    <Tag color="green">{product.quantity} in stock</Tag>
-                  </Descriptions.Item>
+                  {product?.isPreOrder ? (
+                    <Descriptions.Item label="PreOrder Quantity">
+                      <Tag color="green">Limited at: {product?.preOrderAmount}</Tag>
+                    </Descriptions.Item>
+                  ) : (
+                    <Descriptions.Item label="Available Quantity">
+                      <Tag color="green">{product?.quantity} in stock</Tag>
+                    </Descriptions.Item>
+                  )}
                   <Descriptions.Item label="Recommended Age">
-                    <Tag color="blue">{product.byAge} years old</Tag>
+                    <Tag color="blue">
+                      {product?.byAge}-{(product?.byAge || 0) + 2} years old
+                    </Tag>
                   </Descriptions.Item>
                 </Descriptions>
                 <div className="mt-6 flex items-center">
                   <InputNumber
                     min={1}
-                    max={product.quantity}
+                    max={product?.quantity}
                     defaultValue={1}
                     onChange={(value) => setQuantity(value as number)}
                     className="mr-4 w-1/4"
@@ -330,12 +250,6 @@ export default function ProductDetail() {
                         <List
                           itemLayout="vertical"
                           size="large"
-                          pagination={{
-                            onChange: (page) => {
-                              console.log(page)
-                            },
-                            pageSize: 3,
-                          }}
                           dataSource={reviews}
                           renderItem={(item) => (
                             <List.Item key={item.author}>
@@ -352,6 +266,23 @@ export default function ProductDetail() {
                             </List.Item>
                           )}
                         />
+
+                        <Card className="mb-8">
+                          <h3>Write a Review</h3>
+                          <Form onFinish={handleSubmitReview}>
+                            <Form.Item name="rating" rules={[{ required: true, message: 'Please rate the product' }]}>
+                              <Rate />
+                            </Form.Item>
+                            <Form.Item name="content" rules={[{ required: true, message: 'Please write your review' }]}>
+                              <Input.TextArea rows={4} placeholder="Write your review here" />
+                            </Form.Item>
+                            <Form.Item>
+                              <Button type="primary" htmlType="submit">
+                                Submit Review
+                              </Button>
+                            </Form.Item>
+                          </Form>
+                        </Card>
                       </div>
                     </div>
                   </div>

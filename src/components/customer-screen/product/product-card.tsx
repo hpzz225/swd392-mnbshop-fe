@@ -30,13 +30,13 @@ export default function ProductCard(product: ProductDetail) {
           <Link to={`${ROUTE_PATHS.PRODUCT}/${product?.productId}`}>
             <h3 className="product-card__title">{product?.productName}</h3>
           </Link>
-          <p className="product-card__brand">{product?.brandId}</p>
+          <p className="product-card__brand">{product?.productBrand}</p>
           <div className="product-card__row">
             <div className="product-card__rating">
               <img src={star} alt="" className="product-card__star" />
-              <span className="product-card__score">Danh gia</span>
+              <span className="product-card__score">{product?.rate}</span>
             </div>
-            <span className="product-card__price">{product?.productPrice}</span>
+            <span className="product-card__price">${product?.productPrice}</span>
           </div>
         </article>
       </div>
