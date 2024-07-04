@@ -1,23 +1,32 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Menu, Dropdown, Button } from 'antd'
 import more from '@/assets/icons/more.svg'
 import logo from '@/assets/icons/logo3.png'
 import arrowLeft from '@/assets/icons/arrow-left.svg'
 import buy from '@/assets/icons/buy.svg'
 import heart from '@/assets/icons/heart.svg'
-import arrowDown from '@/assets/icons/arrow-down.svg'
-import search from '@/assets/icons/search.svg'
 import avatar from '@/assets/img/avatar.jpg'
-import { Link } from 'react-router-dom'
 import { ROUTE_PATHS, ROUTE_PATHS_CUSTOMER } from '@/router'
 import { useAuth } from '@/hooks/use-auth'
 import { Input } from 'antd'
 
-const { Search } = Input
+// const { Search } = Input
 
 export default function CustomerHeader() {
-  const { user } = useAuth()
-  const onSearch = (value: string) => {
-    console.log(value)
-  }
+  const { user, logout } = useAuth()
+
+  const menu = (
+    <Menu>
+      <Menu.Item key="0">
+        <Link to={ROUTE_PATHS_CUSTOMER.PROFILE}>Profile</Link>
+      </Menu.Item>
+      <Menu.Item key="1">
+        <Link to={ROUTE_PATHS.LOGIN}>Logout</Link>
+      </Menu.Item>
+    </Menu>
+  )
+
   return (
     <header className="header">
       <div className="container">
@@ -70,9 +79,9 @@ export default function CustomerHeader() {
 
           {user ? (
             <div className="top-act">
-              <div className=" d-md-none top-act__group--single">
+              {/* <div className=" d-md-none top-act__group--single">
                 <Search placeholder="Search" allowClear onSearch={onSearch} size="large" style={{ width: 400 }} />
-              </div>
+              </div> */}
               <div className="top-act__group d-md-none">
                 <Link to={ROUTE_PATHS_CUSTOMER.FAVOURITE}>
                   <button className="top-act__btn">
@@ -91,11 +100,11 @@ export default function CustomerHeader() {
                 </Link>
               </div>
 
-              <Link to={ROUTE_PATHS_CUSTOMER.PROFILE}>
-                <div className="top-act__user">
+              <Dropdown overlay={menu} trigger={['click']} placement="bottomRight">
+                <div className="top-act__user" onClick={(e) => e.preventDefault()}>
                   <img src={avatar} alt="" className="top-act__avatar" />
                 </div>
-              </Link>
+              </Dropdown>
             </div>
           ) : (
             <div className="top-act">
