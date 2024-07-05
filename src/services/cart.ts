@@ -66,11 +66,22 @@ const deleteCartItem = async (id: number) => {
   }
 }
 
+const createOrder = async (id: number) => {
+  try {
+    const response = await apiInstance.post(import.meta.env.VITE_CREATE_ORDER_API + id)
+    return response.data
+  } catch (error) {
+    const errorResponse = error as AxiosError<CustomErrorAPIResponse>
+    throw new Error(errorResponse.response?.data.message)
+  }
+}
+
 const cartApi = {
   getCartItem,
   deleteCartItem,
   addCartItem,
   updateQuantity,
+  createOrder,
 }
 
 export default cartApi

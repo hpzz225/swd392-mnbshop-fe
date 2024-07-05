@@ -81,6 +81,7 @@ export const useAuth = () => {
   const logoutMutation = useMutation({
     mutationFn: () => authApi.logOut(),
     onSuccess: () => {
+      navigate(ROUTE_PATHS.ROOT)
       localStorage.clear()
       window.location.reload()
     },

@@ -1,12 +1,27 @@
 import gift from '@/assets/icons/gift.svg'
-import { Link } from 'react-router-dom'
+import { useCreateOrder } from '@/hooks/customer-hook/cart/use-create-order'
+import { notification } from 'antd'
 
 interface PriceSectionProps {
   totalItem: number
   totalPrice: number
+  cartId: number
 }
 
-export default function PriceSection({ totalItem, totalPrice }: PriceSectionProps) {
+export default function PriceSection({ totalItem, totalPrice, cartId }: PriceSectionProps) {
+  const createOrderMutation = useCreateOrder()
+  function handleOrder(cartId: number, totalItem: number) {
+    if (totalItem === 0) {
+      notification.error({
+        message: 'Empty cart',
+        description: 'Please add item to cart',
+        placement: 'topRight',
+      })
+    } else {
+      createOrderMutation.mutate(cartId)
+    }
+  }
+
   return (
     <div className="col-4 col-xl-12">
       <div className="cart-info">
@@ -24,16 +39,19 @@ export default function PriceSection({ totalItem, totalPrice }: PriceSectionProp
         </div>
         <div className="cart-info__row">
           <span>Shipping</span>
-          <span>$0.00</span>
+          <span>FREE</span>
         </div>
         <div className="cart-info__separate"></div>
         <div className="cart-info__row">
           <span>Estimated Total</span>
           <span>${totalPrice}</span>
         </div>
-        <Link to={'/checkout'} className="cart-info__next-btn btn btn--primary btn--rounded">
+        <button
+          onClick={() => handleOrder(cartId, totalItem)}
+          className="cart-info__next-btn btn btn--primary btn--rounded"
+        >
           Continue to checkout
-        </Link>
+        </button>
       </div>
       <div className="cart-info">
         <a href="#!">

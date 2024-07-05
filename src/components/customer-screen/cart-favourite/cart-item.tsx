@@ -6,6 +6,8 @@ import { useDeleteCartItem } from '@/hooks/customer-hook/cart/use-delete-cart-it
 import { useEffect, useState } from 'react'
 import { useDebounce } from '@/hooks/use-debounce'
 import { useUpdateQuantity } from '@/hooks/customer-hook/cart/use-update-quantity'
+import { ROUTE_PATHS } from '@/router'
+import { Link } from 'react-router-dom'
 
 export default function CartItem({ isCheckout, cartItem }: { isCheckout?: boolean; cartItem: cartItems }) {
   const onePrice = cartItem?.unitPrice / cartItem?.quantity
@@ -32,13 +34,13 @@ export default function CartItem({ isCheckout, cartItem }: { isCheckout?: boolea
 
   return (
     <article className="cart-item">
-      <a href="./product-detail.html">
+      <Link to={`${ROUTE_PATHS.PRODUCT}/${cartItem?.productId}`}>
         <img src={cartItem?.image} alt="" className="cart-item__thumb" />
-      </a>
+      </Link>
       <div className="cart-item__content">
         <div className="cart-item__content-left">
           <h3 className="cart-item__title">
-            <a href="./product-detail.html">{cartItem?.productName}</a>
+            <Link to={`${ROUTE_PATHS.PRODUCT}/${cartItem?.productId}`}>{cartItem?.productName}</Link>
           </h3>
           <p className="cart-item__price-wrap">
             {onePrice} | <span className="cart-item__status">In Stock</span>

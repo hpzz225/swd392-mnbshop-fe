@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, Dropdown, Button } from 'antd'
 import more from '@/assets/icons/more.svg'
@@ -9,12 +8,9 @@ import heart from '@/assets/icons/heart.svg'
 import avatar from '@/assets/img/avatar.jpg'
 import { ROUTE_PATHS, ROUTE_PATHS_CUSTOMER } from '@/router'
 import { useAuth } from '@/hooks/use-auth'
-import { Input } from 'antd'
-
-// const { Search } = Input
 
 export default function CustomerHeader() {
-  const { user, logout } = useAuth()
+  const { user, logoutMutation } = useAuth()
 
   const menu = (
     <Menu>
@@ -22,7 +18,7 @@ export default function CustomerHeader() {
         <Link to={ROUTE_PATHS_CUSTOMER.PROFILE}>Profile</Link>
       </Menu.Item>
       <Menu.Item key="1">
-        <Link to={ROUTE_PATHS.LOGIN}>Logout</Link>
+        <button onClick={() => logoutMutation.mutate()}>Logout</button>
       </Menu.Item>
     </Menu>
   )
@@ -86,7 +82,7 @@ export default function CustomerHeader() {
                 <Link to={ROUTE_PATHS_CUSTOMER.FAVOURITE}>
                   <button className="top-act__btn">
                     <img src={heart} alt="" className="icon top-act__icon" />
-                    <span className="top-act__title">03</span>
+                    <span className="top-act__title">Favorite</span>
                   </button>
                 </Link>
 
@@ -95,7 +91,7 @@ export default function CustomerHeader() {
                 <Link to={ROUTE_PATHS_CUSTOMER.CART}>
                   <button className="top-act__btn">
                     <img src={buy} alt="" className="icon top-act__icon" />
-                    <span className="top-act__title">$65.42</span>
+                    <span className="top-act__title">Cart</span>
                   </button>
                 </Link>
               </div>

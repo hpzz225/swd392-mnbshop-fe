@@ -20,11 +20,13 @@ import {
   Space,
   Form,
   Input,
+  notification,
 } from 'antd'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import { useViewDetailProduct } from '@/hooks/customer-hook/product/use-view-detail-product'
 import { useParams } from 'react-router-dom'
+import { useAddCartItem } from '@/hooks/customer-hook/cart/use-add-cart.item'
 
 const { Title, Paragraph } = Typography
 
@@ -33,10 +35,17 @@ export default function ProductDetail() {
   const [currentTab, setCurrentTab] = useState('description')
   const [newReview, setNewReview] = useState({ rating: 0, content: '' })
   const { productId }: any = useParams()
+  const AddToCartMutation = useAddCartItem()
+
+  console.log(newReview)
 
   const { data: product } = useViewDetailProduct(productId)
   const handleTabChange = (tab: string) => {
     setCurrentTab(tab)
+  }
+
+  function handleAddToCart(productId: number, quantity: number) {
+    AddToCartMutation.mutate({ productId, quantity })
   }
 
   const handleSubmitReview = (values: any) => {
@@ -155,7 +164,13 @@ export default function ProductDetail() {
                     className="mr-4 w-1/4"
                     size="large"
                   />
-                  <Button type="primary" icon={<ShoppingCartOutlined />} size="large" className="w-full">
+                  <Button
+                    type="primary"
+                    icon={<ShoppingCartOutlined />}
+                    size="large"
+                    className="w-full"
+                    onClick={() => handleAddToCart(productId, quantity)}
+                  >
                     Add to Cart
                   </Button>
                 </div>
