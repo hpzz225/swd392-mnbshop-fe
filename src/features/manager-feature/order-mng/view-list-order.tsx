@@ -1,19 +1,20 @@
 import TableData from '@/components/manager-screen/table'
-import data from '@/mock/orders.json'
 import { VIEW_ORDER_COLS } from '@/constants/table-columns'
-import { OrderTableData } from '@/types'
+import { OrderData, OrderTableData } from '@/types'
+import { useViewOrderList } from './use-view-order-list'
 
 export default function ViewListOrder() {
-  const addKeyToData = (dataArray: OrderTableData[] | null) => {
+  const { data, isLoading } = useViewOrderList()
+  const addKeyToData = (dataArray: OrderTableData[] | OrderData[] | null) => {
     if (!dataArray) return []
-    return dataArray.map((item: OrderTableData) => {
+    return dataArray.map((item: OrderTableData | OrderData) => {
       return {
         ...item,
         key: item.orderId,
       }
     })
   }
-  const dataWithKeys: OrderTableData[] = (data && addKeyToData(data)) || []
+  const dataWithKeys: any = (data && addKeyToData(data)) || []
 
   return (
     <div>
@@ -24,6 +25,7 @@ export default function ViewListOrder() {
         scrollX={1400}
         scrollY={620}
         hasRowSelection
+        isLoading={isLoading}
       />
     </div>
   )

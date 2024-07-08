@@ -1,12 +1,14 @@
 import TableData from '@/components/manager-screen/table'
-import data from '@/mock/brand.json'
 import { VIEW_BRAND_COLS } from '@/constants/table-columns'
-import { BrandTableData } from '@/types'
+import { BrandListApiResponse, BrandTableData } from '@/types'
+import { useViewBrandList } from './use-view-brand-list'
 
 export default function ViewListBrand() {
-  const addKeyToData = (dataArray: BrandTableData[] | null) => {
+  const { data, isLoading } = useViewBrandList()
+  console.log(data)
+  const addKeyToData = (dataArray: BrandTableData[] | BrandListApiResponse[] | null) => {
     if (!dataArray) return []
-    return dataArray.map((item: BrandTableData) => {
+    return dataArray.map((item: BrandTableData | BrandListApiResponse) => {
       return {
         ...item,
         key: item.brandId,
@@ -24,6 +26,7 @@ export default function ViewListBrand() {
         scrollX={1400}
         scrollY={620}
         hasRowSelection
+        isLoading={isLoading}
       />
     </div>
   )

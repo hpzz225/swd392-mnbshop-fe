@@ -39,8 +39,6 @@ export function getTagColor(tag: string | undefined, type: 'status' | 'attending
         case AUTHORITIES.CUSTOMER:
           return 'cyan'
         case AUTHORITIES.STAFF:
-          return 'orange'
-        case AUTHORITIES.GUEST:
           return 'green'
       }
   }

@@ -1,12 +1,13 @@
 import TableData from '@/components/manager-screen/table'
-import data from '@/mock/account.json'
 import { VIEW_ACCOUNT_COLS } from '@/constants/table-columns'
-import { AccountTableData } from '@/types'
+import { AccountDetail, AccountTableData } from '@/types'
+import { useViewAccountList } from './use-view-account-list'
 
 export default function ViewListAccount() {
-  const addKeyToData = (dataArray: AccountTableData[] | null) => {
+  const { data, isLoading } = useViewAccountList()
+  const addKeyToData = (dataArray: AccountTableData[] | AccountDetail[] | null) => {
     if (!dataArray) return []
-    return dataArray.map((item: AccountTableData) => {
+    return dataArray.map((item: AccountTableData | AccountDetail) => {
       return {
         ...item,
         key: item.id,
@@ -24,6 +25,7 @@ export default function ViewListAccount() {
         scrollX={1400}
         scrollY={620}
         hasRowSelection
+        isLoading={isLoading}
       />
     </div>
   )

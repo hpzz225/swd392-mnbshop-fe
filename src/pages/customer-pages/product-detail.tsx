@@ -20,13 +20,13 @@ import {
   Space,
   Form,
   Input,
-  notification,
 } from 'antd'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import { useViewDetailProduct } from '@/hooks/customer-hook/product/use-view-detail-product'
 import { useParams } from 'react-router-dom'
 import { useAddCartItem } from '@/hooks/customer-hook/cart/use-add-cart.item'
+import SimilarCard from '@/components/customer-screen/product/similar-card'
 
 const { Title, Paragraph } = Typography
 
@@ -138,6 +138,7 @@ export default function ProductDetail() {
                 <Title level={3} className="text-blue-600">
                   ${product?.productPrice.toFixed(2)}
                 </Title>
+                <hr />
                 <Paragraph className="mt-4">{product?.productDescription}</Paragraph>
                 <Descriptions layout="vertical" column={2} className="flex flex-col mt-6">
                   {product?.isPreOrder ? (
@@ -156,14 +157,27 @@ export default function ProductDetail() {
                   </Descriptions.Item>
                 </Descriptions>
                 <div className="mt-6 flex items-center">
-                  <InputNumber
-                    min={1}
-                    max={product?.quantity}
-                    defaultValue={1}
-                    onChange={(value) => setQuantity(value as number)}
-                    className="mr-4 w-1/4"
-                    size="large"
-                  />
+                  {product?.isPreOrder ? (
+                    <InputNumber
+                      min={1}
+                      max={product?.preOrderAmount ?? 0}
+                      disabled
+                      defaultValue={1}
+                      onChange={(value) => setQuantity(value as number)}
+                      className="mr-4 w-1/4"
+                      size="large"
+                    />
+                  ) : (
+                    <InputNumber
+                      min={1}
+                      max={product?.quantity}
+                      defaultValue={1}
+                      onChange={(value) => setQuantity(value as number)}
+                      className="mr-4 w-1/4"
+                      size="large"
+                    />
+                  )}
+
                   <Button
                     type="primary"
                     icon={<ShoppingCartOutlined />}
@@ -174,6 +188,7 @@ export default function ProductDetail() {
                     Add to Cart
                   </Button>
                 </div>
+                <hr className="mt-10" />
                 <div>
                   <Descriptions column={1} bordered className="mt-10">
                     <Descriptions.Item label="Payment methods">Ship COD, check goods before paying</Descriptions.Item>
@@ -307,39 +322,12 @@ export default function ProductDetail() {
                   <div className="prod-content">
                     <h2 className="prod-content__heading">Similar items you might like</h2>
                     <div className="row row-cols-6 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-2">
-                      {/* <!-- Product card 1 --> */}
-                      <div className="col">
-                        <article className="product-card">
-                          <div className="product-card__img-wrap">
-                            <a href="./product-detail.html">
-                              <img src={item1} alt="" className="product-card__thumb" />
-                            </a>
-                            <button className="like-btn product-card__like-btn">
-                              <img src={heart} alt="" className="like-btn__icon icon" />
-                              <img src={heartRed} alt="" className="like-btn__icon--liked" />
-                            </button>
-                          </div>
-                          <h3 className="product-card__title">
-                            <a href="./product-detail.html">Coffee Beans - Espresso Arabica and Robusta Beans</a>
-                          </h3>
-                          <p className="product-card__brand">Lavazza</p>
-                          <div className="product-card__row">
-                            <span className="product-card__price">$47.00</span>
-                            <img src={star} alt="" className="product-card__star" />
-                            <span className="product-card__score">4.3</span>
-                          </div>
-                        </article>
-                      </div>
-
-                      {/* <!-- Product card 2 --> */}
-
-                      {/* <!-- Product card 3 --> */}
-
-                      {/* <!-- Product card 4 --> */}
-
-                      {/* <!-- Product card 5 --> */}
-
-                      {/* <!-- Product card 6 --> */}
+                      <SimilarCard />
+                      <SimilarCard />
+                      <SimilarCard />
+                      <SimilarCard />
+                      <SimilarCard />
+                      <SimilarCard />
                     </div>
                   </div>
                 </div>

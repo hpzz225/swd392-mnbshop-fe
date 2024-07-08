@@ -8,12 +8,22 @@ export const AUTHORITIES = {
   CUSTOMER: 3,
 }
 
+type RoleMappingType = {
+  [key: string]: string
+}
+
+export const ROLE_MAPPING: RoleMappingType = {
+  '1': 'Admin',
+  '2': 'Staff',
+  '3': 'Customer',
+}
+
 export const ORDER_STATUSES = {
-  PENDING: 'Pending',
-  PROCESSING: 'Processing',
-  SHIPPED: 'Shipped',
-  COMPLETED: 'Completed',
-  CANCELLED: 'Cancelled',
+  PENDING: 'pending',
+  PROCESSING: 'processing',
+  SHIPPED: 'shipped',
+  COMPLETED: 'completed',
+  CANCELLED: 'cancelled',
 }
 
 export const queryClient = new QueryClient({

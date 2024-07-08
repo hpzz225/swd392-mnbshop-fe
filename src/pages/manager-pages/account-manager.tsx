@@ -1,7 +1,7 @@
 import Popup from '@/components/manager-screen/popup'
 import ConfigAntdTheme from '@/lib/antd/config-theme'
 import SectionHeader from '@/components/manager-screen/section-header'
-import ViewListAccount from '@/features/manager-feature/account-mng/view-list-account'
+import ViewListAccount from '@/features/manager-feature/account-mng/view-account/view-list-account'
 import AddAccount from '@/features/manager-feature/account-mng/add-account'
 import SearchBar from '@/components/manager-screen/search'
 import { POPUP_TITLE } from '@/constants'

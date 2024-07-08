@@ -1,22 +1,29 @@
+import Dropdown from '@/components/manager-screen/dropdown'
 import { AccountTableData, BrandTableData, OrderTableData, ProductTableData } from '@/types'
 import { Image, TableColumnsType, Tag, Tooltip } from 'antd'
 import { ViewAccountDropdown, ViewBrandDropdown, ViewOrderDropdown, ViewProductDropdown } from './menu-data'
-import Dropdown from '@/components/manager-screen/dropdown'
 import { getTagColor } from '@/utils'
 import { Link } from 'react-router-dom'
 import { ROUTE_PATHS_MANAGER } from '@/router'
+import dayjs from 'dayjs'
+import { ROLE_MAPPING } from '.'
 
 export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
   {
-    title: 'PRODUCT ID',
+    title: 'ID',
     dataIndex: 'productId',
-    key: 'id',
-    width: 160,
+    key: 'productId',
+    width: 80,
     align: 'center',
-    sorter: {
-      compare: (a, b) => a.productId.localeCompare(b.productId),
-    },
-    defaultSortOrder: 'ascend',
+  },
+  {
+    title: 'IMAGE',
+    dataIndex: 'productImg',
+    key: 'productImg',
+    align: 'center',
+    render: (productImg: string) => (
+      <Image src={productImg} preview={false} className="rounded-xl" alt="Brand Image" width={80} />
+    ),
   },
   {
     title: 'PRODUCT NAME',
@@ -29,17 +36,18 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
   },
   {
     title: 'BRAND',
-    dataIndex: 'brand',
-    key: 'category',
+    dataIndex: 'productBrand',
+    key: 'productBrand',
     width: 200,
     align: 'center',
   },
   {
     title: 'PRICE',
-    dataIndex: 'price',
-    key: 'price',
+    dataIndex: 'productPrice',
+    key: 'productPrice',
     width: 140,
     align: 'center',
+    render: (price) => <span>${price}</span>,
   },
   {
     title: 'DISCOUNT',
@@ -55,6 +63,7 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
     key: 'image',
     width: 140,
     align: 'center',
+    render: (quantity) => <span>{quantity}</span>,
   },
   {
     title: 'Action',
@@ -75,10 +84,6 @@ export const VIEW_BRAND_COLS: TableColumnsType<BrandTableData> = [
     key: 'brandId',
     width: 160,
     align: 'center',
-    sorter: {
-      compare: (a, b) => a.brandId.localeCompare(b.brandId),
-    },
-    defaultSortOrder: 'ascend',
   },
   {
     title: 'IMAGE',
@@ -98,16 +103,9 @@ export const VIEW_BRAND_COLS: TableColumnsType<BrandTableData> = [
     ),
   },
   {
-    title: '#PRODUCTS',
-    dataIndex: 'numberOfProducts',
-    key: 'numberOfProducts',
-    width: 200,
-    align: 'center',
-  },
-  {
-    title: 'UPDATE AT',
-    dataIndex: 'updateAt',
-    key: 'updateAt',
+    title: 'MADE IN',
+    dataIndex: 'madeIn',
+    key: 'madeIn',
     width: 200,
     align: 'center',
   },
@@ -129,10 +127,6 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     width: 100,
     key: 'id',
     align: 'center',
-    sorter: {
-      compare: (a, b) => a.id.localeCompare(b.id),
-    },
-    defaultSortOrder: 'ascend',
   },
   {
     title: 'FULL NAME',
@@ -148,6 +142,7 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     title: 'EMAIL',
     dataIndex: 'email',
     key: 'email',
+    width: 200,
     align: 'center',
     ellipsis: true,
     render: (email) => (
@@ -166,6 +161,7 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
   {
     title: 'ADDRESS',
     dataIndex: 'address',
+    width: 150,
     key: 'address',
     align: 'center',
     ellipsis: true,
@@ -177,13 +173,19 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     width: 90,
     key: 'gender',
     align: 'center',
+    render: (gender) => {
+      return gender ? <span>Male</span> : <span>Female</span>
+    },
   },
   {
     title: 'DATE OF BIRTH',
-    dataIndex: 'dob',
+    dataIndex: 'dateOfBirth',
     width: 140,
-    key: 'dob',
+    key: 'dateOfBirth',
     align: 'center',
+    render: (dateOfBirth) => {
+      return <span>{dayjs(dateOfBirth).format('DD/MM/YYYY')}</span>
+    },
   },
   {
     title: 'DISABLE',
@@ -197,14 +199,15 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
   },
   {
     title: 'ROLE',
-    dataIndex: 'role',
-    width: 100,
-    key: 'role',
+    dataIndex: 'roleId',
+    width: 90,
+    key: 'roleId',
     align: 'center',
-    render: (role: string) => {
+    render: (roleId: string) => {
+      const roleName = ROLE_MAPPING[roleId] || 'Unknown'
       return (
-        <Tag className="text-center w-36" color={getTagColor(role, 'role')}>
-          {role.toUpperCase()}
+        <Tag className="text-center w-36" color={getTagColor(roleId, 'role')}>
+          {roleName}
         </Tag>
       )
     },
@@ -222,42 +225,36 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
 
 export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
   {
-    title: 'ORDER ID',
+    title: 'ID',
     dataIndex: 'orderId',
     key: 'orderId',
-    width: 160,
+    width: 90,
     align: 'center',
-    sorter: {
-      compare: (a, b) => a.orderId.localeCompare(b.orderId),
-    },
-    defaultSortOrder: 'ascend',
     render: (orderId: string) => <Link to={`${ROUTE_PATHS_MANAGER.M_ORDER}/${orderId}`}>{orderId}</Link>,
   },
   {
     title: 'CUSTOMER NAME',
-    dataIndex: 'userName',
-    key: 'userName',
+    dataIndex: 'fullName',
+    key: 'fullName',
     align: 'center',
   },
   {
     title: 'ADDRESS',
-    dataIndex: 'address',
-    key: 'address',
+    dataIndex: 'deliverAddress',
+    key: 'deliverAddress',
     align: 'center',
     ellipsis: true,
-    render: (address) => <Tooltip title={address}>{address}</Tooltip>,
+    render: (deliverAddress) => <Tooltip title={deliverAddress}>{deliverAddress}</Tooltip>,
   },
   {
     title: 'PHONE',
     dataIndex: 'phone',
-    width: 140,
     key: 'phone',
     align: 'center',
   },
   {
     title: 'STATUS',
     dataIndex: 'status',
-    width: 140,
     key: 'status',
     align: 'center',
     render: (status: string) => {
@@ -271,7 +268,6 @@ export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
   {
     title: 'TOTAL PRICE',
     dataIndex: 'totalPrice',
-    width: 140,
     key: 'totalPrice',
     align: 'center',
     render: (totalPrice: string) => {
@@ -281,9 +277,11 @@ export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
   {
     title: 'ORDER DATE',
     dataIndex: 'orderDate',
-    width: 140,
     key: 'orderDate',
     align: 'center',
+    render: (orderDate) => {
+      return <span>{dayjs(orderDate).format('DD/MM/YYYY')}</span>
+    },
   },
   {
     title: 'Action',
@@ -296,3 +294,5 @@ export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
     },
   },
 ]
+
+export const VIEW_ORDER_DETAIL = []

@@ -5,9 +5,8 @@ import { useMutation } from '@tanstack/react-query'
 import { notification } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
-const navigate = useNavigate()
-
 export const useCreateOrder = () => {
+  const navigate = useNavigate()
   return useMutation({
     mutationFn: (id: number) => cartApi.createOrder(id),
     onSuccess: () => {

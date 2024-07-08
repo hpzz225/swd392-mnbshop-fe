@@ -1,28 +1,21 @@
 import moment from 'moment'
+import dayjs from 'dayjs'
 import { useState } from 'react'
 import { Card, Descriptions, Tag, Button, Modal, Input, Select, DatePicker, Avatar } from 'antd'
 import { EditOutlined, LockOutlined, UnlockOutlined } from '@ant-design/icons'
 import { useForm, Controller } from 'react-hook-form'
-import { AccountDetail } from '@/types'
 import { accountSchema } from '@/lib/zod/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useViewAccountDetail } from './use-view-account-detail'
+import { ROLE_MAPPING } from '@/constants'
+import { useParams } from 'react-router-dom'
+import { Skeleton } from 'antd'
 
 const { Option } = Select
 
 export default function ViewAccountDetail() {
-  const account: AccountDetail = {
-    id: '12345',
-    fullName: 'John Doe',
-    image:
-      'https://www.watchstore.vn/images/products/others/2024/large/1-khung-sp-1-1818542633-1853976209-1712563883.webp',
-    phone: '+1 (555) 123-4567',
-    email: 'john.doe@example.com',
-    address: '123 Main St, Anytown, USA',
-    gender: 'Male',
-    dob: '1990-01-01',
-    isDisable: false,
-    role: 'User',
-  }
+  const { accountId }: any = useParams()
+  const { data: account, isLoading } = useViewAccountDetail(accountId)
 
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
 
@@ -60,32 +53,35 @@ export default function ViewAccountDetail() {
               Edit
             </Button>
             <Button
-              danger={!account.isDisable}
-              icon={account.isDisable ? <UnlockOutlined /> : <LockOutlined />}
-              onClick={() => console.log(account.id, account.isDisable)}
+              danger={!account?.isDisable}
+              icon={account?.isDisable ? <UnlockOutlined /> : <LockOutlined />}
+              onClick={() => console.log(account?.id, account?.isDisable)}
             >
-              {account.isDisable ? 'Enable' : 'Disable'}
+              {account?.isDisable ? 'Enable' : 'Disable'}
             </Button>
           </div>
         }
         className="shadow-lg"
       >
+        <Skeleton active loading={isLoading} />
         <Descriptions bordered column={1}>
-          <Descriptions.Item label="ID">{account.id}</Descriptions.Item>
-          <Descriptions.Item label="Full Name">{account.fullName}</Descriptions.Item>
+          <Descriptions.Item label="ID">{account?.id}</Descriptions.Item>
+          <Descriptions.Item label="Full Name">{account?.fullName}</Descriptions.Item>
           <Descriptions.Item label="Image">
-            <Avatar src={account.image} size={72} />
+            <Avatar src={account?.image} size={72} />
           </Descriptions.Item>
-          <Descriptions.Item label="Phone">{account.phone}</Descriptions.Item>
-          <Descriptions.Item label="Email">{account.email}</Descriptions.Item>
-          <Descriptions.Item label="Address">{account.address}</Descriptions.Item>
-          <Descriptions.Item label="Gender">{account.gender}</Descriptions.Item>
-          <Descriptions.Item label="Date of Birth">{account.dob}</Descriptions.Item>
+          <Descriptions.Item label="Phone">{account?.phone}</Descriptions.Item>
+          <Descriptions.Item label="Email">{account?.email}</Descriptions.Item>
+          <Descriptions.Item label="Address">{account?.address}</Descriptions.Item>
+          <Descriptions.Item label="Gender">{account?.gender ? 'Male' : 'Female'}</Descriptions.Item>
+          <Descriptions.Item label="Date of Birth">
+            {dayjs(account?.dateOfBirth).format('DD/MM/YYYY')}
+          </Descriptions.Item>
           <Descriptions.Item label="Status">
-            <Tag color={account.isDisable ? 'red' : 'green'}>{account.isDisable ? 'Disabled' : 'Active'}</Tag>
+            <Tag color={account?.isDisable ? 'red' : 'green'}>{account?.isDisable ? 'Disabled' : 'Active'}</Tag>
           </Descriptions.Item>
           <Descriptions.Item label="Role">
-            <Tag color="blue">{account.role}</Tag>
+            <Tag color="blue">{account?.roleId && ROLE_MAPPING[account?.roleId]}</Tag>
           </Descriptions.Item>
         </Descriptions>
       </Card>
@@ -137,9 +133,8 @@ export default function ViewAccountDetail() {
               control={control}
               render={({ field }) => (
                 <Select {...field} className="mt-1 w-full">
-                  <Option value="Male">Male</Option>
-                  <Option value="Female">Female</Option>
-                  <Option value="Other">Other</Option>
+                  <Option value={true}>Male</Option>
+                  <Option value={false}>Female</Option>
                 </Select>
               )}
             />
@@ -149,35 +144,35 @@ export default function ViewAccountDetail() {
           <div>
             <label className="block text-sm font-medium text-gray-700">Date of Birth</label>
             <Controller
-              name="dob"
+              name="dateOfBirth"
               control={control}
               render={({ field }) => (
                 <DatePicker
                   {...field}
                   className="mt-1 w-full"
-                  format="YYYY-MM-DD"
+                  format="DD-MM-YYYY"
                   value={field.value ? moment(field.value) : null}
-                  onChange={(date) => field.onChange(date ? date.format('YYYY-MM-DD') : null)}
+                  onChange={(date) => field.onChange(date ? date.format('DD-MM-YYYY') : null)}
                 />
               )}
             />
-            {errors.dob && <p className="mt-1 text-sm text-red-600">{errors.dob.message}</p>}
+            {errors.dateOfBirth && <p className="mt-1 text-sm text-red-600">{errors.dateOfBirth.message}</p>}
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Role</label>
             <Controller
-              name="role"
+              name="roleId"
               control={control}
               render={({ field }) => (
                 <Select {...field} className="mt-1 w-full">
-                  <Option value="User">User</Option>
-                  <Option value="Admin">Admin</Option>
-                  <Option value="Manager">Manager</Option>
+                  <Option value={1}>Admin</Option>
+                  <Option value={2}>Staff</Option>
+                  <Option value={3}>Customer</Option>
                 </Select>
               )}
             />
-            {errors.role && <p className="mt-1 text-sm text-red-600">{errors.role.message}</p>}
+            {errors.roleId && <p className="mt-1 text-sm text-red-600">{errors.roleId.message}</p>}
           </div>
         </form>
       </Modal>

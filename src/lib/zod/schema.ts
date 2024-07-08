@@ -40,9 +40,9 @@ export const accountSchema = z.object({
   phone: z.string().min(1, 'Phone number is required'),
   email: z.string().email('Invalid email address'),
   address: z.string().min(1, 'Address is required'),
-  gender: z.enum(['Male', 'Female', 'Other']),
-  dob: z.string().min(1, 'Date of birth is required'),
-  role: z.string().min(1, 'Role is required'),
+  gender: z.boolean(),
+  dateOfBirth: z.string().min(1, 'Date of birth is required'),
+  roleId: z.number(),
 })
 
 export const signUpSchema = z
@@ -61,3 +61,11 @@ export const signUpSchema = z
     message: "Passwords don't match",
     path: ['confirmPassword'],
   })
+
+export const brandSchema = z.object({
+  brandId: z.string().min(1, 'Brand ID is required'),
+  brandName: z.string().min(1, 'Brand name is required'),
+  brandImg: z.string().min(1, 'Brand image is required'),
+  madeIn: z.string().min(1, 'Made in is required'),
+  description: z.string().min(1, 'Description is required'),
+})

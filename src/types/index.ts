@@ -74,9 +74,9 @@ export type BrandTableData = {
   key: React.Key
   brandId: string
   brandName: string
-  image: string
-  numberOfProducts: number
-  updateAt: string
+  brandImg: string
+  madeIn: string
+  description: string
 }
 
 export type ProductTableData = {
@@ -119,30 +119,62 @@ export type OrderTableData = {
   totalPrice: number
 }
 
+export type ProductInOrder = {
+  productOrderId: number
+  productId: number
+  orderId: number
+  productName: string
+  brandName: string
+  image: string
+  quantity: number
+  unitPrice: number
+}
+
+export type OrderData = {
+  orderId: number
+  staffId: number | null
+  deliverAddress: string
+  phone: string
+  fullName: string
+  paymentMethod: string
+  status: string
+  orderDate: string
+  totalPrice: number
+  userId: number
+  productOrders: ProductInOrder[]
+}
+
 export type AccountTableData = {
   key: React.Key
-  id: string
+  id: number
+  username: string
+  password: string
   fullName: string
-  phone: string
-  email: string
+  dateOfBirth: string
+  gender: boolean
   address: string
-  gender: string
-  dob: string
+  phone: string
+  image: string
+  status: string
   isDisable: boolean
-  role: string
+  email: string
+  roleId: number
 }
 
 export type AccountDetail = {
-  id: string
+  id: number
+  username: string
+  password: string
   fullName: string
-  phone: string
-  email: string
+  dateOfBirth: string
+  gender: boolean
   address: string
-  gender: string
-  dob: string
-  isDisable: boolean
-  role: string
+  phone: string
   image: string
+  status: string
+  isDisable: boolean
+  email: string
+  roleId: number
 }
 
 // API Response
@@ -180,6 +212,46 @@ export type ViewFavoriteListAPIResponse = {
 
 export type CartAPIResponse = {
   data: CartInfo
+  success: boolean
+  message: string
+  error: string | null
+  errorMessages: string | null
+}
+
+export type BrandListApiResponse = {
+  brandId: string
+  brandName: string
+  brandImg: string
+  madeIn: string
+  description: string
+}
+
+export type OrderListApiResponse = {
+  data: OrderData[]
+  success: boolean
+  message: string
+  error: string | null
+  errorMessages: string | null
+}
+
+export type OrderDetailApiResponse = {
+  data: OrderData
+  success: boolean
+  message: string
+  error: string | null
+  errorMessages: string | null
+}
+
+export type AccountListApiResponse = {
+  data: AccountDetail[]
+  success: boolean
+  message: string
+  error: string | null
+  errorMessages: string | null
+}
+
+export type AccountDetailApiResponse = {
+  data: AccountDetail
   success: boolean
   message: string
   error: string | null
