@@ -6,11 +6,12 @@ const { Title, Paragraph } = Typography
 
 const BlogDetails = () => {
   const blog = {
-    title: 'The Journey to React Mastery',
+    title: 'The Journey to mom and baby',
     author: 'Jane Doe',
     date: 'July 3, 2024',
-    tags: ['React', 'JavaScript', 'Web Development'],
-    image: 'https://images2.thanhnien.vn/528068263637045248/2024/7/2/messi-1719907218170447457871.jpeg',
+    tags: ['Milk', 'BABY', 'Mommy'],
+    image:
+      'https://www.parents.com/thmb/QPN9uI8SaoOmLYk3Vt4tNH6xqDA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/shutterstock_1187290291-a8dd877d6ac248f68b13c42758dd693a.jpg',
     content:
       'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
   }
