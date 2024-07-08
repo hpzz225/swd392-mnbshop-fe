@@ -1,7 +1,13 @@
 import Dropdown from '@/components/manager-screen/dropdown'
-import { AccountTableData, BrandTableData, OrderTableData, ProductTableData } from '@/types'
+import { AccountTableData, BlogTableData, BrandTableData, OrderTableData, ProductTableData } from '@/types'
 import { Image, TableColumnsType, Tag, Tooltip } from 'antd'
-import { ViewAccountDropdown, ViewBrandDropdown, ViewOrderDropdown, ViewProductDropdown } from './menu-data'
+import {
+  ViewAccountDropdown,
+  ViewBlogDropdown,
+  ViewBrandDropdown,
+  ViewOrderDropdown,
+  ViewProductDropdown,
+} from './menu-data'
 import { getTagColor } from '@/utils'
 import { Link } from 'react-router-dom'
 import { ROUTE_PATHS_MANAGER } from '@/router'
@@ -295,4 +301,57 @@ export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
   },
 ]
 
+export const VIEW_BLOG_COLS: TableColumnsType<BlogTableData> = [
+  {
+    title: 'ID',
+    dataIndex: 'blogId',
+    key: 'blogId',
+    width: 90,
+    align: 'center',
+  },
+  {
+    title: 'IMG',
+    dataIndex: 'blogImg',
+    key: 'blogImg',
+    align: 'center',
+    render: (blogImg) => <Image src={blogImg} preview={false} className="rounded-xl" alt="Brand Image" width={100} />,
+  },
+  {
+    title: 'TITLE',
+    dataIndex: 'title',
+    key: 'title',
+    align: 'center',
+    render: (title, record) => <Link to={`${ROUTE_PATHS_MANAGER.M_BLOG}/${record.blogId}`}>{title}</Link>,
+  },
+  {
+    title: 'CREATE DATE',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    align: 'center',
+    render: (createdAt) => {
+      return <span>{dayjs(createdAt).format('DD/MM/YYYY')}</span>
+    },
+  },
+  {
+    title: 'CREATE BY',
+    dataIndex: 'userId',
+    key: 'userId',
+    align: 'center',
+  },
+  {
+    title: 'USEFUL VOTE',
+    dataIndex: 'usefulVote',
+    key: 'usefulVote',
+    align: 'center',
+  },
+  {
+    title: 'Action',
+    key: 'operation',
+    width: 90,
+    align: 'center',
+    render: (record) => {
+      return <Dropdown items={ViewBlogDropdown(record.title, record.blogId)} />
+    },
+  },
+]
 export const VIEW_ORDER_DETAIL = []

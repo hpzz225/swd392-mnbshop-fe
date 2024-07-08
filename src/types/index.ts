@@ -144,6 +144,33 @@ export type OrderData = {
   productOrders: ProductInOrder[]
 }
 
+export type BlogTableData = {
+  key: React.Key
+  blogId: number
+  title: string
+  content: string
+  blogImg: string
+  createAt: string
+  updateAt: string
+  usefulVote: number
+  notUsefulVote: number
+  tags: string
+  userId: number
+}
+
+export type BlogData = {
+  blogId: number
+  title: string
+  content: string
+  blogImg: string
+  createAt: string
+  updateAt: string
+  usefulVote: number
+  notUsefulVote: number
+  tags: string
+  userId: number
+}
+
 export type AccountTableData = {
   key: React.Key
   id: number
@@ -275,4 +302,12 @@ export type cartItems = {
   quantity: number
   unitPrice: number
   brandName: string
+}
+
+export type BlogListApiResponse = {
+  data: BlogData[]
+  success: boolean
+  message: string
+  error: string | null
+  errorMessages: string | null
 }
