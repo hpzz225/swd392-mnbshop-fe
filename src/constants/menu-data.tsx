@@ -18,6 +18,7 @@ import { POPUP_TITLE } from '.'
 import DisableAccount from '@/features/manager-feature/account-mng/disable-account'
 import DeleteBrand from '@/features/manager-feature/brand-mng/delete-brand'
 import DeleteBlog from '@/features/manager-feature/blog-mng/delete-blog'
+import DeletePromotion from '@/features/manager-feature/promotion-mng/delete-promotion'
 
 // TODO: eslint-disable
 // eslint-disable-next-line react-refresh/only-export-components
@@ -148,6 +149,28 @@ export const ViewBlogDropdown = (title: string, blogId: string): MenuItem[] => [
         content={<DeleteBlog title={title} blogId={blogId} />}
       >
         Delete Blog
+      </Popup>
+    ),
+    key: 'delete',
+    icon: <CloseCircleOutlined />,
+  },
+]
+
+export const ViewPromotionDropdown = (promotionName: string, promotionId: string): MenuItem[] => [
+  {
+    label: <Link to={promotionId}>Edit Promotion</Link>,
+    key: 'edit',
+    icon: <EditOutlined />,
+  },
+  {
+    label: (
+      <Popup
+        width={430}
+        type="confirm"
+        title={POPUP_TITLE.DELETE_PROMOTION}
+        content={<DeletePromotion promotionName={promotionName} promotionId={promotionId} />}
+      >
+        Delete Promotion
       </Popup>
     ),
     key: 'delete',

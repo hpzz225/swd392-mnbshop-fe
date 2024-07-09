@@ -16,7 +16,7 @@ export const hasAuthority = (authority: string) => {
   return decodedToken.role === authority
 }
 
-export function getTagColor(tag: string | undefined, type: 'status' | 'attendingStatus' | 'role'): string | undefined {
+export function getTagColor(tag: string | undefined, type: 'status' | 'promotion' | 'role'): string | undefined {
   switch (type) {
     case 'status':
       switch (tag) {
@@ -41,5 +41,14 @@ export function getTagColor(tag: string | undefined, type: 'status' | 'attending
         case AUTHORITIES.STAFF:
           return 'green'
       }
+      break
+    case 'promotion':
+      switch (tag) {
+        case true:
+          return 'green'
+        case false:
+          return 'red'
+      }
+      break
   }
 }

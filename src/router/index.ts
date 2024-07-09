@@ -28,6 +28,7 @@ import ViewAccountDetail from '@/features/manager-feature/account-mng/view-accou
 import CustomerDefaultLayout from '@/layouts/customer-layouts/default-layout'
 import { AUTHORITIES } from '@/constants'
 import ViewBlogDetail from '@/features/manager-feature/blog-mng/view-blog/view-blog-detail'
+import ViewPromotionDetail from '@/features/manager-feature/promotion-mng/view-promotion/view-promotion-detail'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
@@ -256,7 +257,7 @@ export const routes = [
   {
     path: `${ROUTE_PATHS_MANAGER.M_PROMOTION}/:promotionId`,
     name: 'Promotion Detail Manager',
-    component: PromotionManager,
+    component: ViewPromotionDetail,
     layout: ManagerDefaultLayout,
     private: true,
     roles: [AUTHORITIES.ADMIN],

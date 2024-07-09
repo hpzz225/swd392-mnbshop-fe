@@ -1,5 +1,12 @@
 import Dropdown from '@/components/manager-screen/dropdown'
-import { AccountTableData, BlogTableData, BrandTableData, OrderTableData, ProductTableData } from '@/types'
+import {
+  AccountTableData,
+  BlogTableData,
+  BrandTableData,
+  OrderTableData,
+  ProductTableData,
+  PromotionTableData,
+} from '@/types'
 import { Image, TableColumnsType, Tag, Tooltip } from 'antd'
 import {
   ViewAccountDropdown,
@@ -7,6 +14,7 @@ import {
   ViewBrandDropdown,
   ViewOrderDropdown,
   ViewProductDropdown,
+  ViewPromotionDropdown,
 } from './menu-data'
 import { getTagColor } from '@/utils'
 import { Link } from 'react-router-dom'
@@ -351,6 +359,81 @@ export const VIEW_BLOG_COLS: TableColumnsType<BlogTableData> = [
     align: 'center',
     render: (record) => {
       return <Dropdown items={ViewBlogDropdown(record.title, record.blogId)} />
+    },
+  },
+]
+
+export const VIEW_PROMOTION_COLS: TableColumnsType<PromotionTableData> = [
+  {
+    title: 'ID',
+    dataIndex: 'promotionId',
+    key: 'promotionId',
+    align: 'center',
+  },
+  {
+    title: 'NAME',
+    dataIndex: 'promotionName',
+    key: 'promotionName',
+    align: 'center',
+    render: (promotionName, record) => (
+      <Link to={`${ROUTE_PATHS_MANAGER.M_PROMOTION}/${record.promotionId}`}>{promotionName}</Link>
+    ),
+  },
+  {
+    title: 'IMG',
+    dataIndex: 'promotionImg',
+    key: 'promotionImg',
+    align: 'center',
+    render: (promotionImg) => (
+      <Image src={promotionImg} preview={false} className="rounded-xl" alt="Brand Image" width={100} />
+    ),
+  },
+  {
+    title: 'START DATE',
+    dataIndex: 'startAt',
+    key: 'startAt',
+    align: 'center',
+    render: (startAt) => {
+      return <span>{dayjs(startAt).format('DD/MM/YYYY')}</span>
+    },
+  },
+  {
+    title: 'END DATE',
+    dataIndex: 'endAt',
+    key: 'endAt',
+    align: 'center',
+    render: (endAt) => {
+      return <span>{dayjs(endAt).format('DD/MM/YYYY')}</span>
+    },
+  },
+  {
+    title: 'STATUS',
+    dataIndex: 'status',
+    key: 'status',
+    align: 'center',
+    render: (status: string) => {
+      return (
+        <Tag className="text-center w-36" color={getTagColor(status, 'promotion')}>
+          {status ? 'ACTIVE' : 'INACTIVE'}
+        </Tag>
+      )
+    },
+  },
+  {
+    title: 'PROMOTE',
+    dataIndex: 'promote',
+    key: 'promote',
+    align: 'center',
+    render: (promote: string) => {
+      return <span>{promote}%</span>
+    },
+  },
+  {
+    title: 'ACTION',
+    key: 'operation',
+    align: 'center',
+    render: (record) => {
+      return <Dropdown items={ViewPromotionDropdown(record.promotionId, record.promotionName)} />
     },
   },
 ]

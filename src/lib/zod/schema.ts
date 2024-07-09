@@ -69,3 +69,12 @@ export const brandSchema = z.object({
   madeIn: z.string().min(1, 'Made in is required'),
   description: z.string().min(1, 'Description is required'),
 })
+
+export const promotionSchema = z.object({
+  promotionName: z.string().min(1, 'Promotion name is required'),
+  startAt: z.date(),
+  endAt: z.date(),
+  status: z.boolean(),
+  promote: z.number().min(0).max(100),
+  promotionImg: z.string().url('Invalid URL'),
+})

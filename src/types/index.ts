@@ -204,6 +204,27 @@ export type AccountDetail = {
   roleId: number
 }
 
+export type PromotionTableData = {
+  key: React.Key
+  promotionId: number
+  promotionName: string
+  startAt: string
+  endAt: string
+  status: boolean
+  promote: number
+  promotionImg: string
+}
+
+export type PromotionData = {
+  promotionId: number
+  promotionName: string
+  startAt: string
+  endAt: string
+  status: boolean
+  promote: number
+  promotionImg: string
+}
+
 // API Response
 export type CustomErrorAPIResponse = {
   statusCode: number
@@ -306,6 +327,14 @@ export type cartItems = {
 
 export type BlogListApiResponse = {
   data: BlogData[]
+  success: boolean
+  message: string
+  error: string | null
+  errorMessages: string | null
+}
+
+export type PromotionListApiResponse = {
+  data: PromotionData[]
   success: boolean
   message: string
   error: string | null
