@@ -1,32 +1,41 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as z from 'zod'
 import moment from 'moment'
 import { useState } from 'react'
-import { Card, Button, Descriptions, Tag, Image, Modal, Form, Input, DatePicker, Switch } from 'antd'
+import { Card, Button, Descriptions, Tag, Image, Modal, Form, Input, DatePicker, Switch, InputNumber } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { useViewPromotionDetail } from './use-view-promotion-detail'
 import { useParams } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { promotionSchema } from '@/lib/zod/schema'
+import { useUpdatePromotion } from '../update-promotion/use-update-promotion'
 
 type FormData = z.infer<typeof promotionSchema>
 
 export default function ViewPromotionDetail() {
   const { promotionId } = useParams()
-  const { data: promotion } = useViewPromotionDetail(Number(promotionId))
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const { data: promotion } = useViewPromotionDetail(Number(promotionId))
+  const UpdatePromotionMutation = useUpdatePromotion(Number(promotionId))
 
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(promotionSchema),
     defaultValues: promotion,
   })
 
-  const onSubmit = async (data: FormData) => {
-    console.log(data)
+  const showEditModal = () => {
+    reset(promotion)
+    setIsModalVisible(true)
+  }
+
+  const onSubmit = async (data: FormData | any) => {
+    UpdatePromotionMutation.mutate(data)
     setIsModalVisible(false)
   }
 
@@ -35,7 +44,7 @@ export default function ViewPromotionDetail() {
       <Card
         title={<h2 className="text-2xl font-bold">{promotion?.promotionName}</h2>}
         extra={
-          <Button type="primary" icon={<EditOutlined />} onClick={() => setIsModalVisible(true)}>
+          <Button type="primary" icon={<EditOutlined />} onClick={showEditModal}>
             Edit
           </Button>
         }
@@ -70,27 +79,49 @@ export default function ViewPromotionDetail() {
             <Controller name="promotionName" control={control} render={({ field }) => <Input {...field} />} />
           </Form.Item>
 
-          <Form.Item label="Start Time" validateStatus={errors.startAt ? 'error' : ''} help={errors.startAt?.message}>
-            <Controller
-              name="startAt"
-              control={control}
-              render={({ field }) => (
-                <DatePicker showTime {...field} value={field.value ? moment(field.value) : null} />
-              )}
-            />
-          </Form.Item>
+          <div className="flex justify-between">
+            <Form.Item
+              className="w-full"
+              label="Start Time"
+              validateStatus={errors.startAt ? 'error' : ''}
+              help={errors.startAt?.message}
+            >
+              <Controller
+                name="startAt"
+                control={control}
+                render={({ field }) => (
+                  <DatePicker
+                    {...field}
+                    format="DD/MM/YYYY"
+                    value={field.value ? moment(field.value) : null}
+                    onChange={(date) => field.onChange(date ? date.startOf('day').toDate() : null)}
+                  />
+                )}
+              />
+            </Form.Item>
 
-          <Form.Item label="End Time" validateStatus={errors.endAt ? 'error' : ''} help={errors.endAt?.message}>
-            <Controller
-              name="endAt"
-              control={control}
-              render={({ field }) => (
-                <DatePicker showTime {...field} value={field.value ? moment(field.value) : null} />
-              )}
-            />
-          </Form.Item>
+            <Form.Item
+              label="End Time"
+              className="w-full"
+              validateStatus={errors.endAt ? 'error' : ''}
+              help={errors.endAt?.message}
+            >
+              <Controller
+                name="endAt"
+                control={control}
+                render={({ field }) => (
+                  <DatePicker
+                    {...field}
+                    format="DD/MM/YYYY"
+                    value={field.value ? moment(field.value) : null}
+                    onChange={(date) => field.onChange(date ? date.startOf('day').toDate() : null)}
+                  />
+                )}
+              />
+            </Form.Item>
+          </div>
 
-          <Form.Item label="Status" validateStatus={errors.status ? 'error' : ''} help={errors.status?.message}>
+          <Form.Item hidden label="Status" validateStatus={errors.status ? 'error' : ''} help={errors.status?.message}>
             <Controller
               name="status"
               control={control}
@@ -103,7 +134,11 @@ export default function ViewPromotionDetail() {
             validateStatus={errors.promote ? 'error' : ''}
             help={errors.promote?.message}
           >
-            <Controller name="promote" control={control} render={({ field }) => <Input type="number" {...field} />} />
+            <Controller
+              name="promote"
+              control={control}
+              render={({ field }) => <InputNumber {...field} min={0} max={100} formatter={(value) => `${value}%`} />}
+            />
           </Form.Item>
 
           <Form.Item

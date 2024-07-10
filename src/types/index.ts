@@ -347,3 +347,11 @@ export type PromotionListApiResponse = {
   error: string | null
   errorMessages: string | null
 }
+
+export type PromotionFieldInput = {
+  promotionName: string
+  startAt: string
+  endAt: string
+  promote: number
+  promotionImg: string
+}

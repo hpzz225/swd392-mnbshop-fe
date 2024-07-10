@@ -18,7 +18,7 @@ import { POPUP_TITLE } from '.'
 import DisableAccount from '@/features/manager-feature/account-mng/delete-account/disable-account'
 import DeleteBrand from '@/features/manager-feature/brand-mng/delete-brand/delete-brand'
 import DeleteBlog from '@/features/manager-feature/blog-mng/delete-blog'
-import DeletePromotion from '@/features/manager-feature/promotion-mng/delete-promotion'
+import DeletePromotion from '@/features/manager-feature/promotion-mng/delete-promotion/delete-promotion'
 
 // TODO: eslint-disable
 // eslint-disable-next-line react-refresh/only-export-components
@@ -82,9 +82,9 @@ export const ViewProductDropdown = (productName: string, productId: string): Men
   },
 ]
 
-export const ViewBrandDropdown = (brandName: string, brandId: string): MenuItem[] => [
+export const ViewBrandDropdown = (brandName: string, brandId: number): MenuItem[] => [
   {
-    label: <Link to={brandId}>Edit Brand</Link>,
+    label: <Link to={`${ROUTE_PATHS_MANAGER.M_BRAND}/${brandId}`}>Edit Brand</Link>,
     key: 'edit',
     icon: <EditOutlined />,
   },
@@ -112,9 +112,9 @@ export const ViewOrderDropdown = (orderId: string): MenuItem[] => [
   },
 ]
 
-export const ViewAccountDropdown = (fullName: string, id: string): MenuItem[] => [
+export const ViewAccountDropdown = (fullName: string, id: number): MenuItem[] => [
   {
-    label: <Link to={id}>Edit Account</Link>,
+    label: <Link to={`${ROUTE_PATHS_MANAGER.M_ACCOUNT}/${id}`}>Edit Account</Link>,
     key: 'edit',
     icon: <EditOutlined />,
   },
@@ -156,9 +156,9 @@ export const ViewBlogDropdown = (title: string, blogId: string): MenuItem[] => [
   },
 ]
 
-export const ViewPromotionDropdown = (promotionName: string, promotionId: string): MenuItem[] => [
+export const ViewPromotionDropdown = (promotionName: number, promotionId: string): MenuItem[] => [
   {
-    label: <Link to={promotionId}>Edit Promotion</Link>,
+    label: <Link to={`${ROUTE_PATHS_MANAGER.M_PROMOTION}/${promotionId}`}>Edit Promotion</Link>,
     key: 'edit',
     icon: <EditOutlined />,
   },
@@ -168,7 +168,7 @@ export const ViewPromotionDropdown = (promotionName: string, promotionId: string
         width={430}
         type="confirm"
         title={POPUP_TITLE.DELETE_PROMOTION}
-        content={<DeletePromotion promotionName={promotionName} promotionId={promotionId} />}
+        content={<DeletePromotion promotionId={promotionId} promotionName={promotionName} />}
       >
         Delete Promotion
       </Popup>
