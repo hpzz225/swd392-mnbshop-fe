@@ -103,9 +103,8 @@ export const VIEW_BRAND_COLS: TableColumnsType<BrandTableData> = [
     title: 'IMAGE',
     dataIndex: 'image',
     key: 'image',
-    width: 200,
     align: 'center',
-    render: (imageUrl) => <Image src={imageUrl} preview={false} className="rounded-xl" alt="Brand Image" width={80} />,
+    render: (image: string) => <Image src={image} preview={false} className="rounded-xl" alt="Brand Image" />,
   },
   {
     title: 'BRAND NAME',
@@ -120,13 +119,11 @@ export const VIEW_BRAND_COLS: TableColumnsType<BrandTableData> = [
     title: 'MADE IN',
     dataIndex: 'madeIn',
     key: 'madeIn',
-    width: 200,
     align: 'center',
   },
   {
     title: 'Action',
     key: 'operation',
-    width: 100,
     align: 'center',
     render: (record) => {
       return <Dropdown items={ViewBrandDropdown(record.brandName, record.brandId)} />

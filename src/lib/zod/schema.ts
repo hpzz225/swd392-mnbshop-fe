@@ -63,7 +63,6 @@ export const signUpSchema = z
   })
 
 export const brandSchema = z.object({
-  brandId: z.string().min(1, 'Brand ID is required'),
   brandName: z.string().min(1, 'Brand name is required'),
   brandImg: z.string().min(1, 'Brand image is required'),
   madeIn: z.string().min(1, 'Made in is required'),

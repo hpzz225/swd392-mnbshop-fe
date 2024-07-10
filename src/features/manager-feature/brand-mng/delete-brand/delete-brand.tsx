@@ -4,16 +4,18 @@ import { DefaultButtonStyle } from '@/lib/antd/antd-styles'
 import { useAppDispatch } from '@/lib/redux-toolkit/hook'
 import { closePopup } from '@/lib/redux-toolkit/slices/popup-slice'
 import { Button, Typography } from 'antd'
+import { useDeleteBrand } from './use-delete-brand'
 
 interface DeleteBrandProps {
   brandName: string
-  brandId: string
+  brandId: number
 }
 
 export default function DeleteBrand({ brandName, brandId }: DeleteBrandProps) {
   const dispatch = useAppDispatch()
+  const deleteBrandMutation = useDeleteBrand(brandId)
   const handleDelete = () => {
-    console.log(brandId)
+    deleteBrandMutation.mutate()
     dispatch(closePopup(POPUP_TITLE.DELETE_BRAND))
   }
 

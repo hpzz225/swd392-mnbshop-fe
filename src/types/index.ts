@@ -266,6 +266,13 @@ export type CartAPIResponse = {
   errorMessages: string | null
 }
 
+export type CreateBrand = {
+  brandName: string
+  brandImg: string
+  madeIn: string
+  description: string
+}
+
 export type BrandListApiResponse = {
   brandId: string
   brandName: string

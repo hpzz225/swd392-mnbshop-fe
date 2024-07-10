@@ -1,18 +1,24 @@
 import { useState } from 'react'
-import { Card, Descriptions, Image, Button, Modal, Input, Select } from 'antd'
+import { Card, Descriptions, Image, Button, Modal, Input } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { brandSchema } from '@/lib/zod/schema'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useViewBrandDetail } from './use-view-brand-detail'
+import { useEditBrand } from '../edit-brand/use-edit-brand'
+import { useDeleteBrand } from '../delete-brand/use-delete-brand'
+import { ROUTE_PATHS_MANAGER } from '@/router'
 
-export type BrandListApiResponse = z.infer<typeof brandSchema>
+export type BrandDetail = z.infer<typeof brandSchema>
 
 export default function ViewBrandDetail() {
-  const { brandId }: any = useParams()
-  const { data: brand } = useViewBrandDetail(brandId)
+  const navigate = useNavigate()
+  const { brandId } = useParams()
+  const { data: brand } = useViewBrandDetail(Number(brandId))
+  const editBrandMutation = useEditBrand(Number(brandId))
+  const deleteBrandMutation = useDeleteBrand(Number(brandId))
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
 
   const {
@@ -20,7 +26,7 @@ export default function ViewBrandDetail() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<BrandListApiResponse>({
+  } = useForm<BrandDetail>({
     resolver: zodResolver(brandSchema),
     defaultValues: brand,
   })
@@ -32,11 +38,17 @@ export default function ViewBrandDetail() {
 
   const handleEditOk = handleSubmit((data) => {
     console.log(data)
+    editBrandMutation.mutate(data)
     setIsEditModalVisible(false)
   })
 
   const handleEditCancel = () => {
     setIsEditModalVisible(false)
+  }
+
+  function handleDelete() {
+    deleteBrandMutation.mutate()
+    navigate(ROUTE_PATHS_MANAGER.M_BRAND)
   }
 
   return (
@@ -48,7 +60,7 @@ export default function ViewBrandDetail() {
             <Button type="primary" icon={<EditOutlined />} onClick={showEditModal}>
               Edit
             </Button>
-            <Button danger icon={<DeleteOutlined />}>
+            <Button danger icon={<DeleteOutlined />} onClick={() => handleDelete()}>
               Delete
             </Button>
           </div>
@@ -96,6 +108,16 @@ export default function ViewBrandDetail() {
               render={({ field }) => <Input.TextArea {...field} rows={4} className="mt-1" />}
             />
             {errors.description && <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>}
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Brand Image</label>
+            <Controller
+              name="brandImg"
+              control={control}
+              render={({ field }) => <Input {...field} className="mt-1" />}
+            />
+            {errors.brandImg && <p className="mt-1 text-sm text-red-600">{errors.brandImg.message}</p>}
           </div>
         </form>
       </Modal>

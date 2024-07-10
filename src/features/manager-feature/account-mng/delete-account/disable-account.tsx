@@ -4,17 +4,19 @@ import { DefaultButtonStyle } from '@/lib/antd/antd-styles'
 import { useAppDispatch } from '@/lib/redux-toolkit/hook'
 import { closePopup } from '@/lib/redux-toolkit/slices/popup-slice'
 import { Button, Typography } from 'antd'
+import { useDisableAccount } from './use-disable-account'
 
 interface DisableAccountProps {
   fullName: string
-  id: string
+  id: number
 }
 
 export default function DisableAccount({ fullName, id }: DisableAccountProps) {
   const dispatch = useAppDispatch()
-
-  const handleDelete = () => {
+  const disableAccountMutation = useDisableAccount()
+  function handleDelete(id: number) {
     console.log(id)
+    disableAccountMutation.mutate(id)
     dispatch(closePopup(POPUP_TITLE.DISABLE_ACCOUNT))
   }
 
@@ -26,7 +28,7 @@ export default function DisableAccount({ fullName, id }: DisableAccountProps) {
           Cancel
         </Button>
         <ConfigAntdTheme theme={DefaultButtonStyle}>
-          <Button type="primary" onClick={handleDelete}>
+          <Button type="primary" onClick={() => handleDelete(id)}>
             Disable
           </Button>
         </ConfigAntdTheme>

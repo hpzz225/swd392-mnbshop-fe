@@ -14,8 +14,18 @@ const getListAccount = async () => {
 
 const getAccountById = async (id: number) => {
   try {
-    const { data } = await apiInstance.get<AccountDetailApiResponse>(import.meta.env.VITE_ACCOUNT_LIST_API + id)
+    const { data } = await apiInstance.get<AccountDetailApiResponse>(import.meta.env.VITE_ACCOUNT_DETAIL_API + id)
     return data.data
+  } catch (error) {
+    const errorResponse = error as AxiosError<CustomErrorAPIResponse>
+    throw new Error(errorResponse.response?.data.message)
+  }
+}
+
+const disableAccount = async (id: number) => {
+  try {
+    const { data } = await apiInstance.put(import.meta.env.VITE_ACCOUNT_DISABLE_API + id)
+    return data
   } catch (error) {
     const errorResponse = error as AxiosError<CustomErrorAPIResponse>
     throw new Error(errorResponse.response?.data.message)
@@ -25,6 +35,7 @@ const getAccountById = async (id: number) => {
 const accountApi = {
   getListAccount,
   getAccountById,
+  disableAccount,
 }
 
 export default accountApi
