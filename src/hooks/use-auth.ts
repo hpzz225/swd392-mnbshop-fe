@@ -23,7 +23,7 @@ export const useAuth = () => {
   } = useQuery({
     queryKey: ['user'],
     queryFn: async () => {
-      const userId = decodeToken(localStorage.getItem(TOKEN_KEY) || '').Id
+      const userId = decodeToken(localStorage.getItem(TOKEN_KEY) || '')._id
       const response = await authApi.getCurrentUser(userId)
       if (!response) {
         // TODO: Redirect to login
@@ -37,11 +37,12 @@ export const useAuth = () => {
   const signInMutation = useMutation({
     mutationFn: ({ username, password }: { username: string; password: string }) => authApi.signIn(username, password),
     onSuccess: (data) => {
-      localStorage.setItem(TOKEN_KEY, data.data.accessToken)
-      localStorage.setItem(REFRESH_TOKEN_KEY, data.data.refreshToken)
+      console.log(data)
+      localStorage.setItem(TOKEN_KEY, data.accessToken)
+      localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken)
       queryClient.invalidateQueries({ queryKey: ['user'] })
-      const roleId = decodeToken(localStorage.getItem(TOKEN_KEY) || '').RoleId
-      localStorage.setItem('userId', decodeToken(localStorage.getItem(TOKEN_KEY) || '').Id)
+      const roleId = data.data.roleId
+      localStorage.setItem('userId', decodeToken(localStorage.getItem(TOKEN_KEY) || '')._id)
       if (roleId == '1') {
         console.log('Manager')
         navigate(ROUTE_PATHS_MANAGER.DASHBOARD)

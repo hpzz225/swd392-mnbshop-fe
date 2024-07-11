@@ -43,23 +43,15 @@ const refreshToken = async (refreshToken: string) => {
   }
 }
 
-// const getCurrentUser = async (userId: string) => {
-//   try {
-//     const { data } = await apiInstance.get<GetCurrentUserAPIResponse>(import.meta.env.VITE_CURRENT_USER_API + userId)
-//     return data
-//   } catch (error) {
-//     return null
-//   }
-// }
 const getCurrentUser = async (userId: string): Promise<GetCurrentUserAPIResponse | null> => {
   try {
-    const { data } = await apiInstance.get<GetCurrentUserAPIResponse>(import.meta.env.VITE_CURRENT_USER_API + userId);
-    return data;
+    const { data } = await apiInstance.get<GetCurrentUserAPIResponse>(import.meta.env.VITE_CURRENT_USER_API + userId)
+    return data
   } catch (error) {
-    console.error('Error fetching current user:', error);
-    return null;
+    console.error('Error fetching current user:', error)
+    return null
   }
-};
+}
 
 const authApi = {
   signIn,

@@ -134,9 +134,9 @@ export const VIEW_BRAND_COLS: TableColumnsType<BrandTableData> = [
 export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
   {
     title: 'ID',
-    dataIndex: 'id',
+    dataIndex: '_id',
     width: 100,
-    key: 'id',
+    key: '_id',
     align: 'center',
   },
   {
@@ -146,7 +146,7 @@ export const VIEW_ACCOUNT_COLS: TableColumnsType<AccountTableData> = [
     key: 'name',
     align: 'center',
     render: (fullName: string, record: AccountTableData) => (
-      <Link to={`${ROUTE_PATHS_MANAGER.M_ACCOUNT}/${record.id}`}>{fullName}</Link>
+      <Link to={`${ROUTE_PATHS_MANAGER.M_ACCOUNT}/${record._id}`}>{fullName}</Link>
     ),
   },
   {
