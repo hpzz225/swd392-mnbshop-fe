@@ -5,17 +5,17 @@ import { AxiosError } from 'axios'
 const getPromotionList = async () => {
   try {
     const { data } = await apiInstance.get(import.meta.env.VITE_PROMOTION_LIST_API)
-    return data.data
+    return data
   } catch (error) {
     const errorResponse = error as AxiosError<CustomErrorAPIResponse>
     throw new Error(errorResponse.response?.data.message)
   }
 }
 
-const getPromotionById = async (id: number) => {
+const getPromotionById = async (id: any) => {
   try {
     const { data } = await apiInstance.get(import.meta.env.VITE_PROMOTION_DETAIL_API + id)
-    return data.data
+    return data
   } catch (error) {
     const errorResponse = error as AxiosError<CustomErrorAPIResponse>
     throw new Error(errorResponse.response?.data.message)
@@ -32,7 +32,7 @@ const addPromotion = async (data: FormData) => {
   }
 }
 
-const updatePromotion = async (id: number, data: FormData) => {
+const updatePromotion = async (id: any, data: FormData) => {
   try {
     const { data: response } = await apiInstance.put(import.meta.env.VITE_PROMOTION_UPDATE_API + id, data)
     return response
@@ -42,7 +42,7 @@ const updatePromotion = async (id: number, data: FormData) => {
   }
 }
 
-const deletePromotion = async (id: number) => {
+const deletePromotion = async (id: any) => {
   try {
     const { data: response } = await apiInstance.delete(import.meta.env.VITE_PROMOTION_DELETE_API + id)
     return response

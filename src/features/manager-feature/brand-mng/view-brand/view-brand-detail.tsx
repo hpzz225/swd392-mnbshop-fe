@@ -16,9 +16,9 @@ export type BrandDetail = z.infer<typeof brandSchema>
 export default function ViewBrandDetail() {
   const navigate = useNavigate()
   const { brandId } = useParams()
-  const { data: brand } = useViewBrandDetail(Number(brandId))
-  const editBrandMutation = useEditBrand(Number(brandId))
-  const deleteBrandMutation = useDeleteBrand(Number(brandId))
+  const { data: brand } = useViewBrandDetail(brandId)
+  const editBrandMutation = useEditBrand(brandId)
+  const deleteBrandMutation = useDeleteBrand(brandId)
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
 
   const {
@@ -73,7 +73,7 @@ export default function ViewBrandDetail() {
           </div>
           <div className="w-full md:w-2/3">
             <Descriptions bordered column={1}>
-              <Descriptions.Item label="Brand ID">{brand?.brandId}</Descriptions.Item>
+              <Descriptions.Item label="Brand ID">{brand?._id}</Descriptions.Item>
               <Descriptions.Item label="Brand Name">{brand?.brandName}</Descriptions.Item>
               <Descriptions.Item label="Made In">{brand?.madeIn}</Descriptions.Item>
               <Descriptions.Item label="Description">{brand?.description}</Descriptions.Item>

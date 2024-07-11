@@ -4,7 +4,7 @@ import { CreateBrand } from '@/types'
 import { queryClient } from '@/constants'
 import { notification } from 'antd'
 
-export const useEditBrand = (id: number) => {
+export const useEditBrand = (id: any) => {
   return useMutation({
     mutationFn: (data: CreateBrand) => {
       return brandApi.updateBrand(id, data)

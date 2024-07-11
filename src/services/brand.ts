@@ -32,7 +32,7 @@ const addBrand = async (data: CreateBrand) => {
   }
 }
 
-const updateBrand = async (id: number, data: CreateBrand) => {
+const updateBrand = async (id: any, data: CreateBrand) => {
   try {
     console.log(data)
     console.log(import.meta.env.VITE_BRAND_UPDATE_API + id)

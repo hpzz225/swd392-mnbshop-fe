@@ -30,8 +30,8 @@ type FormData = z.infer<typeof promotionSchema>
 export default function ViewPromotionDetail() {
   const { promotionId } = useParams()
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const { data: promotion } = useViewPromotionDetail(Number(promotionId))
-  const UpdatePromotionMutation = useUpdatePromotion(Number(promotionId))
+  const { data: promotion } = useViewPromotionDetail(promotionId)
+  const UpdatePromotionMutation = useUpdatePromotion(promotionId)
 
   const {
     control,
@@ -121,7 +121,7 @@ export default function ViewPromotionDetail() {
         className="shadow-lg"
       >
         <Descriptions bordered column={1}>
-          <Descriptions.Item label="Promotion ID">{promotion?.promotionId}</Descriptions.Item>
+          <Descriptions.Item label="Promotion ID">{promotion?._id}</Descriptions.Item>
           <Descriptions.Item label="Start Time">{new Date(promotion?.startAt).toLocaleString()}</Descriptions.Item>
           <Descriptions.Item label="End Time">{new Date(promotion?.endAt).toLocaleString()}</Descriptions.Item>
           <Descriptions.Item label="Status">

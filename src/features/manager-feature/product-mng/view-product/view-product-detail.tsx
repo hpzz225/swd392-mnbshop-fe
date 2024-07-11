@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, Descriptions, Tag, Image, Button, Modal, Input, InputNumber, Select, Switch } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { useForm, Controller } from 'react-hook-form'
@@ -12,7 +12,7 @@ const { Option } = Select
 
 export default function ViewProductDetail() {
   const { productId } = useParams()
-  const { data: product } = useViewProductDetail(Number(productId))
+  const { data: product, isLoading } = useViewProductDetail(productId)
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
 
   const {
@@ -25,8 +25,11 @@ export default function ViewProductDetail() {
     defaultValues: product,
   })
 
-  const showEditModal = () => {
+  useEffect(() => {
     reset(product)
+  }, [product, reset])
+
+  const showEditModal = () => {
     setIsEditModalVisible(true)
   }
 
@@ -37,6 +40,10 @@ export default function ViewProductDetail() {
 
   const handleEditCancel = () => {
     setIsEditModalVisible(false)
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>
   }
 
   return (
@@ -61,9 +68,10 @@ export default function ViewProductDetail() {
           </div>
           <div className="w-full md:w-2/3">
             <Descriptions bordered column={2}>
-              <Descriptions.Item label="Product ID">{product?.productId}</Descriptions.Item>
+              <Descriptions.Item label="Product ID">{product?._id}</Descriptions.Item>
               <Descriptions.Item label="Product Name">{product?.productName}</Descriptions.Item>
-              <Descriptions.Item label="Brand">{product?.productBrand}</Descriptions.Item>
+              <Descriptions.Item label="Brand ID">{product?.brandId?._id}</Descriptions.Item>
+              <Descriptions.Item label="Brand">{product?.brandId?.brandName}</Descriptions.Item>
               <Descriptions.Item label="Price">${product?.productPrice}</Descriptions.Item>
               <Descriptions.Item label="Stock">{product?.quantity}</Descriptions.Item>
               <Descriptions.Item label="By Age">{product?.byAge}</Descriptions.Item>
@@ -71,8 +79,6 @@ export default function ViewProductDetail() {
               <Descriptions.Item label="Pre-Order Amount">{product?.preOrderAmount || 'N/A'}</Descriptions.Item>
               <Descriptions.Item label="Promoted">{product?.isPromote ? 'Yes' : 'No'}</Descriptions.Item>
               <Descriptions.Item label="Disabled">{product?.isDisable ? 'Yes' : 'No'}</Descriptions.Item>
-              <Descriptions.Item label="Brand ID">{product?.brandId}</Descriptions.Item>
-              <Descriptions.Item label="Rate">{product?.rate}</Descriptions.Item>
               <Descriptions.Item label="Description">{product?.productDescription}</Descriptions.Item>
             </Descriptions>
           </div>
@@ -94,11 +100,15 @@ export default function ViewProductDetail() {
           <div>
             <label className="block text-sm font-medium text-gray-700">Brand</label>
             <Controller
-              name="productBrand"
+              name="brandId"
               control={control}
-              render={({ field }) => <Input {...field} className="mt-1" />}
+              render={({ field }) => (
+                <Select {...field} className="mt-1 w-full">
+                  <Option value={product?.brandId?._id}>{product?.brandId?.brandName}</Option>
+                </Select>
+              )}
             />
-            {errors.productBrand && <p className="mt-1 text-sm text-red-600">{errors.productBrand.message}</p>}
+            {errors.brandId && <p className="mt-1 text-sm text-red-600">{errors.brandId.message}</p>}
           </div>
 
           <div>
@@ -164,15 +174,6 @@ export default function ViewProductDetail() {
               name="isDisable"
               control={control}
               render={({ field }) => <Switch {...field} checked={field.value} />}
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Brand ID</label>
-            <Controller
-              name="brandId"
-              control={control}
-              render={({ field }) => <InputNumber {...field} className="mt-1 w-full" />}
             />
           </div>
 

@@ -3,7 +3,7 @@ import brandApi from '@/services/brand'
 import { useMutation } from '@tanstack/react-query'
 import { notification } from 'antd'
 
-export const useDeleteBrand = (id: number) => {
+export const useDeleteBrand = (id: any) => {
   return useMutation({
     mutationFn: () => {
       return brandApi.deleteBrand(id)

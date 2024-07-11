@@ -25,10 +25,15 @@ import { ROLE_MAPPING } from '.'
 export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
   {
     title: 'ID',
-    dataIndex: 'productId',
-    key: 'productId',
+    dataIndex: '_id',
+    key: '_id',
     width: 80,
     align: 'center',
+    render: (text, record, index) => (
+      <Tooltip placement="topLeft" title={text}>
+        <span>{index + 1}</span>
+      </Tooltip>
+    ),
   },
   {
     title: 'IMAGE',
@@ -45,15 +50,16 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
     key: 'name',
     align: 'center',
     render: (name: string, record: ProductTableData) => (
-      <Link to={`${ROUTE_PATHS_MANAGER.M_PRODUCT}/${record.productId}`}>{name}</Link>
+      <Link to={`${ROUTE_PATHS_MANAGER.M_PRODUCT}/${record._id}`}>{name}</Link>
     ),
   },
   {
     title: 'BRAND',
-    dataIndex: 'productBrand',
-    key: 'productBrand',
+    dataIndex: 'brandId',
+    key: 'brandId',
     width: 200,
     align: 'center',
+    render: (record) => <span>{record?.brandId}</span>,
   },
   {
     title: 'PRICE',
@@ -112,7 +118,7 @@ export const VIEW_BRAND_COLS: TableColumnsType<BrandTableData> = [
     key: 'brandName',
     align: 'center',
     render: (name: string, record: BrandTableData) => (
-      <Link to={`${ROUTE_PATHS_MANAGER.M_BRAND}/${record.brandId}`}>{name}</Link>
+      <Link to={`${ROUTE_PATHS_MANAGER.M_BRAND}/${record._id}`}>{name}</Link>
     ),
   },
   {
@@ -126,7 +132,7 @@ export const VIEW_BRAND_COLS: TableColumnsType<BrandTableData> = [
     key: 'operation',
     align: 'center',
     render: (record) => {
-      return <Dropdown items={ViewBrandDropdown(record.brandName, record.brandId)} />
+      return <Dropdown items={ViewBrandDropdown(record.brandName, record._id)} />
     },
   },
 ]
@@ -363,9 +369,10 @@ export const VIEW_BLOG_COLS: TableColumnsType<BlogTableData> = [
 export const VIEW_PROMOTION_COLS: TableColumnsType<PromotionTableData> = [
   {
     title: 'ID',
-    dataIndex: 'promotionId',
-    key: 'promotionId',
+    dataIndex: '_id',
+    key: '_id',
     align: 'center',
+    render: (text, record, index) => <span>{index + 1}</span>,
   },
   {
     title: 'NAME',
@@ -373,7 +380,7 @@ export const VIEW_PROMOTION_COLS: TableColumnsType<PromotionTableData> = [
     key: 'promotionName',
     align: 'center',
     render: (promotionName, record) => (
-      <Link to={`${ROUTE_PATHS_MANAGER.M_PROMOTION}/${record.promotionId}`}>{promotionName}</Link>
+      <Link to={`${ROUTE_PATHS_MANAGER.M_PROMOTION}/${record._id}`}>{promotionName}</Link>
     ),
   },
   {
@@ -430,7 +437,7 @@ export const VIEW_PROMOTION_COLS: TableColumnsType<PromotionTableData> = [
     key: 'operation',
     align: 'center',
     render: (record) => {
-      return <Dropdown items={ViewPromotionDropdown(record.promotionId, record.promotionName)} />
+      return <Dropdown items={ViewPromotionDropdown(record._id, record.promotionName)} />
     },
   },
 ]

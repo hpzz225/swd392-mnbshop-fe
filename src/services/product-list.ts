@@ -5,17 +5,18 @@ import { CustomErrorAPIResponse, ViewProductDetailAPIResponse, ViewProductListAP
 const getProductList = async () => {
   try {
     const { data } = await apiInstance.get<ViewProductListAPIResponse>(import.meta.env.VITE_M_PRODUCT_LIST_API)
-    return data.data
+    return data
   } catch (error) {
     const errorResponse = error as AxiosError<CustomErrorAPIResponse>
     throw new Error(errorResponse.response?.data.message)
   }
 }
 
-const getProductById = async (id: number) => {
+const getProductById = async (id: any) => {
   try {
     const { data } = await apiInstance.get<ViewProductDetailAPIResponse>(import.meta.env.VITE_M_PRODUCT_LIST_API + id)
-    return data.data
+    console.log(data)
+    return data
   } catch (error) {
     const errorResponse = error as AxiosError<CustomErrorAPIResponse>
     throw new Error(errorResponse.response?.data.message)

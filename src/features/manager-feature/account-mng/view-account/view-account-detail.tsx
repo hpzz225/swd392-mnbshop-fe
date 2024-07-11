@@ -65,7 +65,7 @@ export default function ViewAccountDetail() {
       >
         <Skeleton active loading={isLoading} />
         <Descriptions bordered column={1}>
-          <Descriptions.Item label="ID">{account?.id}</Descriptions.Item>
+          <Descriptions.Item label="ID">{account?._id}</Descriptions.Item>
           <Descriptions.Item label="Full Name">{account?.fullName}</Descriptions.Item>
           <Descriptions.Item label="Image">
             <Avatar src={account?.image} size={72} />

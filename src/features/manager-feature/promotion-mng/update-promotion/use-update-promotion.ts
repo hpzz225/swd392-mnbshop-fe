@@ -3,7 +3,7 @@ import promotionApi from '@/services/promotion'
 import { useMutation } from '@tanstack/react-query'
 import { notification } from 'antd'
 
-export const useUpdatePromotion = (id: number) => {
+export const useUpdatePromotion = (id: any) => {
   return useMutation({
     mutationFn: (data: FormData) => {
       return promotionApi.updatePromotion(id, data)
