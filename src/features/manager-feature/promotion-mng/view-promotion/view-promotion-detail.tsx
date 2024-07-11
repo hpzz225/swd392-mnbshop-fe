@@ -2,7 +2,20 @@
 import * as z from 'zod'
 import moment from 'moment'
 import { useState } from 'react'
-import { Card, Button, Descriptions, Tag, Image, Modal, Form, Input, DatePicker, Switch, InputNumber } from 'antd'
+import {
+  Card,
+  Button,
+  Descriptions,
+  Tag,
+  Image,
+  Modal,
+  Form,
+  Input,
+  DatePicker,
+  Switch,
+  InputNumber,
+  Table,
+} from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { useViewPromotionDetail } from './use-view-promotion-detail'
 import { useParams } from 'react-router-dom'
@@ -10,6 +23,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { promotionSchema } from '@/lib/zod/schema'
 import { useUpdatePromotion } from '../update-promotion/use-update-promotion'
+import { ProductInPromotion } from '@/types'
 
 type FormData = z.infer<typeof promotionSchema>
 
@@ -39,8 +53,61 @@ export default function ViewPromotionDetail() {
     setIsModalVisible(false)
   }
 
+  const columns = [
+    {
+      title: 'ID',
+      dataIndex: 'productId',
+      key: 'productId',
+    },
+    {
+      title: 'Product',
+      dataIndex: 'productName',
+      key: 'productName',
+      render: (text: string) => (
+        <div className="flex items-center">
+          <span>{text}</span>
+        </div>
+      ),
+    },
+    {
+      title: 'Image',
+      dataIndex: 'productImg',
+      key: 'productImg',
+      render: (text: string, record: ProductInPromotion) => (
+        <div className="flex items-center ">
+          <Image src={record.productImg} alt={text} width={120} className="rounded-xl" />
+        </div>
+      ),
+    },
+    {
+      title: 'Brand',
+      dataIndex: 'productBrand',
+      key: 'productBrand',
+    },
+    {
+      title: 'Quantity',
+      dataIndex: 'quantity',
+      key: 'quantity',
+    },
+    {
+      title: 'Price',
+      dataIndex: 'productPrice',
+      key: 'productPrice',
+      render: (productPrice: number) => `$${productPrice}`,
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: () => (
+        <Button type="primary" danger>
+          Delete
+        </Button>
+      ),
+    },
+  ]
+
   return (
-    <div className="w-7/12 mx-auto p-4">
+    <div className="w-9/12 mx-auto p-4">
       <Card
         title={<h2 className="text-2xl font-bold">{promotion?.promotionName}</h2>}
         extra={
@@ -62,6 +129,10 @@ export default function ViewPromotionDetail() {
           </Descriptions.Item>
           <Descriptions.Item label="Discount Rate">{promotion?.promote}%</Descriptions.Item>
         </Descriptions>
+      </Card>
+
+      <Card title="Order Items" className="my-5">
+        <Table columns={columns} dataSource={promotion?.products} rowKey="productId" pagination={false} />
       </Card>
 
       <Modal

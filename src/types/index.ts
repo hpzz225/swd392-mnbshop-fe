@@ -348,6 +348,23 @@ export type PromotionListApiResponse = {
   errorMessages: string | null
 }
 
+export type ProductInPromotion = {
+  productId: number
+  productBrand: string | null
+  rate: number | null
+  productName: string
+  productDescription: string
+  productImg: string
+  productPrice: number
+  quantity: number
+  byAge: number
+  isPreOrder: boolean
+  preOrderAmount: number
+  isPromote: boolean
+  isDisable: boolean
+  brandId: number
+}
+
 export type PromotionFieldInput = {
   promotionName: string
   startAt: string
