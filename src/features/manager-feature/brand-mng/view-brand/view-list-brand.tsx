@@ -5,7 +5,6 @@ import { useViewBrandList } from './use-view-brand-list'
 
 export default function ViewListBrand() {
   const { data, isLoading } = useViewBrandList()
-  console.log(data)
   const addKeyToData = (dataArray: BrandTableData[] | BrandListApiResponse[] | null) => {
     if (!dataArray) return []
     return dataArray.map((item: BrandTableData | BrandListApiResponse) => {

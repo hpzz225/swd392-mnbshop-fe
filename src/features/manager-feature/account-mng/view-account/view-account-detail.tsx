@@ -14,8 +14,8 @@ import { Skeleton } from 'antd'
 const { Option } = Select
 
 export default function ViewAccountDetail() {
-  const { accountId }: any = useParams()
-  const { data: account, isLoading } = useViewAccountDetail(accountId)
+  const { accountId } = useParams()
+  const { data: account, isLoading } = useViewAccountDetail(Number(accountId))
 
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
 

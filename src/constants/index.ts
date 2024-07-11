@@ -79,6 +79,14 @@ export const POPUP_TITLE = {
   ADD_BRAND: 'Add new brand',
   UPDATE_BRAND: 'Update brand',
   DELETE_BRAND: 'Delete brand',
+
+  ADD_BLOG: 'Add new blog',
+  UPDATE_BLOG: 'Update blog',
+  DELETE_BLOG: 'Delete blog',
+
+  ADD_PROMOTION: 'Add new promotion',
+  UPDATE_PROMOTION: 'Update promotion',
+  DELETE_PROMOTION: 'Delete promotion',
 }
 
 export const FILTER_OPTIONS = {

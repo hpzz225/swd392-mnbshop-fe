@@ -4,24 +4,25 @@ import { DefaultButtonStyle } from '@/lib/antd/antd-styles'
 import { useAppDispatch } from '@/lib/redux-toolkit/hook'
 import { closePopup } from '@/lib/redux-toolkit/slices/popup-slice'
 import { Button, Typography } from 'antd'
+import { useDeletePromotion } from './use-delete-promotion'
 
-interface DeleteBrandProps {
-  brandName: string
-  brandId: string
+interface DeletePromotionProps {
+  promotionId: string
+  promotionName: number
 }
 
-export default function DeleteBrand({ brandName, brandId }: DeleteBrandProps) {
+export default function DeletePromotion({ promotionId, promotionName }: DeletePromotionProps) {
   const dispatch = useAppDispatch()
+  const deletePromotionMutation = useDeletePromotion(promotionName)
   const handleDelete = () => {
-    console.log(brandId)
-    dispatch(closePopup(POPUP_TITLE.DELETE_BRAND))
+    deletePromotionMutation.mutate()
+    dispatch(closePopup(POPUP_TITLE.DELETE_PROMOTION))
   }
-
   return (
     <>
-      <Typography.Text>Are you sure to delete {brandName}?</Typography.Text>
+      <Typography.Text>Are you sure to delete promotion: {promotionId}?</Typography.Text>
       <div className="flex items-center justify-end mt-4">
-        <Button danger type="text" className="mr-2" onClick={() => dispatch(closePopup(POPUP_TITLE.DELETE_BRAND))}>
+        <Button danger type="text" className="mr-2" onClick={() => dispatch(closePopup(POPUP_TITLE.DELETE_PROMOTION))}>
           Cancel
         </Button>
         <ConfigAntdTheme theme={DefaultButtonStyle}>

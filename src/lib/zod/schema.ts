@@ -63,9 +63,17 @@ export const signUpSchema = z
   })
 
 export const brandSchema = z.object({
-  brandId: z.string().min(1, 'Brand ID is required'),
   brandName: z.string().min(1, 'Brand name is required'),
   brandImg: z.string().min(1, 'Brand image is required'),
   madeIn: z.string().min(1, 'Made in is required'),
   description: z.string().min(1, 'Description is required'),
+})
+
+export const promotionSchema = z.object({
+  promotionName: z.string().min(1, 'Promotion name is required'),
+  startAt: z.date(),
+  endAt: z.date(),
+  status: z.boolean().optional(),
+  promote: z.number().min(0).max(100),
+  promotionImg: z.string().url('Invalid URL'),
 })

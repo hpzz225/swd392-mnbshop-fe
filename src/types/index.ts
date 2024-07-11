@@ -144,6 +144,33 @@ export type OrderData = {
   productOrders: ProductInOrder[]
 }
 
+export type BlogTableData = {
+  key: React.Key
+  blogId: number
+  title: string
+  content: string
+  blogImg: string
+  createAt: string
+  updateAt: string
+  usefulVote: number
+  notUsefulVote: number
+  tags: string
+  userId: number
+}
+
+export type BlogData = {
+  blogId: number
+  title: string
+  content: string
+  blogImg: string
+  createAt: string
+  updateAt: string
+  usefulVote: number
+  notUsefulVote: number
+  tags: string
+  userId: number
+}
+
 export type AccountTableData = {
   key: React.Key
   id: number
@@ -175,6 +202,27 @@ export type AccountDetail = {
   isDisable: boolean
   email: string
   roleId: number
+}
+
+export type PromotionTableData = {
+  key: React.Key
+  promotionId: number
+  promotionName: string
+  startAt: string
+  endAt: string
+  status: boolean
+  promote: number
+  promotionImg: string
+}
+
+export type PromotionData = {
+  promotionId: number
+  promotionName: string
+  startAt: string
+  endAt: string
+  status: boolean
+  promote: number
+  promotionImg: string
 }
 
 // API Response
@@ -216,6 +264,13 @@ export type CartAPIResponse = {
   message: string
   error: string | null
   errorMessages: string | null
+}
+
+export type CreateBrand = {
+  brandName: string
+  brandImg: string
+  madeIn: string
+  description: string
 }
 
 export type BrandListApiResponse = {
@@ -275,4 +330,45 @@ export type cartItems = {
   quantity: number
   unitPrice: number
   brandName: string
+}
+
+export type BlogListApiResponse = {
+  data: BlogData[]
+  success: boolean
+  message: string
+  error: string | null
+  errorMessages: string | null
+}
+
+export type PromotionListApiResponse = {
+  data: PromotionData[]
+  success: boolean
+  message: string
+  error: string | null
+  errorMessages: string | null
+}
+
+export type ProductInPromotion = {
+  productId: number
+  productBrand: string | null
+  rate: number | null
+  productName: string
+  productDescription: string
+  productImg: string
+  productPrice: number
+  quantity: number
+  byAge: number
+  isPreOrder: boolean
+  preOrderAmount: number
+  isPromote: boolean
+  isDisable: boolean
+  brandId: number
+}
+
+export type PromotionFieldInput = {
+  promotionName: string
+  startAt: string
+  endAt: string
+  promote: number
+  promotionImg: string
 }

@@ -27,6 +27,8 @@ import ViewOrderDetail from '@/features/manager-feature/order-mng/view-order-det
 import ViewAccountDetail from '@/features/manager-feature/account-mng/view-account/view-account-detail'
 import CustomerDefaultLayout from '@/layouts/customer-layouts/default-layout'
 import { AUTHORITIES } from '@/constants'
+import ViewBlogDetail from '@/features/manager-feature/blog-mng/view-blog/view-blog-detail'
+import ViewPromotionDetail from '@/features/manager-feature/promotion-mng/view-promotion/view-promotion-detail'
 
 export const ROUTE_PATHS = {
   ROOT: '/',
@@ -239,7 +241,7 @@ export const routes = [
   {
     path: `${ROUTE_PATHS_MANAGER.M_BLOG}/:blogId`,
     name: 'Blog Detail Manager',
-    component: BlogManager,
+    component: ViewBlogDetail,
     layout: ManagerDefaultLayout,
     private: true,
     roles: [AUTHORITIES.ADMIN],
@@ -255,7 +257,7 @@ export const routes = [
   {
     path: `${ROUTE_PATHS_MANAGER.M_PROMOTION}/:promotionId`,
     name: 'Promotion Detail Manager',
-    component: PromotionManager,
+    component: ViewPromotionDetail,
     layout: ManagerDefaultLayout,
     private: true,
     roles: [AUTHORITIES.ADMIN],

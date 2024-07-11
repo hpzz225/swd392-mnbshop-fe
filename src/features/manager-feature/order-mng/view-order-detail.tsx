@@ -51,6 +51,7 @@ export default function ViewOrderDetail() {
     {
       title: 'Total',
       key: 'total',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       render: (_: any, record: ProductInOrder) => `$${record.quantity * record.unitPrice}`,
     },
   ]
