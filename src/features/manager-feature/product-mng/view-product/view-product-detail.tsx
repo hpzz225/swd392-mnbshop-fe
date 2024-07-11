@@ -7,6 +7,8 @@ import { productSchema } from '@/lib/zod/schema'
 import { useParams } from 'react-router-dom'
 import { useViewProductDetail } from './use-view-product-detail'
 import { ProductDetail } from '@/types'
+import { useEditProduct } from '../edit-product/use-edit-product'
+import { useViewBrandList } from '../../brand-mng/view-brand/use-view-brand-list'
 
 const { Option } = Select
 
@@ -14,6 +16,8 @@ export default function ViewProductDetail() {
   const { productId } = useParams()
   const { data: product, isLoading } = useViewProductDetail(productId)
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
+  const editProductMutation = useEditProduct(productId)
+  const { data: brandList } = useViewBrandList()
 
   const {
     control,
@@ -35,6 +39,7 @@ export default function ViewProductDetail() {
 
   const handleEditOk = handleSubmit((data) => {
     console.log(data)
+    editProductMutation.mutate(data)
     setIsEditModalVisible(false)
   })
 
@@ -104,11 +109,25 @@ export default function ViewProductDetail() {
               control={control}
               render={({ field }) => (
                 <Select {...field} className="mt-1 w-full">
-                  <Option value={product?.brandId?._id}>{product?.brandId?.brandName}</Option>
+                  {brandList?.map((brand) => (
+                    <Option key={brand._id} value={brand._id}>
+                      {brand.brandName}
+                    </Option>
+                  ))}
                 </Select>
               )}
             />
             {errors.brandId && <p className="mt-1 text-sm text-red-600">{errors.brandId.message}</p>}
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Product Image URL</label>
+            <Controller
+              name="productImg"
+              control={control}
+              render={({ field }) => <Input {...field} className="mt-1" />}
+            />
+            {errors.productImg && <p className="mt-1 text-sm text-red-600">{errors.productImg.message}</p>}
           </div>
 
           <div>
@@ -157,6 +176,7 @@ export default function ViewProductDetail() {
               control={control}
               render={({ field }) => <InputNumber {...field} className="mt-1 w-full" />}
             />
+            {errors.preOrderAmount && <p className="mt-1 text-sm text-red-600">{errors.preOrderAmount.message}</p>}
           </div>
 
           <div>
@@ -174,15 +194,6 @@ export default function ViewProductDetail() {
               name="isDisable"
               control={control}
               render={({ field }) => <Switch {...field} checked={field.value} />}
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Rate</label>
-            <Controller
-              name="rate"
-              control={control}
-              render={({ field }) => <InputNumber {...field} className="mt-1 w-full" min={0} max={5} step={0.1} />}
             />
           </div>
 

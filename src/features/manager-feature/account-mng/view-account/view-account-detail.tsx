@@ -22,17 +22,11 @@ export default function ViewAccountDetail() {
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(accountSchema),
     defaultValues: account,
   })
-
-  const showEditModal = () => {
-    reset(account)
-    setIsEditModalVisible(true)
-  }
 
   const handleEditOk = handleSubmit((data) => {
     console.log({ ...account, ...data })
@@ -49,9 +43,6 @@ export default function ViewAccountDetail() {
         title={<h1 className="text-2xl font-bold">Account Details</h1>}
         extra={
           <div className="space-x-2">
-            <Button type="primary" icon={<EditOutlined />} onClick={showEditModal}>
-              Edit
-            </Button>
             <Button
               danger={!account?.isDisable}
               icon={account?.isDisable ? <UnlockOutlined /> : <LockOutlined />}

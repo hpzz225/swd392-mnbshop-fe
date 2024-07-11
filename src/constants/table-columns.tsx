@@ -27,7 +27,7 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
     title: 'ID',
     dataIndex: '_id',
     key: '_id',
-    width: 80,
+    width: 90,
     align: 'center',
     render: (text, record, index) => (
       <Tooltip placement="topLeft" title={text}>
@@ -54,45 +54,40 @@ export const VIEW_PRODUCT_COLS: TableColumnsType<ProductTableData> = [
     ),
   },
   {
-    title: 'BRAND',
-    dataIndex: 'brandId',
-    key: 'brandId',
-    width: 200,
-    align: 'center',
-    render: (record) => <span>{record?.brandId}</span>,
-  },
-  {
     title: 'PRICE',
     dataIndex: 'productPrice',
     key: 'productPrice',
-    width: 140,
     align: 'center',
     render: (price) => <span>${price}</span>,
   },
   {
     title: 'DISCOUNT',
-    dataIndex: 'discount',
-    key: 'description',
-    width: 140,
+    dataIndex: 'byAge',
+    key: 'byAge',
     align: 'center',
-    render: (discount) => <span>{discount}%</span>,
+    render: (byAge) => <span>{byAge}</span>,
   },
   {
     title: 'QUANTITY',
     dataIndex: 'quantity',
     key: 'image',
-    width: 140,
     align: 'center',
     render: (quantity) => <span>{quantity}</span>,
   },
   {
+    title: 'STATUS',
+    dataIndex: 'isDisable',
+    key: 'isDisable',
+    align: 'center',
+    render: (isDisable) => <Tag>{isDisable ? 'Disable' : 'Enable'}</Tag>,
+  },
+  {
     title: 'Action',
     key: 'operation',
-    width: 90,
     align: 'center',
 
     render: (record) => {
-      return <Dropdown items={ViewProductDropdown(record.productName, record.productId)} />
+      return <Dropdown items={ViewProductDropdown(record.productName, record._id)} />
     },
   },
 ]
@@ -315,10 +310,11 @@ export const VIEW_ORDER_COLS: TableColumnsType<OrderTableData> = [
 export const VIEW_BLOG_COLS: TableColumnsType<BlogTableData> = [
   {
     title: 'ID',
-    dataIndex: 'blogId',
-    key: 'blogId',
+    dataIndex: '_id',
+    key: '_id',
     width: 90,
     align: 'center',
+    render: (text, record, index) => <span>{index + 1}</span>,
   },
   {
     title: 'IMG',
@@ -332,7 +328,7 @@ export const VIEW_BLOG_COLS: TableColumnsType<BlogTableData> = [
     dataIndex: 'title',
     key: 'title',
     align: 'center',
-    render: (title, record) => <Link to={`${ROUTE_PATHS_MANAGER.M_BLOG}/${record.blogId}`}>{title}</Link>,
+    render: (title, record) => <Link to={`${ROUTE_PATHS_MANAGER.M_BLOG}/${record._id}`}>{title}</Link>,
   },
   {
     title: 'CREATE DATE',
@@ -344,24 +340,12 @@ export const VIEW_BLOG_COLS: TableColumnsType<BlogTableData> = [
     },
   },
   {
-    title: 'CREATE BY',
-    dataIndex: 'userId',
-    key: 'userId',
-    align: 'center',
-  },
-  {
-    title: 'USEFUL VOTE',
-    dataIndex: 'usefulVote',
-    key: 'usefulVote',
-    align: 'center',
-  },
-  {
     title: 'Action',
     key: 'operation',
     width: 90,
     align: 'center',
     render: (record) => {
-      return <Dropdown items={ViewBlogDropdown(record.title, record.blogId)} />
+      return <Dropdown items={ViewBlogDropdown(record.title, record._id)} />
     },
   },
 ]

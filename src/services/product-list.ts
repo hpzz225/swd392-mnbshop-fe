@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import apiInstance from '@/lib/axios'
 import { AxiosError } from 'axios'
 import { CustomErrorAPIResponse, ViewProductDetailAPIResponse, ViewProductListAPIResponse } from '@/types'
@@ -15,8 +16,37 @@ const getProductList = async () => {
 const getProductById = async (id: any) => {
   try {
     const { data } = await apiInstance.get<ViewProductDetailAPIResponse>(import.meta.env.VITE_M_PRODUCT_LIST_API + id)
-    console.log(data)
     return data
+  } catch (error) {
+    const errorResponse = error as AxiosError<CustomErrorAPIResponse>
+    throw new Error(errorResponse.response?.data.message)
+  }
+}
+
+const updateProduct = async (id: any, data: FormData) => {
+  try {
+    const { data: response } = await apiInstance.put(import.meta.env.VITE_PRODUCT_UPDATE_API + id, data)
+    return response
+  } catch (error) {
+    const errorResponse = error as AxiosError<CustomErrorAPIResponse>
+    throw new Error(errorResponse.response?.data.message)
+  }
+}
+
+const disableProduct = async (id: any) => {
+  try {
+    const { data: response } = await apiInstance.delete(import.meta.env.VITE_PRODUCT_DELETE_API + id)
+    return response
+  } catch (error) {
+    const errorResponse = error as AxiosError<CustomErrorAPIResponse>
+    throw new Error(errorResponse.response?.data.message)
+  }
+}
+
+const addProduct = async (data: FormData) => {
+  try {
+    const { data: response } = await apiInstance.post(import.meta.env.VITE_PRODUCT_CREATE_API, data)
+    return response
   } catch (error) {
     const errorResponse = error as AxiosError<CustomErrorAPIResponse>
     throw new Error(errorResponse.response?.data.message)
@@ -26,6 +56,9 @@ const getProductById = async (id: any) => {
 const productListApi = {
   getProductList,
   getProductById,
+  updateProduct,
+  disableProduct,
+  addProduct,
 }
 
 export default productListApi

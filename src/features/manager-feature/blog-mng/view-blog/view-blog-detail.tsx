@@ -1,30 +1,17 @@
-import { useState } from 'react'
-import { Typography, Button, Modal, Form, Input, InputNumber, Tag, Divider, Rate } from 'antd'
-import { EditOutlined, LikeOutlined, DislikeOutlined } from '@ant-design/icons'
 import moment from 'moment'
-import { BlogData } from '@/types'
+import { useState } from 'react'
+import { Typography, Button, Modal, Form, Input, Tag, Divider } from 'antd'
+import { EditOutlined } from '@ant-design/icons'
 import { useParams } from 'react-router-dom'
 import { useViewBlogDetail } from './use-view-blog-detail'
+import { useEditBlog } from '../edit-blog/use-edit-blog'
 
 const { Title, Paragraph } = Typography
 
-const blog: BlogData = {
-  blogId: 1,
-  title: 'The Ultimate Guide to Modern Web Development',
-  content:
-    "# Web development has come a long way since the early days of the internet. Today, it's a complex and ever-evolving field that requires a diverse set of skills and knowledge.\n\nFirst, we'll dive into frontend development, covering HTML5, CSS3, and JavaScript. We'll discuss popular frameworks like React, Vue, and Angular, and how they're changing the way we build user interfaces.\n\n## Backend Development\n\nNext, we'll explore backend development, including server-side languages like Node.js, Python, and Ruby. We'll also cover databases, APIs, and microservices architecture.\n\n## DevOps\n\nFinally, we'll look at DevOps practices, cloud computing, and how they're revolutionizing the way we deploy and maintain web applications.",
-  blogImg: 'https://example.com/modern-web-dev.jpg',
-  createAt: '2023-07-01T12:00:00Z',
-  updateAt: '2023-07-02T14:30:00Z',
-  usefulVote: 142,
-  notUsefulVote: 15,
-  tags: 'web development,frontend,backend,devops',
-  userId: 123,
-}
-
 export default function ViewBlogDetail() {
   const { blogId } = useParams()
-  const { data: blog1 } = useViewBlogDetail(Number(blogId))
+  const { data: blog } = useViewBlogDetail(blogId)
+  const editBlogMutation = useEditBlog(blogId)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [form] = Form.useForm()
 
@@ -38,6 +25,7 @@ export default function ViewBlogDetail() {
       .validateFields()
       .then((values) => {
         console.log('Updated blog:', values)
+        editBlogMutation.mutate(values as FormData)
         setIsModalVisible(false)
       })
       .catch((info) => {
@@ -100,14 +88,13 @@ export default function ViewBlogDetail() {
         </Button>
       </div>
 
-      <div className="mb-6">
+      {/* <div className="mb-6">
         <img src={blog?.blogImg} alt="Blog cover" className="w-full h-96 object-cover rounded-lg shadow-lg" />
-      </div>
+      </div> */}
 
       <div className="bg-white p-8 rounded-lg shadow-lg">
         <div className="flex justify-between items-center mb-4 text-gray-500">
-          <span>Published: {moment(blog?.createAt).format('MMMM Do YYYY, h:mm a')}</span>
-          <span>Last updated: {moment(blog?.updateAt).format('MMMM Do YYYY, h:mm a')}</span>
+          <span>Published: {moment(blog?.publishDate).format('MMMM Do YYYY, h:mm a')}</span>
         </div>
 
         <Divider />
@@ -115,30 +102,6 @@ export default function ViewBlogDetail() {
         <article className="prose lg:prose-xl">{formatContent(blog?.content || '')}</article>
 
         <Divider />
-
-        <div className="mb-6">
-          <Title level={4} className="mb-2">
-            Tags
-          </Title>
-          <div>
-            {blog?.tags.split(',').map((tag: string) => (
-              <Tag key={tag} color="blue" className="mr-2 mb-2 text-base py-1 px-3">
-                {tag.trim()}
-              </Tag>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex justify-between items-center">
-          <div className="flex items-center">
-            <Button type="text" icon={<LikeOutlined />} size="large">
-              {blog?.usefulVote} Useful
-            </Button>
-            <Button type="text" icon={<DislikeOutlined />} size="large" className="ml-4">
-              {blog?.notUsefulVote} Not Useful
-            </Button>
-          </div>
-        </div>
       </div>
 
       <Modal title="Edit Blog Post" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} width={800}>
@@ -148,12 +111,6 @@ export default function ViewBlogDetail() {
           </Form.Item>
           <Form.Item name="content" label="Content" rules={[{ required: true }]}>
             <Input.TextArea rows={10} />
-          </Form.Item>
-          <Form.Item name="blogImg" label="Image URL" rules={[{ required: true }]}>
-            <Input size="large" />
-          </Form.Item>
-          <Form.Item name="tags" label="Tags">
-            <Input size="large" />
           </Form.Item>
         </Form>
       </Modal>

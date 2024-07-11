@@ -1,5 +1,5 @@
 import Popup from '@/components/manager-screen/popup'
-import DeleteProduct from '@/features/manager-feature/product-mng/delete-product'
+import DeleteProduct from '@/features/manager-feature/product-mng/disable-product/delete-product'
 import {
   GiftOutlined,
   UserOutlined,
@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom'
 import { POPUP_TITLE } from '.'
 import DisableAccount from '@/features/manager-feature/account-mng/delete-account/disable-account'
 import DeleteBrand from '@/features/manager-feature/brand-mng/delete-brand/delete-brand'
-import DeleteBlog from '@/features/manager-feature/blog-mng/delete-blog'
+import DeleteBlog from '@/features/manager-feature/blog-mng/delete-blog/delete-blog'
 import DeletePromotion from '@/features/manager-feature/promotion-mng/delete-promotion/delete-promotion'
 
 // TODO: eslint-disable
@@ -62,7 +62,7 @@ export const NavigatorItems: MenuItem[] = [
 
 export const ViewProductDropdown = (productName: string, productId: string): MenuItem[] => [
   {
-    label: <Link to={productId}>Edit Product</Link>,
+    label: <Link to={`${ROUTE_PATHS_MANAGER.M_PRODUCT}/${productId}`}>Edit Product</Link>,
     key: 'edit',
     icon: <EditOutlined />,
   },
@@ -74,7 +74,7 @@ export const ViewProductDropdown = (productName: string, productId: string): Men
         title={POPUP_TITLE.DELETE_PRODUCT}
         content={<DeleteProduct productName={productName} productId={productId} />}
       >
-        Delete Product
+        Disable Product
       </Popup>
     ),
     key: 'delete',
@@ -136,7 +136,7 @@ export const ViewAccountDropdown = (fullName: string, id: number): MenuItem[] =>
 
 export const ViewBlogDropdown = (title: string, blogId: string): MenuItem[] => [
   {
-    label: <Link to={blogId}>Edit Blog</Link>,
+    label: <Link to={`${ROUTE_PATHS_MANAGER.M_BLOG}/${blogId}`}>Edit Blog</Link>,
     key: 'edit',
     icon: <EditOutlined />,
   },
