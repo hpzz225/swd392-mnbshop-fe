@@ -8,15 +8,22 @@ import gift2 from '@/assets/icons/gift-2.svg'
 import shield from '@/assets/icons/shield.svg'
 import { ROUTE_PATHS_CUSTOMER } from '@/router'
 import { Link } from 'react-router-dom'
+import { AuthUser } from '@/types'
+import { format } from 'date-fns'
+interface SidebarInfoProps {
+  user: AuthUser
+}
 
-export default function SidebarInfo() {
+export default function SidebarInfo({ user }: SidebarInfoProps) {
+  const formattedDateOfBirth = format(new Date(user?.data.dateOfBirth), 'yyyy-MM-dd')
+
   return (
     <div className="col-3 col-xl-4 col-lg-5 col-md-12">
       <aside className="profile__sidebar">
         <div className="profile-user">
-          <img src={profileImg} alt="" className="profile-user__avatar" />
-          <h1 className="profile-user__name">Imran Khan</h1>
-          <p className="profile-user__desc">Registered: 17th May 2022</p>
+          <img src={user?.data.image} alt="" className="profile-user__avatar" />
+          <h1 className="profile-user__name">{user?.data.fullName}</h1>
+          <p className="profile-user__desc">{formattedDateOfBirth}</p>
         </div>
 
         <div className="profile-menu">

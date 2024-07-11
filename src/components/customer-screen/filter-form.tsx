@@ -1,98 +1,143 @@
-import React from 'react'
-import { Slider, Input, Button, Select, Tag } from 'antd'
-import { DownOutlined, SearchOutlined } from '@ant-design/icons'
-import selectArrow from '@/assets/icons/select-arrow.svg'
-import search from '@/assets/icons/search.svg'
+import React, { useState } from 'react'
+import { Slider, Input, Button, Tag } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
 
-const { Option } = Select
+interface FilterFormProps {
+  filters: {
+    price: [number, number]
+    brand: string
+    byAge: [number, number]
+  }
+  setFilters: React.Dispatch<
+    React.SetStateAction<{
+      price: [number, number]
+      brand: string
+      byAge: [number, number]
+    }>
+  >
+}
 
-export default function FilterForm() {
+export default function FilterForm({ filters, setFilters }: FilterFormProps) {
+  const [priceRange, setPriceRange] = useState<[number, number]>(filters.price)
+  const [brand, setBrand] = useState<string>(filters.brand)
+  const [ageRange, setAgeRange] = useState<[number, number]>(filters.byAge)
+
+  const handlePriceChange = (value: [number, number]) => {
+    setPriceRange([value[0], value[1]])
+  }
+
+  const handleBrandChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBrand(e.target.value)
+  }
+
+  const handleAgeChange = (value: [number, number]) => {
+    setAgeRange([value[0], value[1]])
+  }
+
+  const applyFilters = () => {
+    setFilters({ price: priceRange, brand, byAge: ageRange })
+  }
+
   return (
     <div>
       <div className="filter-wrap">
         <div className="filter" id="home-filter">
           <h3 className="filter__heading">Filter</h3>
-          <form action="" className="filter__form">
-            <div className="filter__row filter__content">
-              <div className="filter__col">
-                <label htmlFor="" className="filter__form-label">
-                  Price
-                </label>
+          <form className="filter__form">
+            <div
+              className="filter__row filter__content"
+              style={{ display: 'flex', flexWrap: 'wrap', position: 'relative' }}
+            >
+              <div className="filter__col" style={{ flex: '0 0 33.3333%', padding: '10px', position: 'relative' }}>
+                <label className="filter__form-label">Price</label>
                 <div className="filter__form-group">
-                  <Slider range defaultValue={[30, 100]} />
+                  <Slider range defaultValue={priceRange} onChange={handlePriceChange as any} />
                 </div>
                 <div className="filter__form-group filter__form-group--inline">
                   <div>
-                    <label htmlFor="" className="filter__form-label filter__form-label--small">
-                      Minimum
-                    </label>
-                    <div className=" filter__form-text-input--small">
-                      <Input prefix="$" defaultValue="30.00" />
+                    <label className="filter__form-label filter__form-label--small">Minimum</label>
+                    <div className="filter__form-text-input--small">
+                      <Input prefix="$" value={priceRange[0]} readOnly />
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="" className="filter__form-label filter__form-label--small">
-                      Maximum
-                    </label>
-                    <div className=" filter__form-text-input--small">
-                      <Input prefix="$" defaultValue="100.00" />
+                    <label className="filter__form-label filter__form-label--small">Maximum</label>
+                    <div className="filter__form-text-input--small">
+                      <Input prefix="$" value={priceRange[1]} readOnly />
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="filter__separate"></div>
-
-              <div className="filter__col">
-                <label htmlFor="" className="filter__form-label">
-                  Made in
-                </label>
+              <div className="filter__col" style={{ flex: '0 0 33.3333%', padding: '10px', position: 'relative' }}>
+                <div
+                  className="filter__vertical-line"
+                  style={{
+                    position: 'absolute',
+                    left: '0',
+                    top: '0',
+                    bottom: '0',
+                    width: '1px',
+                    backgroundColor: '#e0e0e0',
+                  }}
+                ></div>
+                <label className="filter__form-label">Brand</label>
                 <div className="filter__form-group">
-                  <Select defaultValue="USA" style={{ width: '100%' }}>
-                    <Option value="USA">USA</Option>
-                    <Option value="Japan">Japan</Option>
-                    <Option value="China">China</Option>
-                    <Option value="France">France</Option>
-                    <Option value="England">England</Option>
-                  </Select>
+                  <Input
+                    placeholder="Search brand name"
+                    prefix={<SearchOutlined />}
+                    value={brand}
+                    onChange={handleBrandChange}
+                  />
                 </div>
                 <div className="filter__form-group">
-                  <div className="filter__form-tags">
-                    <Tag>Japan</Tag>
-                    <Tag>China</Tag>
-                    <Tag>France</Tag>
-                    <Tag>England</Tag>
-                  </div>
+                  <div className="filter__form-tags">{brand && <Tag>{brand}</Tag>}</div>
                 </div>
               </div>
 
-              <div className="filter__separate"></div>
-
-              <div className="filter__col">
-                <label htmlFor="" className="filter__form-label">
-                  Brand
-                </label>
+              <div className="filter__col" style={{ flex: '0 0 33.3333%', padding: '10px', position: 'relative' }}>
+                <div
+                  className="filter__vertical-line"
+                  style={{
+                    position: 'absolute',
+                    left: '0',
+                    top: '0',
+                    bottom: '0',
+                    width: '1px',
+                    backgroundColor: '#e0e0e0',
+                  }}
+                ></div>
+                <label className="filter__form-label">By Age</label>
                 <div className="filter__form-group">
-                  <Input placeholder="Search brand name" prefix={<SearchOutlined />} />
+                  <Slider range min={1} max={20} defaultValue={ageRange} onChange={handleAgeChange as any} />
                 </div>
-                <div className="filter__form-group">
-                  <div className="filter__form-tags">
-                    <Tag>Ensure</Tag>
-                    <Tag>Abbott</Tag>
-                    <Tag>Meiji</Tag>
-                    <Tag>Yokogold</Tag>
-                    <Tag>Similac</Tag>
-                    <Tag>Nutifood</Tag>
+                <div className="filter__form-group filter__form-group--inline">
+                  <div>
+                    <label className="filter__form-label filter__form-label--small">Minimum Age</label>
+                    <div className="filter__form-text-input--small">
+                      <Input value={ageRange[0]} readOnly />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="filter__form-label filter__form-label--small">Maximum Age</label>
+                    <div className="filter__form-text-input--small">
+                      <Input value={ageRange[1]} readOnly />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="filter__row filter__footer">
-              <Button className="btn btn--text filter__cancel js-toggle" toggle-target="#home-filter">
+              {/* <Button className="btn btn--text filter__cancel js-toggle" toggle-target="#home-filter">
                 Cancel
-              </Button>
-              <Button type="primary" className="btn btn--primary filter__submit js-toggle" toggle-target="#home-filter">
+              </Button> */}
+              <Button
+                type="primary"
+                className="btn btn--primary filter__submit js-toggle"
+                toggle-target="#home-filter"
+                onClick={applyFilters}
+              >
                 Show Result
               </Button>
             </div>
