@@ -45,7 +45,7 @@ export const useAuth = () => {
       localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken)
       createCartMutation.mutate()
       queryClient.invalidateQueries({ queryKey: ['user'] })
-      const roleId = data.data.roleId
+      const roleId = data.data.role
       localStorage.setItem('userId', decodeToken(localStorage.getItem(TOKEN_KEY) || '')._id)
       if (roleId == '1') {
         console.log('Manager')
