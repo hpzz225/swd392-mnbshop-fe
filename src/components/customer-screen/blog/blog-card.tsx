@@ -12,17 +12,17 @@ export default function BlogCard({ blog }: BlogCardProps) {
     <div>
       <article className="news-item">
         <figure className="news-item__img-wrap">
-          <Link to={`${ROUTE_PATHS.BLOG}/${blog?.blogId}`}>
+          <Link to={`${ROUTE_PATHS.BLOG}/${blog?._id}`}>
             <img src={blog?.blogImg} alt={blog?.title} className="news-item__thumb" />
           </Link>
         </figure>
         <section className="news-item__body">
           <h3>
-            <Link to={`${ROUTE_PATHS.BLOG}/${blog?.blogId}`} className="news-item__heading">
+            <Link to={`${ROUTE_PATHS.BLOG}/${blog?._id}`} className="news-item__heading">
               {blog?.title}
             </Link>
           </h3>
-          <Link to={`${ROUTE_PATHS.BLOG}/${blog?.blogId}`} className="news-item__more">
+          <Link to={`${ROUTE_PATHS.BLOG}/${blog?._id}`} className="news-item__more">
             Learn More
           </Link>
         </section>

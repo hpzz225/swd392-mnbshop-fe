@@ -6,7 +6,7 @@ import { AxiosError } from 'axios'
 const getBlogList = async () => {
   try {
     const { data } = await apiInstance.get<BlogListApiResponse>(import.meta.env.VITE_BLOG_LIST_API)
-    return data
+    return data.data
   } catch (error) {
     const errorResponse = error as AxiosError<CustomErrorAPIResponse>
     throw new Error(errorResponse.response?.data.message)

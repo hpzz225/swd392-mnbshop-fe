@@ -22,7 +22,7 @@ const BlogsList: React.FC = () => {
         </div>
         <div className="row row-cols-4 row-cols-lg-2 row-cols-sm-1 gy-3 g-lg-3 g-md-2">
           {data?.map((blog: BlogData) => (
-            <BlogCard key={blog.blogId} blog={blog} />
+            <BlogCard key={blog._id} blog={blog} />
           ))}
         </div>
       </section>

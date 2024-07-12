@@ -1,6 +1,6 @@
 import moment from 'moment'
 import { useState } from 'react'
-import { Typography, Button, Modal, Form, Input, Tag, Divider } from 'antd'
+import { Typography, Button, Modal, Form, Input, Divider } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { useParams } from 'react-router-dom'
 import { useViewBlogDetail } from './use-view-blog-detail'

@@ -37,7 +37,6 @@ export const useAuth = () => {
   const signInMutation = useMutation({
     mutationFn: ({ username, password }: { username: string; password: string }) => authApi.signIn(username, password),
     onSuccess: (data) => {
-      console.log(data)
       localStorage.setItem(TOKEN_KEY, data.accessToken)
       localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken)
       queryClient.invalidateQueries({ queryKey: ['user'] })
@@ -66,6 +65,8 @@ export const useAuth = () => {
   const signUpMutation = useMutation({
     mutationFn: (inputData: SignUpForm) => authApi.signUp(inputData),
     onSuccess: (data) => {
+      console.log(data)
+
       navigate(ROUTE_PATHS.LOGIN)
       notification.success({
         message: data.message,

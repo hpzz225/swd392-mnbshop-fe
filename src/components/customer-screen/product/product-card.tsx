@@ -19,7 +19,7 @@ export default function ProductCard(product: ProductDetail) {
         <article className="product-card">
           <div className="product-card__img-wrap">
             {/* TODO: add link */}
-            <Link to={`${ROUTE_PATHS.PRODUCT}/${product?.productId}`}>
+            <Link to={`${ROUTE_PATHS.PRODUCT}/${product?._id}`}>
               <img src={product?.productImg} alt="" className="product-card__thumb" />
             </Link>
             <button className="like-btn product-card__like-btn" onClick={() => handleAddToCart(product?.productId, 1)}>

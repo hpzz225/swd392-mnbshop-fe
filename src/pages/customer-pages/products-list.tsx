@@ -7,6 +7,8 @@ import { ProductDetail } from '@/types'
 
 export default function ProductsList() {
   const { data } = useViewProductList()
+  console.log(data)
+
   const [filters, setFilters] = useState({ price: [1, 100], brand: '', byAge: [1, 20] })
 
   const filteredData = data?.filter((product: ProductDetail) => {
@@ -27,7 +29,7 @@ export default function ProductsList() {
         </div>
         <div className="row row-cols-4 row-cols-lg-2 row-cols-sm-1 gy-3 g-lg-3 g-md-2">
           {filteredData?.map((product: ProductDetail) => (
-            <ProductCard key={product.productId} {...product} />
+            <ProductCard key={product._id} {...product} />
           ))}
         </div>
       </section>

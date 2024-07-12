@@ -159,7 +159,7 @@ export type BlogTableData = {
 }
 
 export type BlogData = {
-  blogId: number
+  _id: number
   title: string
   content: string
   blogImg: string

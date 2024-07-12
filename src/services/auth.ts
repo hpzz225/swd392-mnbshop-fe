@@ -1,24 +1,36 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import apiInstance from '@/lib/axios'
 import { GetCurrentUserAPIResponse, LoginUserAPIResponse, SignUpForm } from '@/types'
+import { notification } from 'antd'
 
 const signIn = async (username: string, password: string): Promise<LoginUserAPIResponse> => {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data = await apiInstance.post<LoginUserAPIResponse, any>(import.meta.env.VITE_SIGNIN_API, {
       username,
       password,
     })
     return data.data
   } catch (error) {
-    throw new Error('Invalid username or password')
+    console.log(error)
+
+    throw new Error(error.response.data.message)
+    // throw new Error('Invalid username or password')
   }
 }
 
 const signUp = async (userData: SignUpForm): Promise<any> => {
   try {
     const response = await apiInstance.post(import.meta.env.VITE_SIGNUP_API, userData)
+
+    console.log(response)
+
     return response.data
   } catch (error) {
+    console.log(error)
+    notification.error({
+      message: error.response.data.message,
+      description: 'You have successfully registered',
+    })
     throw new Error('Registration failed')
   }
 }

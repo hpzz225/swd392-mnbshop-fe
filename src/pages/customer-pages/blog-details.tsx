@@ -79,7 +79,7 @@ const BlogDetails = () => {
           dataSource={suggestions}
           renderItem={(item) => (
             <List.Item>
-              <Link to={`/blog/${item.blogId}`}>{item.title}</Link>
+              <Link to={`/blog/${item._id}`}>{item.title}</Link>
             </List.Item>
           )}
         />
