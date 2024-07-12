@@ -21,7 +21,7 @@ export default function Cart() {
                 <div className="cart-info">
                   <div className="cart-info__list">
                     {/* <!-- Cart item --> */}
-                    {data?.cartItems?.map((item) => (
+                    {data?.products?.map((item) => (
                       <CartItem key={item.cartItemId} cartItem={item} />
                     ))}
                   </div>

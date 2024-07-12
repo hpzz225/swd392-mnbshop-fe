@@ -1,5 +1,7 @@
 import gift from '@/assets/icons/gift.svg'
+import { useCartItem } from '@/hooks/customer-hook/cart/use-cart-list'
 import { useCreateOrder } from '@/hooks/customer-hook/cart/use-create-order'
+import { useAuth } from '@/hooks/use-auth'
 import { notification } from 'antd'
 
 interface PriceSectionProps {
@@ -10,16 +12,23 @@ interface PriceSectionProps {
 
 export default function PriceSection({ totalItem, totalPrice, cartId }: PriceSectionProps) {
   const createOrderMutation = useCreateOrder()
-  function handleOrder(cartId: number, totalItem: number) {
-    if (totalItem === 0) {
-      notification.error({
-        message: 'Empty cart',
-        description: 'Please add item to cart',
-        placement: 'topRight',
-      })
-    } else {
-      createOrderMutation.mutate(cartId)
+  const { data: cart } = useCartItem()
+
+  const { user } = useAuth()
+  console.log(user?.data)
+  function handleOrder() {
+    const orderData = {
+      deliverAddress: user?.data?.address,
+      phone: user?.data?.phone,
+      fullName: user?.data?.fullName,
+      paymentMethod: 'COD',
+      status: 'processing',
+      orderDate: new Date().toISOString(),
+      totalPrice: totalPrice,
+      userId: user?.data?._id,
+      cart: cart,
     }
+    createOrderMutation.mutate(orderData)
   }
 
   return (

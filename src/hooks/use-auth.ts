@@ -7,6 +7,7 @@ import { notification } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
 import { DecodedToken, SignUpForm } from '@/types'
+import { useCreateCart } from './customer-hook/cart/use-create-cart'
 
 export const useAuth = () => {
   const navigate = useNavigate()
@@ -16,6 +17,7 @@ export const useAuth = () => {
     const decodedToken = jwtDecode<DecodedToken>(token)
     return decodedToken
   }
+
   const {
     data: user,
     isLoading: loadingInitial,
@@ -34,11 +36,14 @@ export const useAuth = () => {
     },
   })
 
+  const createCartMutation = useCreateCart()
+
   const signInMutation = useMutation({
     mutationFn: ({ username, password }: { username: string; password: string }) => authApi.signIn(username, password),
     onSuccess: (data) => {
       localStorage.setItem(TOKEN_KEY, data.accessToken)
       localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken)
+      createCartMutation.mutate()
       queryClient.invalidateQueries({ queryKey: ['user'] })
       const roleId = data.data.roleId
       localStorage.setItem('userId', decodeToken(localStorage.getItem(TOKEN_KEY) || '')._id)

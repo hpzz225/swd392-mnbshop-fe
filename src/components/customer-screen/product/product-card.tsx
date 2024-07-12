@@ -3,12 +3,12 @@ import star from '@/assets/icons/star.svg'
 import { Link } from 'react-router-dom'
 import { ROUTE_PATHS } from '@/router'
 import { ProductDetail } from '@/types'
-import { useAddCartItem } from '@/hooks/customer-hook/cart/use-add-cart.item'
+import { useAddCartItem } from '@/hooks/customer-hook/cart/use-add-cart-item'
 
 export default function ProductCard(product: ProductDetail) {
   const AddToCartMutation = useAddCartItem()
 
-  function handleAddToCart(productId: number, quantity: number) {
+  function handleAddToCart(productId: any, quantity: number) {
     console.log(productId, quantity)
     AddToCartMutation.mutate({ productId, quantity })
   }
@@ -27,7 +27,7 @@ export default function ProductCard(product: ProductDetail) {
             </button>
           </div>
 
-          <Link to={`${ROUTE_PATHS.PRODUCT}/${product?.productId}`}>
+          <Link to={`${ROUTE_PATHS.PRODUCT}/${product?._id}`}>
             <h3 className="product-card__title">{product?.productName}</h3>
           </Link>
           <p className="product-card__brand">{product?.productBrand}</p>

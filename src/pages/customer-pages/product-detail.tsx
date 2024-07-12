@@ -25,7 +25,7 @@ import { ShoppingCartOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import { useViewDetailProduct } from '@/hooks/customer-hook/product/use-view-detail-product'
 import { useParams } from 'react-router-dom'
-import { useAddCartItem } from '@/hooks/customer-hook/cart/use-add-cart.item'
+import { useAddCartItem } from '@/hooks/customer-hook/cart/use-add-cart-item'
 import SimilarCard from '@/components/customer-screen/product/similar-card'
 
 const { Title, Paragraph } = Typography

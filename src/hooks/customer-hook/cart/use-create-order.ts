@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 export const useCreateOrder = () => {
   const navigate = useNavigate()
   return useMutation({
-    mutationFn: (id: number) => cartApi.createOrder(id),
+    mutationFn: (data: any) => cartApi.createOrder(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] })
       notification.success({

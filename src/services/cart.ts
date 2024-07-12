@@ -11,25 +11,21 @@ const decodeToken = (token: string) => {
 const getCartItem = async () => {
   try {
     const { data } = await apiInstance.get<CartAPIResponse>(
-      import.meta.env.VITE_CART_API + decodeToken(localStorage.getItem(TOKEN_KEY)!).Id
+      import.meta.env.VITE_CART_API + decodeToken(localStorage.getItem(TOKEN_KEY)!)._id
     )
-    return data.data
+    return data
   } catch (error) {
     const errorResponse = error as AxiosError<CustomErrorAPIResponse>
     throw new Error(errorResponse.response?.data.message)
   }
 }
 
-const addCartItem = async (productId: number, quantity: number) => {
+const addCartItem = async (productId: any, quantity: number) => {
   try {
-    const response = await apiInstance.post(
-      import.meta.env.VITE_ADDTOCART_API +
-        decodeToken(localStorage.getItem(TOKEN_KEY)!).Id +
-        '?productId=' +
-        productId +
-        '&quantity=' +
-        quantity
-    )
+    const response = await apiInstance.post(import.meta.env.VITE_ADDTOCART_API + productId, {
+      productId: productId,
+      quantity: quantity,
+    })
     return response.data
   } catch (error) {
     const errorResponse = error as AxiosError<CustomErrorAPIResponse>
@@ -66,9 +62,19 @@ const deleteCartItem = async (id: number) => {
   }
 }
 
-const createOrder = async (id: number) => {
+const createOrder = async (data: any) => {
   try {
-    const response = await apiInstance.post(import.meta.env.VITE_CREATE_ORDER_API + id)
+    const response = await apiInstance.post(import.meta.env.VITE_CREATE_ORDER_API, data)
+    return response.data
+  } catch (error) {
+    const errorResponse = error as AxiosError<CustomErrorAPIResponse>
+    throw new Error(errorResponse.response?.data.message)
+  }
+}
+
+const createCart = async () => {
+  try {
+    const response = await apiInstance.post(import.meta.env.VITE_CREATECART_API)
     return response.data
   } catch (error) {
     const errorResponse = error as AxiosError<CustomErrorAPIResponse>
@@ -82,6 +88,7 @@ const cartApi = {
   addCartItem,
   updateQuantity,
   createOrder,
+  createCart,
 }
 
 export default cartApi

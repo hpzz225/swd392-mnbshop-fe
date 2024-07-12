@@ -34,19 +34,19 @@ export default function CartItem({ isCheckout, cartItem }: { isCheckout?: boolea
 
   return (
     <article className="cart-item">
-      <Link to={`${ROUTE_PATHS.PRODUCT}/${cartItem?.productId}`}>
+      <Link to={`${ROUTE_PATHS.PRODUCT}/${cartItem?.product?._id}`}>
         <img src={cartItem?.image} alt="" className="cart-item__thumb" />
       </Link>
       <div className="cart-item__content">
         <div className="cart-item__content-left">
           <h3 className="cart-item__title">
-            <Link to={`${ROUTE_PATHS.PRODUCT}/${cartItem?.productId}`}>{cartItem?.productName}</Link>
+            <Link to={`${ROUTE_PATHS.PRODUCT}/${cartItem?.productId}`}>{cartItem?.product?.productName}</Link>
           </h3>
           <p className="cart-item__price-wrap">
             {onePrice} | <span className="cart-item__status">In Stock</span>
           </p>
           <div className="cart-item__ctrl cart-item__ctrl--md-block">
-            <div className="cart-item__input">{cartItem?.brandName}</div>
+            <div className="cart-item__input">{cartItem?.product?.brandName}</div>
             {isCheckout ? (
               <div className="cart-item__input">
                 <span>{quantityItem}</span>
